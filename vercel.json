@@ -1,0 +1,554 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/2026/07/30/",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/2026/07/30",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/2026/08/19/",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/2026/08/19",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/2026/08/25/",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/2026/08/25",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/2026/10/07/",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/2026/10/07",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/24-7-private-house-call-doctor-villa-cabo/",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/24-7-private-house-call-doctor-villa-cabo",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/about-us/",
+      "destination": "https://www.rmcpharmacy.com/about",
+      "statusCode": 301
+    },
+    {
+      "source": "/about-us",
+      "destination": "https://www.rmcpharmacy.com/about",
+      "statusCode": 301
+    },
+    {
+      "source": "/beauty-glow/",
+      "destination": "https://www.rmcpharmacy.com/services/iv-therapy",
+      "statusCode": 301
+    },
+    {
+      "source": "/beauty-glow",
+      "destination": "https://www.rmcpharmacy.com/services/iv-therapy",
+      "statusCode": 301
+    },
+    {
+      "source": "/benefits-in-home-medical-services-cabo-san-lucas/",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/benefits-in-home-medical-services-cabo-san-lucas",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/book/",
+      "destination": "https://www.rmcpharmacy.com/contact",
+      "statusCode": 301
+    },
+    {
+      "source": "/book",
+      "destination": "https://www.rmcpharmacy.com/contact",
+      "statusCode": 301
+    },
+    {
+      "source": "/cabo-pharmacy-2/",
+      "destination": "https://www.rmcpharmacy.com/pharmacy",
+      "statusCode": 301
+    },
+    {
+      "source": "/cabo-pharmacy-2",
+      "destination": "https://www.rmcpharmacy.com/pharmacy",
+      "statusCode": 301
+    },
+    {
+      "source": "/concierge-pharmacy-delivery-villa-hotel-los-cabos/",
+      "destination": "https://www.rmcpharmacy.com/delivery",
+      "statusCode": 301
+    },
+    {
+      "source": "/concierge-pharmacy-delivery-villa-hotel-los-cabos",
+      "destination": "https://www.rmcpharmacy.com/delivery",
+      "statusCode": 301
+    },
+    {
+      "source": "/contact/",
+      "destination": "https://www.rmcpharmacy.com/contact",
+      "statusCode": 301
+    },
+    {
+      "source": "/contact",
+      "destination": "https://www.rmcpharmacy.com/contact",
+      "statusCode": 301
+    },
+    {
+      "source": "/cookie-policy/",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/cookie-policy",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/doctor-pharmacy-support-travelers-cabo/",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/doctor-pharmacy-support-travelers-cabo",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/doctor-visits-home-cabo-san-lucas-2/",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/doctor-visits-home-cabo-san-lucas-2",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/emergency-healthcare-expats-cabo-san-lucas/",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/emergency-healthcare-expats-cabo-san-lucas",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/energy-b12/",
+      "destination": "https://www.rmcpharmacy.com/services/iv-therapy",
+      "statusCode": 301
+    },
+    {
+      "source": "/energy-b12",
+      "destination": "https://www.rmcpharmacy.com/services/iv-therapy",
+      "statusCode": 301
+    },
+    {
+      "source": "/english-speaking-concierge-doctor-los-cabos/",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/english-speaking-concierge-doctor-los-cabos",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/essential-health-tips-tourists-cabo-san-lucas/",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/essential-health-tips-tourists-cabo-san-lucas",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/essential-medical-care-tourists-cabo-san-lucas/",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/essential-medical-care-tourists-cabo-san-lucas",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/exploring-wellness-services-cabo-san-lucas/",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/exploring-wellness-services-cabo-san-lucas",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/finding-best-pharmacy-near-you-cabo-san-lucas/",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/finding-best-pharmacy-near-you-cabo-san-lucas",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/guide-over-the-counter-medications-cabo-san-lucas/",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/guide-over-the-counter-medications-cabo-san-lucas",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/hangover-rescue/",
+      "destination": "https://www.rmcpharmacy.com/services/iv-therapy",
+      "statusCode": 301
+    },
+    {
+      "source": "/hangover-rescue",
+      "destination": "https://www.rmcpharmacy.com/services/iv-therapy",
+      "statusCode": 301
+    },
+    {
+      "source": "/health-tips-tourists-cabo-san-lucas/",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/health-tips-tourists-cabo-san-lucas",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/home-doctor-cabo-san-lucas/",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/home-doctor-cabo-san-lucas",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/home-doctor/",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/home-doctor",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/house-call-doctor-cabo/",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/house-call-doctor-cabo",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/how-to-stay-healthy-while-traveling-cabo/",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/how-to-stay-healthy-while-traveling-cabo",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/immunity-armor/",
+      "destination": "https://www.rmcpharmacy.com/services/iv-therapy",
+      "statusCode": 301
+    },
+    {
+      "source": "/immunity-armor",
+      "destination": "https://www.rmcpharmacy.com/services/iv-therapy",
+      "statusCode": 301
+    },
+    {
+      "source": "/in-home-medical-services-cabo-san-lucas-2/",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/in-home-medical-services-cabo-san-lucas-2",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/in-suite-iv-therapy-concierge-cabo/",
+      "destination": "https://www.rmcpharmacy.com/services/iv-therapy",
+      "statusCode": 301
+    },
+    {
+      "source": "/in-suite-iv-therapy-concierge-cabo",
+      "destination": "https://www.rmcpharmacy.com/services/iv-therapy",
+      "statusCode": 301
+    },
+    {
+      "source": "/iv-therapy-cabo/",
+      "destination": "https://www.rmcpharmacy.com/services/iv-therapy",
+      "statusCode": 301
+    },
+    {
+      "source": "/iv-therapy-cabo",
+      "destination": "https://www.rmcpharmacy.com/services/iv-therapy",
+      "statusCode": 301
+    },
+    {
+      "source": "/m/",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/m",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/medical-concierge-palmilla-los-cabos/",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/medical-concierge-palmilla-los-cabos",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/medical-concierge-tourist-corridor-los-cabos/",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/medical-concierge-tourist-corridor-los-cabos",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/medical-tips-tourists-cabo-san-lucas/",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/medical-tips-tourists-cabo-san-lucas",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/medication-delivery-cabo-san-lucas/",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/medication-delivery-cabo-san-lucas",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/myers-cocktail/",
+      "destination": "https://www.rmcpharmacy.com/services/iv-therapy",
+      "statusCode": 301
+    },
+    {
+      "source": "/myers-cocktail",
+      "destination": "https://www.rmcpharmacy.com/services/iv-therapy",
+      "statusCode": 301
+    },
+    {
+      "source": "/performance-recovery/",
+      "destination": "https://www.rmcpharmacy.com/services/iv-therapy",
+      "statusCode": 301
+    },
+    {
+      "source": "/performance-recovery",
+      "destination": "https://www.rmcpharmacy.com/services/iv-therapy",
+      "statusCode": 301
+    },
+    {
+      "source": "/pharmacies-in-cabo-san-lucas/",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/pharmacies-in-cabo-san-lucas",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/pharmacy-delivery-cabo-san-lucas/",
+      "destination": "https://www.rmcpharmacy.com/delivery",
+      "statusCode": 301
+    },
+    {
+      "source": "/pharmacy-delivery-cabo-san-lucas",
+      "destination": "https://www.rmcpharmacy.com/delivery",
+      "statusCode": 301
+    },
+    {
+      "source": "/privacy-policy/",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/private-doctor-pharmacy-concierge-pedregal-cabo/",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/private-doctor-pharmacy-concierge-pedregal-cabo",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/private-nurse-care-villa-cabo/",
+      "destination": "https://www.rmcpharmacy.com/services/home-nursing",
+      "statusCode": 301
+    },
+    {
+      "source": "/private-nurse-care-villa-cabo",
+      "destination": "https://www.rmcpharmacy.com/services/home-nursing",
+      "statusCode": 301
+    },
+    {
+      "source": "/rapid-hydration/",
+      "destination": "https://www.rmcpharmacy.com/services/iv-therapy",
+      "statusCode": 301
+    },
+    {
+      "source": "/rapid-hydration",
+      "destination": "https://www.rmcpharmacy.com/services/iv-therapy",
+      "statusCode": 301
+    },
+    {
+      "source": "/refund-policy/",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/refund-policy",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/senior-doctor-cabo/",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/senior-doctor-cabo",
+      "destination": "https://www.rmcpharmacy.com/services/doctor-consultation",
+      "statusCode": 301
+    },
+    {
+      "source": "/services/",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/services",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/terms-of-service/",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/terms-of-service",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/yacht-doctor-iv-therapy-marina-cabo-san-lucas/",
+      "destination": "https://www.rmcpharmacy.com/services/iv-therapy",
+      "statusCode": 301
+    },
+    {
+      "source": "/yacht-doctor-iv-therapy-marina-cabo-san-lucas",
+      "destination": "https://www.rmcpharmacy.com/services/iv-therapy",
+      "statusCode": 301
+    },
+    {
+      "source": "/category/:path*",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/tag/:path*",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/author/:path*",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/page/:path*",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/feed/:path*",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/wp-content/:path*",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/((?!robots\\.txt|sitemap\\.xml|sitemap-.*\\.xml).*)",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    }
+  ]
+}
