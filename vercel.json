@@ -516,32 +516,62 @@
       "statusCode": 301
     },
     {
-      "source": "/category/:path*",
+      "source": "/category/(.*)",
       "destination": "https://www.rmcpharmacy.com/blog",
       "statusCode": 301
     },
     {
-      "source": "/tag/:path*",
+      "source": "/category",
       "destination": "https://www.rmcpharmacy.com/blog",
       "statusCode": 301
     },
     {
-      "source": "/author/:path*",
+      "source": "/tag/(.*)",
       "destination": "https://www.rmcpharmacy.com/blog",
       "statusCode": 301
     },
     {
-      "source": "/page/:path*",
+      "source": "/tag",
       "destination": "https://www.rmcpharmacy.com/blog",
       "statusCode": 301
     },
     {
-      "source": "/feed/:path*",
+      "source": "/author/(.*)",
       "destination": "https://www.rmcpharmacy.com/blog",
       "statusCode": 301
     },
     {
-      "source": "/wp-content/:path*",
+      "source": "/author",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/page/(.*)",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/page",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/feed/(.*)",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/feed",
+      "destination": "https://www.rmcpharmacy.com/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/wp-content/(.*)",
+      "destination": "https://www.rmcpharmacy.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/wp-content",
       "destination": "https://www.rmcpharmacy.com/",
       "statusCode": 301
     },
