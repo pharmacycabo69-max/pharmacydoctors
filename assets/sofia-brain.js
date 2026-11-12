@@ -9,23 +9,23 @@
   var DRIPS = {
     hydration: { title: 'Rapid Hydration IV', url: '/rapid-hydration/', clinic: '$129', mobile: '$159', color: '#0ea5e9',
       short: 'Fluids and electrolytes for sun, heat, travel or a long day out.' },
-    hangover: { title: 'Hangover Rescue IV', url: '/hangover-rescue/', clinic: '$159', mobile: '$189', color: '#f59e0b',
+    hangover: { title: 'Hangover Rescue IV', url: '/hangover-rescue/', clinic: '$159', mobile: '$189.99', color: '#f59e0b',
       short: 'Rehydration, vitamins and anti-nausea support so you can enjoy the rest of your trip.' },
-    myers: { title: 'Myers Cocktail IV', url: '/myers-cocktail/', clinic: '$159', mobile: '$189', color: '#22c55e',
+    myers: { title: 'Myers Cocktail IV', url: '/myers-cocktail/', clinic: '$159', mobile: '$189.99', color: '#22c55e',
       short: 'The classic wellness drip: hydration plus a vitamin and mineral blend.' },
-    immunity: { title: 'Immunity Armor IV', url: '/immunity-armor/', clinic: '$149', mobile: '$179', color: '#14b8a6',
+    immunity: { title: 'Immunity Armor IV', url: '/immunity-armor/', clinic: '$149', mobile: '$179.99', color: '#14b8a6',
       short: 'High-dose vitamin C, zinc and antioxidants.' },
-    energy: { title: 'Energy & B12 IV', url: '/energy-b12/', clinic: '$149', mobile: '$179', color: '#a855f7',
+    energy: { title: 'Energy & B12 IV', url: '/energy-b12/', clinic: '$149', mobile: '$179.99', color: '#a855f7',
       short: 'A B-complex recharge for jet lag and low energy.' },
-    performance: { title: 'Performance & Recovery IV', url: '/performance-recovery/', clinic: '$149', mobile: '$179', color: '#ef4444',
+    performance: { title: 'Performance & Recovery IV', url: '/performance-recovery/', clinic: '$149', mobile: '$179.99', color: '#ef4444',
       short: 'Rehydrate and recover after golf, fishing, training or a big day.' },
-    beauty: { title: 'Beauty Glow IV', url: '/beauty-glow/', clinic: '$149', mobile: '$179', color: '#ec4899',
+    beauty: { title: 'Beauty Glow IV', url: '/beauty-glow/', clinic: '$149', mobile: '$179.99', color: '#ec4899',
       short: 'Hydration with antioxidants for skin and glow.' }
   };
   function card(key) {
     var d = DRIPS[key];
     return { title: d.title, url: d.url, short: d.short, tier_color: d.color,
-      price_clinic: d.clinic + ' USD', price_mobile: d.mobile + ' USD',
+      price_clinic: d.clinic + ' + tax', price_mobile: d.mobile + ' + tax',
       wa_prefill: wa("Hi! I'd like to book a " + d.title + ' in Cabo.') };
   }
   var CHIPS = ['💧 Hydration IV', '🤕 Hangover help', '🩺 Doctor to my hotel', '💊 Pharmacy delivery', '💲 Prices', '💬 Talk to a nurse'];
@@ -46,7 +46,7 @@
       r.escalate = true; return r;
     }
     if (has(m, /price|cost|how much|rates?|cu[aá]nto|precio|cuesta/)) {
-      r.reply = 'Our IV drips are $149–$189 USD delivered to your villa, hotel or yacht, or $129–$159 at our downtown clinic in Cabo San Lucas. Cards accepted. Here are the most requested:';
+      r.reply = 'Our IV drips are $159–$189.99 USD plus tax delivered to your villa, hotel or yacht, or $129–$159 plus tax at our downtown clinic in Cabo San Lucas. Cards accepted. Here are the most requested:';
       r.cards = [card('hydration'), card('hangover'), card('myers')];
       r.quick_replies = ['See all IV drips', '💬 Talk to a nurse'];
       return r;
