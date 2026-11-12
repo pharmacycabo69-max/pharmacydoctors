@@ -1,0 +1,68 @@
+{
+  "slug": "food-poisoning-cabo-san-lucas",
+  "date": "2026-11-12",
+  "title": "Food Poisoning in Cabo: Symptoms, Treatment & When to Call",
+  "description": "Food poisoning or traveler's diarrhea in Cabo San Lucas? What helps, warning signs, and how to get a doctor ($199) or IV hydration at your hotel 24/7.",
+  "h1": "Food poisoning in Cabo: what helps and when to call a doctor",
+  "eyebrow": "Traveler's diarrhea & stomach bugs",
+  "image": "/wp-content/uploads/2026/07/pdh-iv-hangover-preview-lite.jpg",
+  "image_alt": "Guest resting in a hotel bed with an IV drip in Cabo",
+  "whatsapp": "Hi! I think I have food poisoning in Cabo. My location is: ",
+  "intro": [
+    "A stomach bug is one of the most common reasons visitors call a doctor in Los Cabos. Usually called food poisoning or traveler's diarrhea, it is unpleasant but most often short-lived. This guide explains what helps, the warning signs that mean you should see a doctor, and how to get care without leaving your hotel."
+  ],
+  "sections": [
+    {
+      "h2": "Common symptoms",
+      "list": ["Nausea and vomiting", "Watery diarrhea and stomach cramps", "Low-grade fever, chills or body aches", "Weakness and dizziness from losing fluids"],
+      "p_after": ["Symptoms often start a few hours to a couple of days after eating or drinking something contaminated and commonly improve within one to three days."]
+    },
+    {
+      "h2": "What helps at home",
+      "list": [
+        "Sip fluids often &mdash; small amounts every few minutes if you are nauseated.",
+        "Use oral rehydration salts (sold at every Cabo pharmacy) rather than plain water alone.",
+        "Rest, and skip alcohol, coffee and heavy or spicy food until you feel better.",
+        "Ask a doctor before taking medicine to stop diarrhea if you have a fever or blood in your stool."
+      ]
+    },
+    {
+      "h2": "When to call a doctor",
+      "p": ["See a doctor the same day if you or someone in your group has any of these:"],
+      "list": [
+        "Cannot keep fluids down, or very little urine",
+        "Dizziness, a racing heart or extreme weakness",
+        "Fever above 102&deg;F (38.9&deg;C)",
+        "Blood or black, tarry stool",
+        "Symptoms lasting more than 48 hours, or severe belly pain",
+        "A young child, an older adult, a pregnant traveler or someone with a chronic illness who is sick"
+      ],
+      "p_after": ["<strong>Call 911</strong> for confusion, fainting, severe pain or signs of serious dehydration in a child or older adult."]
+    },
+    {
+      "h2": "Getting care at your hotel in Cabo",
+      "h3": [
+        {"h": "House-call doctor &mdash; $199", "p": ["An English-speaking doctor comes to your hotel, villa or yacht 24/7, evaluates you, and prescribes medication if appropriate. Typical arrival is 30&ndash;45 minutes in Cabo San Lucas. Clinic consultations are $99. <a href=\"/home-doctor-cabo-san-lucas/\">Book a doctor</a>."]},
+        {"h": "IV hydration &mdash; from $159 + tax", "p": ["If you cannot keep fluids down, a nurse-administered IV rehydrates you in about 45&ndash;60 minutes. <a href=\"/rapid-hydration/\">Rapid Hydration</a> is our simplest fluid-and-electrolyte drip; <a href=\"/hangover-rescue/\">Hangover Rescue</a> adds anti-nausea support."]},
+        {"h": "Pharmacy delivery", "p": ["Oral rehydration salts, probiotics and prescribed medication delivered to your room 24/7, free over $50. <a href=\"/pharmacy-delivery-cabo-san-lucas/\">Order delivery</a>."]}
+      ]
+    },
+    {
+      "h2": "How to lower your risk in Los Cabos",
+      "list": [
+        "Drink bottled or purified water; most resorts serve purified water and ice.",
+        "Choose busy restaurants and food that is served hot.",
+        "Be careful with raw seafood, salads and fruit you did not peel yourself.",
+        "Wash or sanitize your hands before eating.",
+        "Pack oral rehydration salts and save a 24/7 doctor's number before you travel."
+      ]
+    }
+  ],
+  "faq": [
+    {"q": "Can I get an IV for food poisoning in Cabo?", "a": "Yes. If you are dehydrated and cannot keep fluids down, a licensed nurse can give you an IV at your hotel or villa. Our IV drips start at $159 plus tax at your door, or $129 plus tax at our clinic."},
+    {"q": "Do I need antibiotics for traveler's diarrhea?", "a": "Many cases improve without antibiotics. A doctor can tell you whether you need them; antibiotics require a prescription in Mexico."},
+    {"q": "How fast can a doctor come to my hotel?", "a": "Typical arrival is 30 to 45 minutes in Cabo San Lucas and the Tourist Corridor, and up to about 60 minutes in San Jos&eacute; del Cabo. The visit is $199 USD."},
+    {"q": "Is it safe to drink the water in Cabo?", "a": "Drink bottled or purified water. Most hotels and resorts serve purified water and ice, but avoid tap water."}
+  ],
+  "related": [["/sick-in-cabo-what-to-do/", "Sick in Cabo: what to do"], ["/home-doctor-cabo-san-lucas/", "House-call doctor"], ["/rapid-hydration/", "Rapid Hydration IV"], ["/pharmacy-delivery-cabo-san-lucas/", "Pharmacy delivery"]]
+}

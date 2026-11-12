@@ -1,0 +1,76 @@
+{
+  "slug": "iv-therapy-cabo-cost",
+  "date": "2026-11-12",
+  "title": "How Much Does IV Therapy Cost in Cabo? 2026 Price Guide",
+  "description": "IV therapy in Cabo costs $159–$189.99 + tax at your hotel or villa, $129–$159 at a clinic, and $119 per person for groups of 6+. What's included and how to save.",
+  "h1": "How much does IV therapy cost in Cabo? (2026 price guide)",
+  "eyebrow": "Prices in US dollars",
+  "image": "/wp-content/uploads/real-iv/real-iv-sterile-set.jpg",
+  "image_alt": "Nurse preparing a sterile single-use IV set in Cabo",
+  "whatsapp": "Hi! I'd like a price for an IV in Cabo. We are __ people at: ",
+  "intro": [
+    "If you are planning a trip to Los Cabos &mdash; or waking up in one after a big night &mdash; you probably want to know one thing first: how much is an IV drip? Many providers in Cabo only tell you the price when the nurse arrives. Here are our real 2026 prices, what is included, and how to pay less."
+  ],
+  "sections": [
+    {
+      "h2": "Cabo IV therapy prices at a glance",
+      "list": [
+        "<strong>At your hotel, villa, Airbnb or yacht:</strong> $159 to $189.99 USD + tax, depending on the drip",
+        "<strong>At our downtown Cabo San Lucas clinic:</strong> $129 to $159 USD + tax",
+        "<strong>Groups of 6 or more:</strong> $119 USD per person, tax included"
+      ],
+      "p_after": ["See every drip side by side on our <a href=\"/prices/\">prices page</a>."]
+    },
+    {
+      "h2": "Price by IV drip",
+      "list": [
+        "<a href=\"/rapid-hydration/\">Rapid Hydration</a> &mdash; $159 + tax at your door, $129 at the clinic",
+        "<a href=\"/hangover-rescue/\">Hangover Rescue</a> &mdash; $189.99 + tax at your door, $159 at the clinic",
+        "<a href=\"/myers-cocktail/\">Myers Cocktail</a> &mdash; $189.99 + tax at your door, $159 at the clinic",
+        "<a href=\"/immunity-armor/\">Immunity Armor</a> &mdash; $179.99 + tax at your door, $149 at the clinic",
+        "<a href=\"/energy-b12/\">Energy &amp; B12</a> &mdash; $179.99 + tax at your door, $149 at the clinic",
+        "<a href=\"/performance-recovery/\">Performance &amp; Recovery</a> &mdash; $179.99 + tax at your door, $149 at the clinic",
+        "<a href=\"/beauty-glow/\">Beauty Glow</a> &mdash; $179.99 + tax at your door, $149 at the clinic"
+      ]
+    },
+    {
+      "h2": "What is included in the price",
+      "list": [
+        "A licensed nurse from a COFEPRIS-licensed team (authorization #05-022-B)",
+        "Sealed, medical-grade ingredients and a sterile, single-use IV set",
+        "The nurse visit to your hotel, villa or yacht &mdash; typical arrival 30&ndash;45 minutes",
+        "About 45&ndash;60 minutes with the nurse beside you while the drip runs",
+        "An itemized invoice in English and USD for travel insurance"
+      ],
+      "p_after": ["Nothing is charged before the visit, and the total is confirmed on WhatsApp before the nurse heads out."]
+    },
+    {
+      "h2": "Three ways to pay less",
+      "h3": [
+        {"h": "1. Book as a group", "p": ["Bachelorette parties, weddings and villa groups of 6 or more pay <strong>$119 per person, tax included</strong> &mdash; up to about $70 less per person than individual mobile pricing. Details on our <a href=\"/group-iv-therapy-cabo/\">group IV page</a>."]},
+        {"h": "2. Come to the clinic", "p": ["If you are near downtown Cabo San Lucas, the same drips are $30 less at our clinic on Francisco I. Madero, Centro."]},
+        {"h": "3. Choose the right drip", "p": ["If you mainly need fluids, Rapid Hydration ($159) is the simplest option. Hangover Rescue adds anti-nausea support; Myers Cocktail adds a fuller vitamin and mineral blend."]}
+      ]
+    },
+    {
+      "h2": "Is IV therapy covered by insurance?",
+      "p": ["Wellness IV drips are usually paid out of pocket. If a doctor prescribes IV fluids for an illness such as dehydration from a stomach bug, many travel medical insurance plans reimburse it &mdash; keep the itemized invoice. We do not bill insurers directly."]
+    },
+    {
+      "h2": "Red flags when comparing IV providers in Cabo",
+      "list": [
+        "No price until the nurse arrives",
+        "Large cancellation penalties or payment required in advance",
+        "No visible license or authorization number",
+        "Reused or unsealed supplies &mdash; every set should be opened in front of you"
+      ]
+    }
+  ],
+  "faq": [
+    {"q": "How much is a hangover IV in Cabo?", "a": "Our Hangover Rescue IV is $189.99 USD plus tax at your hotel or villa, or $159 plus tax at our downtown clinic. Groups of 6 or more pay $119 per person, tax included."},
+    {"q": "Is there a travel fee for IV therapy in Cabo?", "a": "Our at-your-door prices include the nurse visit. We confirm the full total on WhatsApp before the nurse heads out, and there is no payment in advance."},
+    {"q": "Can I pay in US dollars?", "a": "Yes. Prices are in USD and we accept credit and debit cards, US dollars cash and Mexican pesos."},
+    {"q": "How long does an IV take?", "a": "About 45 to 60 minutes from setup to finish. Typical arrival is 30 to 45 minutes in Cabo San Lucas."}
+  ],
+  "related": [["/prices/", "All prices"], ["/iv-therapy-cabo/", "IV therapy menu"], ["/group-iv-therapy-cabo/", "Group IV $119"], ["/book-before-you-arrive/", "Book before you arrive"]]
+}
