@@ -3,6 +3,9 @@
 (function () {
   'use strict';
   var ORDER_EMAIL_ENDPOINT = 'https://formsubmit.co/ajax/cmccompanydental@gmail.com';
+  // Web3Forms lets us set the sender name. Paste the free access key here to switch providers.
+  var WEB3FORMS_KEY = '';
+  var SENDER_NAME = 'Pharmacy & Doctors Cabo – Bookings';
   var WA = '526242261023';
   var ES = (document.documentElement.lang || '').toLowerCase().indexOf('es') === 0;
   function t(en, es) { return ES ? es : en; }
@@ -246,7 +249,7 @@
       if (hp.value) return;
       send.disabled = true; send.textContent = t('Sending…', 'Enviando…');
       var payload = {
-        _subject: 'New booking ' + orderId + ' — ' + form.name + ' — ' + fmtDate(state.date) + ' ' + state.time,
+        _subject: 'PharmacyDoctors.com · New booking ' + orderId + ' — ' + form.name + ' — ' + fmtDate(state.date) + ' ' + state.time,
         _template: 'table', _captcha: 'false', _replyto: form.email,
         Booking: orderId, Name: form.name, Phone: form.phone, Email: form.email,
         Where: state.where === 'door' ? 'At customer location' : 'Downtown clinic', Area: form.area || '-', Address: form.address || '-',
@@ -255,7 +258,13 @@
         'Pharmacy list': state.pharmacyList || '-', 'Estimated total USD': money(total()) + (isGroup() ? ' (group, tax incl.)' : ' (+ tax on IVs)'),
         Notes: form.notes || '-', Language: ES ? 'Spanish' : 'English', Page: location.href
       };
-      fetch(ORDER_EMAIL_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) })
+      var url = ORDER_EMAIL_ENDPOINT, body = payload;
+      if (WEB3FORMS_KEY) {
+        url = 'https://api.web3forms.com/submit';
+        body = { access_key: WEB3FORMS_KEY, from_name: SENDER_NAME, subject: payload._subject, replyto: form.email, botcheck: '' };
+        for (var k in payload) if (k.charAt(0) !== '_') body[k] = payload[k];
+      }
+      fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(body) })
         .then(function (r) { return r.json().catch(function () { return {}; }); })
         .then(function (j) { done(j && (j.success === true || j.success === 'true')); })
         .catch(function () { done(false); });
