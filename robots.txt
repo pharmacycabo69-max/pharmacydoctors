@@ -3,4 +3,4 @@ Allow: /
 Disallow: /wp-admin/
 Allow: /wp-admin/admin-ajax.php
 
-Sitemap: https://pharmacydoctors.com/sitemap.xml
+Sitemap: https://www.pharmacydoctors.com/sitemap.xml
