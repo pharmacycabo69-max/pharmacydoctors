@@ -1,0 +1,24 @@
+{
+  "trailingSlash": true,
+  "redirects": [
+    { "source": "/m", "destination": "/contact/", "permanent": true },
+    { "source": "/m/", "destination": "/contact/", "permanent": true },
+    { "source": "/home-doctor", "destination": "/home-doctor-cabo-san-lucas/", "permanent": true },
+    { "source": "/home-doctor/", "destination": "/home-doctor-cabo-san-lucas/", "permanent": true },
+    { "source": "/doctor-visits-home-cabo-san-lucas-2", "destination": "/home-doctor-cabo-san-lucas/", "permanent": true },
+    { "source": "/doctor-visits-home-cabo-san-lucas-2/", "destination": "/home-doctor-cabo-san-lucas/", "permanent": true },
+    { "source": "/in-home-medical-services-cabo-san-lucas-2", "destination": "/home-doctor-cabo-san-lucas/", "permanent": true },
+    { "source": "/in-home-medical-services-cabo-san-lucas-2/", "destination": "/home-doctor-cabo-san-lucas/", "permanent": true },
+    { "source": "/cabo-pharmacy-2", "destination": "/pharmacy-delivery-cabo-san-lucas/", "permanent": true },
+    { "source": "/cabo-pharmacy-2/", "destination": "/pharmacy-delivery-cabo-san-lucas/", "permanent": true },
+    { "source": "/services", "destination": "/book/", "permanent": true },
+    { "source": "/services/", "destination": "/book/", "permanent": true },
+    { "source": "/category/blog/page/:n", "destination": "/category/blog/", "permanent": true },
+    { "source": "/category/blog/page/:n/", "destination": "/category/blog/", "permanent": true },
+    { "source": "/2026/:path*", "destination": "/", "permanent": true },
+    { "source": "/feed", "destination": "/category/blog/", "permanent": true },
+    { "source": "/feed/", "destination": "/category/blog/", "permanent": true },
+    { "source": "/:slug/feed/", "destination": "/:slug/", "permanent": true },
+    { "source": "/contact-lens-solution-delivery-cabo", "destination": "/contact-lens-solution-delivery-cabo/", "permanent": true }
+  ]
+}
