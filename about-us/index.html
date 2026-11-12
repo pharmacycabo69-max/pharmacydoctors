@@ -300,6 +300,7 @@ html{background-color:#ffffff}
   });
 })();
 </script>
+<script src="/assets/sofia-brain.js" defer></script>
 <!-- PD AI Concierge — Frontend (HTML + CSS + JS in one HTML snippet for WPCode "HTML Snippet" type, auto-insert: Site Wide Footer) -->
 <style id="pdai-styles">
 :root{
@@ -396,11 +397,11 @@ html{background-color:#ffffff}
 <div id="pdai-bubble" class="pdai-hidden"><span id="pdai-bubble-x">×</span>Hi! I'm Sofia 💚 Need IVs, wellness items, or a doctor?</div>
 <button id="pdai-btn" aria-label="Chat with Sofia" type="button"></button>
 
-<aside id="pdai-panel" role="dialog" aria-label="Sofia AI Concierge">
+<aside id="pdai-panel" role="dialog" aria-label="Sofia, virtual concierge">
   <div class="pdai-head">
     <div class="pdai-ava"></div>
     <div class="pdai-id"><div class="pdai-name">Sofia · Pharmacy &amp; Doctors</div>
-      <div class="pdai-sub">AI Concierge · <span class="pdai-dot">online</span></div></div>
+      <div class="pdai-sub">Virtual concierge · <span class="pdai-dot">online</span></div></div>
     <a class="pdai-hbtn" href="https://wa.me/526242261023" target="_blank" rel="noopener" id="pdai-wa">WA</a>
     <button class="pdai-x" id="pdai-close" aria-label="Close" type="button">×</button>
   </div>
@@ -410,7 +411,7 @@ html{background-color:#ffffff}
       <input class="pdai-input" id="pdai-input" type="text" placeholder="Describe what you need…" maxlength="500" />
       <button class="pdai-send" id="pdai-send" type="submit" aria-label="Send">➤</button>
     </form>
-    <div class="pdai-disclaimer">Educational only · Powered by Pharmacy &amp; Doctors AI</div>
+    <div class="pdai-disclaimer">Automated assistant · A nurse replies on WhatsApp 24/7</div>
   </div>
 </aside>
 
@@ -467,7 +468,7 @@ html{background-color:#ffffff}
     var w = el('div','pdai-card');
     w.innerHTML = '<div class="pdai-card-top" style="border-left-color:#0EA5A0">'+
       '<div><div class="pdai-card-title">Talk to a human now</div></div></div>'+
-      '<div class="pdai-card-blurb">Our bilingual team replies in seconds, 24/7.</div>'+
+      '<div class="pdai-card-blurb">Our bilingual team answers 24/7 by WhatsApp or phone.</div>'+
       '<div class="pdai-card-btns">'+
         '<a class="pdai-cbtn pdai-cbtn-navy" href="tel:'+esc(phone||('+'+WA_NUM))+'">Call</a>'+
         '<a class="pdai-cbtn pdai-cbtn-green" href="'+esc(wa||('https://wa.me/'+WA_NUM))+'" target="_blank" rel="noopener">WhatsApp</a>'+
@@ -475,7 +476,7 @@ html{background-color:#ffffff}
     bodyEl.appendChild(w); scroll();
   }
 
-  function fetchNonce(cb){
+  function fetchNonce(cb){ if (cb) cb(); return;
     var fd = new FormData(); fd.append('action','pd_concierge_nonce');
     fetch(AJAX,{method:'POST',body:fd,credentials:'same-origin'}).then(function(r){return r.json();}).then(function(j){
       if (j && j.data && j.data.nonce) { nonce = j.data.nonce; cb && cb(); }
@@ -492,7 +493,7 @@ html{background-color:#ffffff}
     var fd = new FormData();
     fd.append('action','pd_concierge_chat'); fd.append('nonce',nonce);
     fd.append('message', msg); fd.append('history', JSON.stringify(history.slice(-8)));
-    fetch(AJAX,{method:'POST',body:fd,credentials:'same-origin'}).then(function(r){return r.json();}).then(function(j){
+    new Promise(function(res){ setTimeout(function(){ res(window.pdSofiaReply ? window.pdSofiaReply(msg) : null); }, 650); }).then(function(j){
       typing(false);
       if (!j) { addMsg("Connection hiccup — please WhatsApp +52 624 226 1023."); return; }
       if (j.reply) { addMsg(j.reply, "bot"); history.push({role:'assistant', content: j.reply}); }
@@ -509,7 +510,7 @@ html{background-color:#ffffff}
 
   function greet(){
     bodyEl.innerHTML = '';
-    addMsg("Hi! I'm Sofia, your concierge at Pharmacy & Doctors. Tell me how you're feeling or what you need — IV drips, medicine delivery, a doctor at your hotel — and I'll get you sorted in seconds. 💚", 'bot');
+    addMsg("Hi! I'm Sofia, your concierge at Pharmacy & Doctors. Tell me how you're feeling or what you need — IV drips, medicine delivery, a doctor at your hotel — and I'll point you to the right care. 💚", 'bot');
     chips(['💧 Hydration IV','🤕 Hangover help','🩺 Doctor to my hotel','💊 Pharmacy delivery','👵 Geriatric care','💬 Talk to human'], function(label){
       var map = {
         '💧 Hydration IV':'I need a hydration IV',
