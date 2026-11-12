@@ -72,10 +72,10 @@
       r.escalate = true; return r;
     }
     if (has(m, /group|bachelor|bachelorette|wedding|bride|party of|friends|team|corporate|retreat|grupo|despedida|boda|novia|amigos|evento|varias personas/)) {
-      r.reply = t('Group rate: for groups of 6 or more people, IV drips are $119 USD per person at your villa, hotel or yacht. Perfect for bachelor/bachelorette parties, weddings and villa groups. Book ahead so we send enough nurses.',
-                  'Precio de grupo: para grupos de 6 personas o más, el suero cuesta $119 USD por persona en tu villa, hotel o yate. Ideal para despedidas, bodas y grupos en villa. Reserva con anticipación para enviar suficientes enfermeras.');
-      r.cards = [info(t('Group IV therapy', 'Sueros para grupos'), '/group-iv-therapy-cabo/', t('6+ people · $119 USD per person · nurses come to you', '6+ personas · $119 USD por persona · las enfermeras van a ti'), '#be185d',
-        t("Hi! I'd like to book IVs for a group in Cabo. We are __ people on (date): ", 'Hola, quiero reservar sueros para un grupo en Cabo. Somos __ personas el día: '), '$119 / person')];
+      r.reply = t('Group rate: for groups of 6 or more people, IV drips are $119 USD per person, tax included, at your villa, hotel or yacht. Perfect for bachelor/bachelorette parties, weddings and villa groups. Book ahead so we send enough nurses.',
+                  'Precio de grupo: para grupos de 6 personas o más, el suero cuesta $119 USD por persona, IVA incluido, en tu villa, hotel o yate. Ideal para despedidas, bodas y grupos en villa. Reserva con anticipación para enviar suficientes enfermeras.');
+      r.cards = [info(t('Group IV therapy', 'Sueros para grupos'), '/group-iv-therapy-cabo/', t('6+ people · $119 USD per person, tax included · nurses come to you', '6+ personas · $119 USD por persona, IVA incluido · las enfermeras van a ti'), '#be185d',
+        t("Hi! I'd like to book IVs for a group in Cabo. We are __ people on (date): ", 'Hola, quiero reservar sueros para un grupo en Cabo. Somos __ personas el día: '), '$119 / person (tax incl.)')];
       return r;
     }
     if (has(m, /before (we|i) (arrive|land|get)|book ahead|in advance|advance booking|pre-?book|arriv|flight|landing|from the us|antes de llegar|reservar antes|con anticipaci[oó]n|llegamos|vuelo/)) {
