@@ -61,8 +61,8 @@
       r.cards = [card('hangover'), card('hydration')]; r.quick_replies = ['💬 Talk to a nurse', '💲 Prices']; return r;
     }
     if (has(m, /doctor|fever|pain|infection|injur|bcuts?b|wound|stomach|diarrh|vomit|bears?b|throat|rash|sick|m[eé]dico|doctora?|fiebre/)) {
-      r.reply = 'An English-speaking doctor can come to your hotel, villa or yacht 24/7. Send us your location on WhatsApp and a short description, and the team will confirm timing and cost.';
-      r.cards = [{ title: 'House-call doctor', url: '/home-doctor-cabo-san-lucas/', short: '24/7 doctor visits at your hotel, villa, Airbnb or yacht.', tier_color: '#0f766e',
+      r.reply = 'An English-speaking doctor can come to your hotel, villa or yacht 24/7 for $199 USD per visit, or see you at our downtown clinic for $99 USD. Send us your location on WhatsApp and a short description, and the team will confirm timing.';
+      r.cards = [{ title: 'House-call doctor', url: '/home-doctor-cabo-san-lucas/', short: '24/7 doctor visits at your hotel, villa, Airbnb or yacht.', price_clinic: '$99 USD', price_mobile: '$199 USD', tier_color: '#0f766e',
         wa_prefill: wa('Hi! I need a doctor at my location in Cabo. Symptoms: ') }];
       r.escalate = true; r.whatsapp = wa('Hi! I need a doctor at my location in Cabo.'); return r;
     }

@@ -63,6 +63,18 @@
 @media(max-width:980px){.px-nav,.px-hdr-cta{display:none}.px-burger{display:flex}}
 @media(max-width:400px){.px-logo-name{font-size:1.15rem}.px-logo-name small{display:none}}
 
+/* Doctor price banner */
+.px-price{--px-ink:#1c1917;--px-teal:#0f766e;font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:linear-gradient(135deg,#f0fdfa,#ecfdf5);border-bottom:1px solid #ccfbf1}
+.px-price *{box-sizing:border-box}
+.px-price .px-wrap{display:flex;align-items:center;justify-content:space-between;gap:14px 28px;flex-wrap:wrap;padding-top:16px;padding-bottom:16px}
+.px-price-t b{display:block;font:700 1.05rem/1.2 "Fraunces",Georgia,serif;color:#1c1917}
+.px-price-t span{font-size:.85rem;color:#57534e}
+.px-price-o{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.9rem;color:#44403c}
+.px-price-o b{font:700 1.35rem/1 "Fraunces",Georgia,serif;color:#0f766e;margin-right:2px}
+.px-price-c{display:flex;align-items:center;gap:14px}
+.px-price-l{font:700 .9rem "Inter",sans-serif;color:#0f766e!important;text-decoration:underline}
+@media(max-width:700px){.px-price-c{width:100%}.px-price-c .px-btn{flex:1}}
+
 /* Drawer */
 .px-drawer{position:fixed;inset:0;z-index:100000;visibility:hidden}
 .px-drawer.px-open{visibility:visible}
