@@ -132,3 +132,17 @@ h1 em,h2 em{font-style:italic;background:linear-gradient(120deg,var(--teal),#1f8
 .rv figcaption .rv-av{display:grid;place-items:center;margin:0;font:700 .95rem var(--sans);letter-spacing:.02em;color:#fff}
 .rv figcaption .rv-who{display:block;margin:0;font:700 .92rem var(--sans);letter-spacing:0;text-transform:none;color:var(--ink)}
 .rv figcaption .rv-ver{display:inline-flex;align-items:center;gap:5px;font:700 .66rem var(--sans);color:#15803d}
+
+/* ---- Real visit photos ---- */
+.rv-photos{margin-top:34px}
+.rv-ph-h{text-align:center;font:700 .74rem var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+.rv-ph-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.rv-ph-row figure{position:relative;margin:0;border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:var(--cream-2);box-shadow:0 10px 26px -10px rgba(20,18,16,.3)}
+.rv-ph-row img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.rv-ph-row figure:hover img{transform:scale(1.05)}
+.rv-ph-row figcaption{position:absolute;left:8px;right:8px;bottom:8px;background:rgba(255,255,255,.92);border-radius:10px;padding:6px 10px;font:600 .76rem var(--sans);color:var(--ink)}
+@media(max-width:760px){.rv-ph-row{grid-template-columns:repeat(4,72%);overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}.rv-ph-row figure{scroll-snap-align:start}}
+.about-ph{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:26px 0 0}
+.about-ph img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:20px;box-shadow:0 14px 30px -12px rgba(20,18,16,.3)}
+@media(max-width:640px){.about-ph{grid-template-columns:1fr 1fr}.about-ph img:last-child{display:none}}
+.card h3 a{color:inherit;text-decoration:none}.card h3 a:hover{color:var(--teal)}
