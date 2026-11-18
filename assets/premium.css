@@ -146,3 +146,17 @@ h1 em,h2 em{font-style:italic;background:linear-gradient(120deg,var(--teal),#1f8
 .about-ph img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:20px;box-shadow:0 14px 30px -12px rgba(20,18,16,.3)}
 @media(max-width:640px){.about-ph{grid-template-columns:1fr 1fr}.about-ph img:last-child{display:none}}
 .card h3 a{color:inherit;text-decoration:none}.card h3 a:hover{color:var(--teal)}
+
+/* ---- Medical team ---- */
+.team{display:grid;grid-template-columns:repeat(2,minmax(0,460px));justify-content:center;gap:18px}
+.doc{display:flex;gap:18px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:0 1px 2px rgba(20,18,16,.04);transition:transform .25s,box-shadow .25s}
+.doc:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.doc img{flex:none;width:112px;height:112px;border-radius:50%;object-fit:cover;object-position:center 25%;border:3px solid var(--gold-l);box-shadow:0 10px 24px -10px rgba(20,18,16,.4)}
+.doc h3{margin:0 0 4px;font-size:1.15rem}
+.doc p{margin:0 0 4px;font:600 .86rem var(--sans);color:var(--ink-2)}
+.doc .doc-role{color:var(--teal)}
+.doc .doc-ced b{color:var(--ink)}
+.doc .doc-also{color:var(--muted);font-weight:500}
+.doc .doc-also a{color:var(--teal)}
+.team-cta{text-align:center;margin-top:22px}
+@media(max-width:760px){.team{grid-template-columns:1fr}.doc img{width:88px;height:88px}}
