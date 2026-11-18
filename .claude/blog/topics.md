@@ -4,7 +4,7 @@ Take the FIRST unchecked topic, write it, publish it, then mark it `[x]` with th
 Prefer high-intent searches (symptom + Cabo, cost, "near me", group trips, planning). Add new ideas at the bottom.
 
 ## Symptoms & conditions (outrank telemedicine pages with an in-person doctor)
-- [ ] Sunburn and sun poisoning in Cabo: treatment and when to see a doctor
+- [x] Sunburn and sun poisoning in Cabo: treatment and when to see a doctor — 2026-11-18 /sunburn-sun-poisoning-cabo/
 - [ ] Swimmer's ear and ear infections in Cabo
 - [ ] UTI while traveling in Cabo San Lucas: getting treated fast
 - [ ] Strep throat and sore throat in Cabo
