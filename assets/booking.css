@@ -74,3 +74,8 @@
 .bk-done .btn{color:#fff}
 @media(max-width:980px){.bk-grid{grid-template-columns:1fr}.bk-side{position:static;order:-1}}
 @media(max-width:560px){.bk-main{padding:18px}.bk-steps{grid-template-columns:repeat(4,1fr);gap:4px}.bk-steps li{flex-direction:column;gap:4px;padding:8px 4px;font-size:.68rem;text-align:center}.bk-item{grid-template-columns:1fr auto;}.bk-qty{grid-column:1/-1;justify-content:flex-end}}
+.bk-pay{margin:18px auto;max-width:420px;padding:18px;border:1px solid #e6d7bb;border-radius:18px;background:linear-gradient(180deg,#fdf8ef,#fff);text-align:center}
+.bk-pay b{display:block;font-size:1.05rem;margin-bottom:4px}
+.bk-pay p{margin:0 0 12px;font-size:.92rem;color:#3f3a35}
+.bk-paybtn{display:inline-flex;justify-content:center;width:100%;background:linear-gradient(135deg,#635bff,#4b44d6)!important;color:#fff!important;box-shadow:0 10px 22px -8px rgba(99,91,255,.6)}
+.bk-pay small{display:block;margin-top:8px;color:#7a7268;font-size:.75rem}
