@@ -5,7 +5,7 @@ Prefer high-intent searches (symptom + Cabo, cost, "near me", group trips, plann
 
 ## Symptoms & conditions (outrank telemedicine pages with an in-person doctor)
 - [x] Sunburn and sun poisoning in Cabo: treatment and when to see a doctor — 2026-11-18 /sunburn-sun-poisoning-cabo/
-- [ ] Swimmer's ear and ear infections in Cabo
+- [x] Swimmer's ear and ear infections in Cabo — 2026-11-19 /swimmers-ear-infection-cabo/
 - [ ] UTI while traveling in Cabo San Lucas: getting treated fast
 - [ ] Strep throat and sore throat in Cabo
 - [ ] Flu, colds and COVID-like symptoms on vacation in Los Cabos
