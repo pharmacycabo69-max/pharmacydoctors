@@ -186,3 +186,7 @@ h1 em,h2 em{font-style:italic;background:linear-gradient(120deg,var(--teal),#1f8
 .pillar-cta{display:block;margin:18px 0;padding:16px 18px;border-radius:16px;background:linear-gradient(135deg,#eef8f5,#fff);border:1px solid #cfe9e2;border-left:4px solid var(--teal);font-size:.98rem}
 .pillar-cta b{display:block;margin-bottom:2px}
 .pillar-cta a{color:var(--teal);font-weight:700}
+.med-sup{display:inline-block;line-height:1.5;margin:4px 0 14px;padding:7px 14px;border-radius:999px;background:#fff;border:1px solid var(--line);font:600 .8rem var(--sans);color:var(--ink-2);box-shadow:0 2px 10px rgba(20,18,16,.04)}
+.med-sup b{color:var(--ink)}
+.med-sup a{color:var(--teal);font-weight:700}
+@media(max-width:560px){.med-sup{border-radius:14px}}
