@@ -160,3 +160,29 @@ h1 em,h2 em{font-style:italic;background:linear-gradient(120deg,var(--teal),#1f8
 .doc .doc-also a{color:var(--teal)}
 .team-cta{text-align:center;margin-top:22px}
 @media(max-width:760px){.team{grid-template-columns:1fr}.doc img{width:88px;height:88px}}
+
+/* ---- SEO pillar blocks ---- */
+.seo-tw{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 1px 2px rgba(20,18,16,.04)}
+.seo-table{width:100%;border-collapse:collapse;font-size:.95rem;min-width:560px}
+.seo-table caption{text-align:left;padding:16px 18px 4px;font:700 1rem var(--sans)}
+.seo-table th,.seo-table td{padding:12px 18px;text-align:left;border-top:1px solid var(--line);vertical-align:top}
+.seo-table th{font:700 .74rem var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--cream)}
+.seo-table td:first-child{font-weight:700}
+.seo-table a{color:var(--teal);font-weight:700;text-decoration:none}
+.seo-table b{font:700 1.05rem var(--serif)}
+.seo-note{margin:14px 0 0;color:var(--ink-2);font-size:.95rem}
+.seo-note a,.seo-check a{color:var(--teal);font-weight:600}
+.seo-check{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.seo-check li{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px 14px 46px;position:relative;font-size:.95rem}
+.seo-check li:before{content:"✓";position:absolute;left:14px;top:13px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--teal-l);color:var(--teal);font-weight:800;font-size:.8rem}
+.area-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.area{display:grid;gap:4px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 18px;text-decoration:none;color:var(--ink);transition:transform .2s,box-shadow .2s}
+.area:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.area b{font:600 1.05rem var(--serif)}
+.area span{font-size:.88rem;color:var(--ink-2)}
+.area em{font:700 .78rem var(--sans);font-style:normal;color:var(--teal)}
+@media(max-width:860px){.area-grid{grid-template-columns:1fr 1fr}.seo-check{grid-template-columns:1fr}}
+@media(max-width:520px){.area-grid{grid-template-columns:1fr}}
+.pillar-cta{display:block;margin:18px 0;padding:16px 18px;border-radius:16px;background:linear-gradient(135deg,#eef8f5,#fff);border:1px solid #cfe9e2;border-left:4px solid var(--teal);font-size:.98rem}
+.pillar-cta b{display:block;margin-bottom:2px}
+.pillar-cta a{color:var(--teal);font-weight:700}
