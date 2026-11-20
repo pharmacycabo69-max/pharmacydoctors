@@ -37,3 +37,25 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
+
+/* Partner referral codes: ?ref=CODE is remembered for 30 days and added to
+   WhatsApp messages and online bookings so the owner knows who sent the guest. */
+(function () {
+  var KEY = 'pd_ref', DAYS = 30, ref = '';
+  function clean(v) { return String(v || '').toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 40); }
+  try {
+    var q = clean(new URLSearchParams(location.search).get('ref'));
+    if (q) { localStorage.setItem(KEY, JSON.stringify({ c: q, t: Date.now() })); ref = q;
+      if (typeof window.gtag === 'function') window.gtag('event', 'partner_referral', { ref_code: q }); }
+    else { var s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s && s.c && Date.now() - s.t < DAYS * 864e5) ref = clean(s.c); }
+  } catch (e) { try { ref = clean(new URLSearchParams(location.search).get('ref')); } catch (e2) {} }
+  window.PD_REF = ref;
+  window.pdTagWa = function (url) {
+    if (!ref || !/wa\.me\//.test(url) || /Ref%3A|Ref:/.test(url)) return url;
+    var tag = encodeURIComponent('\n(Ref: ' + ref + ')');
+    return /[?&]text=/.test(url) ? url.replace(/([?&]text=[^&#]*)/, '$1' + tag) : url + (url.indexOf('?') < 0 ? '?' : '&') + 'text=' + encodeURIComponent('(Ref: ' + ref + ')');
+  };
+  if (ref) document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href*="wa.me/"]'); if (a) a.href = window.pdTagWa(a.href);
+  }, true);
+})();

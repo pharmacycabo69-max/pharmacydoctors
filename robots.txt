@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /wp-admin/
+Disallow: /partners/
 Allow: /wp-admin/admin-ajax.php
 
 Sitemap: https://www.pharmacydoctors.com/sitemap.xml

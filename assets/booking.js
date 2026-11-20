@@ -251,14 +251,14 @@
       if (hp.value) return;
       send.disabled = true; send.textContent = t('Sending…', 'Enviando…');
       var payload = {
-        _subject: 'PharmacyDoctors.com · New booking ' + orderId + ' — ' + form.name + ' — ' + fmtDate(state.date) + ' ' + state.time,
+        _subject: 'PharmacyDoctors.com · New booking ' + orderId + ' — ' + form.name + ' — ' + fmtDate(state.date) + ' ' + state.time + (window.PD_REF ? ' · ref ' + window.PD_REF : ''),
         _template: 'table', _captcha: 'false', _replyto: form.email,
         Booking: orderId, Name: form.name, Phone: form.phone, Email: form.email,
         Where: state.where === 'door' ? 'At customer location' : 'Downtown clinic', Area: form.area || '-', Address: form.address || '-',
         Date: fmtDate(state.date), Time: state.time,
         Services: lines().map(function (l) { return l.label + (l.amount ? ' ' + money(l.amount) : '') + (l.note ? ' (' + l.note + ')' : ''); }).join(' | '),
         'Pharmacy list': state.pharmacyList || '-', 'Estimated total USD': money(total()) + (isGroup() ? ' (group, tax incl.)' : ' (+ tax on IVs)'),
-        Deposit: DEPOSIT_URL ? ('$' + DEPOSIT + ' deposit link shown — check Stripe for ' + orderId) : 'n/a', Notes: form.notes || '-', Language: ES ? 'Spanish' : 'English', Page: location.href
+        Deposit: DEPOSIT_URL ? ('$' + DEPOSIT + ' deposit link shown — check Stripe for ' + orderId) : 'n/a', 'Referred by': window.PD_REF || '-', Notes: form.notes || '-', Language: ES ? 'Spanish' : 'English', Page: location.href
       };
       var url = ORDER_EMAIL_ENDPOINT, body = payload;
       if (WEB3FORMS_KEY) {
@@ -277,7 +277,7 @@
     };
     function done(ok) {
       var waUrl = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(t('Hi! I just sent a booking request on your website:', '¡Hola! Acabo de enviar una solicitud de reserva en su sitio:') + '\n' + summaryText());
-      var payUrl = DEPOSIT_URL ? DEPOSIT_URL + '?client_reference_id=' + encodeURIComponent(orderId) + (form.email ? '&prefilled_email=' + encodeURIComponent(form.email) : '') : '';
+      var payUrl = DEPOSIT_URL ? DEPOSIT_URL + '?client_reference_id=' + encodeURIComponent(orderId + (window.PD_REF ? '_ref-' + window.PD_REF : '')) + (form.email ? '&prefilled_email=' + encodeURIComponent(form.email) : '') : '';
       var payBox = payUrl ? '<div class="bk-pay"><b>' + t('Secure your appointment', 'Asegura tu cita') + '</b><p>' + t('Pay a $' + DEPOSIT + ' USD deposit by card. It is deducted from your total at the visit.', 'Paga un anticipo de $' + DEPOSIT + ' USD con tarjeta. Se descuenta de tu total en la visita.') + '</p><a class="btn bk-paybtn" href="' + payUrl + '" target="_blank" rel="noopener">💳 ' + t('Pay $' + DEPOSIT + ' deposit', 'Pagar anticipo de $' + DEPOSIT) + '</a><small>' + t('Secure checkout by Stripe · Full refund if you cancel 24+ hours before', 'Pago seguro con Stripe · Reembolso completo si cancelas con 24 h o más') + ' (<a href="/refund-policy/" target="_blank">' + t('policy', 'política') + '</a>)</small></div>' : '';
       main.innerHTML = '<div class="bk-done"><div class="bk-ok">✓</div><h2>' + (ok ? t('Request received!', '¡Solicitud recibida!') : t('Almost done — send it on WhatsApp', 'Casi listo — envíala por WhatsApp')) + '</h2>'
         + '<p>' + (ok ? t('Your booking number is', 'Tu número de reserva es') + ' <b>' + orderId + '</b>. ' + t('We will confirm by WhatsApp or phone shortly.', 'Te confirmamos por WhatsApp o llamada en breve.') : t('We could not send it by email from your browser. Tap below to send the same booking on WhatsApp — it takes one tap.', 'No pudimos enviarla por correo desde tu navegador. Toca abajo para mandar la misma reserva por WhatsApp.')) + '</p>'
