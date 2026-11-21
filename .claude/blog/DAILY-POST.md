@@ -22,7 +22,8 @@ ranking for high-intent searches and leading readers to book (WhatsApp/phone).
   - Doctor: $199 USD house call (hotel/villa/yacht), $99 USD at clinic. Typical arrival 30–45 min Cabo San Lucas & Corridor, up to ~60 min San José/Pedregal/Palmilla.
   - IV at your door $159 (Rapid Hydration), $179.99 (Immunity Armor, Energy & B12, Performance & Recovery, Beauty Glow), $189.99 (Hangover Rescue, Myers Cocktail) + tax; clinic $129–$159 + tax.
   - Groups of 6+: $119 USD per person, TAX INCLUDED. Pharmacy delivery free over $50 USD; 22:00–07:00 may add a fee.
-  - No payment before the visit; itemized invoice in English/USD for travel insurance; we do not bill insurers directly.
+  - Online bookings may pay an optional $50 USD card deposit (deducted at the visit; fully refunded if cancelled 24h+ before); otherwise pay at the visit. Itemized invoice in English/USD for travel insurance; we do not bill insurers directly.
+  - Doctors: Dra. Myriam Palacios Alarcón (céd. 11664989) and Dr. Kevin Adame (céd. 14796516, Medical Director), general physicians. Never say board-certified.
   - Real reviews only: 4.9 rating; testimonials already on the site (Mike B., Jennifer R., Olivia C., Sarah K., David L., Carlos M.).
 - General health information only — no dosing instructions, no diagnosis claims, no "cure" language. Always include
   clear "when to call 911 / see a doctor" guidance for symptom topics.

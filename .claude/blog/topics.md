@@ -67,3 +67,4 @@ Prefer high-intent searches (symptom + Cabo, cost, "near me", group trips, plann
 - [ ] Hurricane season in Los Cabos: medical preparedness for visitors
 - [ ] Holiday travel to Cabo (Thanksgiving, Christmas, New Year): health tips
 - [ ] Whale-watching season in Cabo: seasickness and sun tips
+- [x] Urgent care in Cabo San Lucas — 2026-11-21 /urgent-care-cabo-san-lucas/
