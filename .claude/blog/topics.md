@@ -68,3 +68,20 @@ Prefer high-intent searches (symptom + Cabo, cost, "near me", group trips, plann
 - [ ] Holiday travel to Cabo (Thanksgiving, Christmas, New Year): health tips
 - [ ] Whale-watching season in Cabo: seasickness and sun tips
 - [x] Urgent care in Cabo San Lucas — 2026-11-21 /urgent-care-cabo-san-lucas/
+- [x] X-ray and imaging in Cabo — 2026-11-21 /x-ray-imaging-cabo-san-lucas/
+- [x] Walk-in clinic in Cabo San Lucas — 2026-11-21 /walk-in-clinic-cabo-san-lucas/
+- [x] Safe pharmacy / counterfeit medicine in Cabo — 2026-11-21 /safe-pharmacy-cabo-san-lucas/
+- [x] Sick at your resort: hotel doctor — 2026-11-21 /sick-at-resort-cabo-hotel-doctor/
+
+## Added 2026-11-21 from competitor research (symptom pages rank well for "X in Cabo San Lucas")
+- [ ] Flu symptoms in Cabo: when to see a doctor
+- [ ] Allergic reaction or hives in Cabo: what to do
+- [ ] Traveler's diarrhea in Cabo (Montezuma's revenge): relief and when to worry
+- [ ] Scorpion sting in Baja California Sur: what to do
+- [ ] Seasickness on a Cabo fishing or whale-watching trip
+- [ ] Sprained ankle or a fall in Cabo: do you need an X-ray?
+- [ ] Kidney stone pain on vacation in Cabo
+- [ ] Bronchitis and chest cold in Cabo
+- [ ] Bringing prescription medicine to Mexico: what travelers should know
+- [ ] Pregnant in Cabo: seeing a doctor on vacation
+- [ ] Spa day vs. IV drip in Cabo: which helps more after a party weekend

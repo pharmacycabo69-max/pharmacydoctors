@@ -1,0 +1,64 @@
+{
+  "slug": "x-ray-imaging-cabo-san-lucas",
+  "date": "2026-11-21",
+  "title": "X-Ray & Ultrasound in Cabo San Lucas | In English",
+  "description": "Need an X-ray, ultrasound or CT in Cabo San Lucas? See an English-speaking doctor first ($199 hotel / $99 clinic); we coordinate imaging and explain results.",
+  "h1": "X-ray, ultrasound and CT in Cabo San Lucas, coordinated in English",
+  "eyebrow": "Imaging in Los Cabos",
+  "image": "/wp-content/uploads/2026/08/doctor-pharmacy-support-travelers-cabo.jpg",
+  "image_alt": "English-speaking doctor reviewing imaging results with a traveler in Cabo San Lucas",
+  "whatsapp": "Hi! I may need an X-ray or ultrasound in Cabo. What happened: ",
+  "intro": [
+    "A slip on wet tiles, a fall from a scooter, a twisted ankle on the beach or sudden belly pain &mdash; sometimes a doctor needs to see inside before deciding what to do. On vacation in Cabo San Lucas that raises practical questions: where do you go, who speaks English, and what will it cost?",
+    "Our English-speaking doctors see you first, decide whether you actually need imaging, coordinate the study, and explain the results to you. Our team includes a radiologist, <strong>Dr. Luis Antonio Camacho Villegas</strong> (Cédula Profesional 4359616)."
+  ],
+  "sections": [
+    {
+      "h2": "Which imaging study might you need?",
+      "list": [
+        "<strong>X-ray:</strong> the usual first step for a possible broken bone after a fall, and for some chest problems.",
+        "<strong>Ultrasound:</strong> often used for belly pain, the gallbladder or kidneys, and to check soft tissue.",
+        "<strong>CT scan:</strong> more detailed images when an X-ray is not enough, for example after a head injury.",
+        "<strong>MRI:</strong> for some joint, spine and soft-tissue injuries; usually not needed urgently on vacation."
+      ],
+      "p_after": ["Not every injury needs a scan. A doctor&rsquo;s exam comes first, so you do not pay for a study you do not need."]
+    },
+    {
+      "h2": "How it works",
+      "list": [
+        "<strong>See a doctor first</strong> &mdash; at your hotel, villa or yacht ($199 USD, 24/7) or at our downtown clinic ($99 USD).",
+        "<strong>We coordinate the study</strong> with the imaging department and tell you where to go and when.",
+        "<strong>Results in plain English</strong> &mdash; our doctors go through the findings with you and plan the next step: treatment, a splint, medicines delivered to your room, or a specialist."
+      ]
+    },
+    {
+      "h2": "Where imaging is done",
+      "p": ["Imaging machines are in a licensed hospital or imaging center, not in a hotel room. Our role is to get you there with the right order, avoid unnecessary studies and make sure you understand the result. Imaging fees are set by the facility and depend on the study; ask us and we help you get a quote in advance for non-emergency studies."]
+    },
+    {
+      "h2": "When to call 911 instead",
+      "list": [
+        "A head injury with fainting, confusion, repeated vomiting or a severe headache",
+        "Chest pain or trouble breathing",
+        "A bone pushing through the skin, or a limb that is cold, pale or numb",
+        "Severe bleeding or a serious accident"
+      ],
+      "p_after": ["In Mexico the emergency number is <strong>911</strong>."]
+    },
+    {
+      "h2": "Travel insurance",
+      "p": ["We give you an itemized invoice in English and US dollars for our visit. Keep the facility&rsquo;s receipt and report for the imaging itself. Many travel-insurance policies cover medically necessary imaging; the final decision is your insurer&rsquo;s."]
+    },
+    {
+      "h2": "Get help now",
+      "p": ["Message us on WhatsApp or call <strong>+52 624 226 1023</strong>, 24/7, in English or Spanish. Tell us what happened and where you are staying, and a <a href=\"/home-doctor-cabo-san-lucas/\">doctor in Cabo San Lucas</a> will see you first. If you have pain after a fall, our <a href=\"/urgent-care-cabo-san-lucas/\">urgent care</a> page explains your options."]
+    }
+  ],
+  "faq": [
+    {"q": "Can I get an X-ray today in Cabo San Lucas?", "a": "Often yes. Our doctor sees you first at your hotel or our clinic and, if an X-ray is needed, we coordinate it the same day when possible."},
+    {"q": "Is there a radiologist on your team?", "a": "Yes. Dr. Luis Antonio Camacho Villegas, Cédula Profesional 4359616, is the radiologist on our medical team."},
+    {"q": "How much does an X-ray cost in Cabo?", "a": "Imaging fees are set by the facility and depend on the study. Our doctor visit is $199 USD at your hotel or $99 USD at our clinic, and we help you get a quote for the imaging in advance."},
+    {"q": "Do I need an X-ray for a sprained ankle?", "a": "Not always. A doctor's exam decides whether an X-ray is needed. Severe pain, swelling, inability to put weight on the foot or a deformity are reasons to get checked."}
+  ],
+  "related": [["/urgent-care-cabo-san-lucas/", "Urgent care in Cabo"], ["/home-doctor-cabo-san-lucas/", "Doctor in Cabo San Lucas"], ["/prices/", "Prices"], ["/sick-in-cabo-what-to-do/", "Sick in Cabo: what to do"]]
+}
