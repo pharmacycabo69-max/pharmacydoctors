@@ -8,7 +8,7 @@ Prefer high-intent searches (symptom + Cabo, cost, "near me", group trips, plann
 - [x] Swimmer's ear and ear infections in Cabo — 2026-11-19 /swimmers-ear-infection-cabo/
 - [x] UTI while traveling in Cabo San Lucas: getting treated fast — 2026-11-20 /uti-treatment-cabo-san-lucas/
 - [x] Strep throat and sore throat in Cabo — 2026-11-21 /strep-sore-throat-doctor-cabo/
-- [ ] Flu, colds and COVID-like symptoms on vacation in Los Cabos
+- [x] Flu, colds and COVID-like symptoms on vacation in Los Cabos — 2026-11-23 /flu-cold-covid-symptoms-cabo/
 - [ ] Heat exhaustion and dehydration in Cabo: warning signs
 - [ ] Allergic reactions and hives on vacation in Cabo
 - [ ] Jellyfish and stingray stings at Cabo beaches: what to do
