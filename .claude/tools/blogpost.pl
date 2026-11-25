@@ -53,7 +53,7 @@ for my $file (@ARGV) {
   my $main = qq{<div class="wrap crumbs"><a href="/">Home</a> &rsaquo; <a href="/category/blog/">Blog</a> &rsaquo; <span>$h1</span></div>
 <article class="art-wrap">
   <header class="art-head"><span class="eyebrow">@{[ $p->{eyebrow} // 'Cabo health guide' ]}</span><h1>$h1</h1>
-    <div class="art-meta"><span>By <b>Pharmacy &amp; Doctors medical team</b></span><span>Published @{[ pretty($p->{date}) ]}</span><span>COFEPRIS authorization #05-022-B</span></div>
+    <div class="art-meta"><span>By <b>Pharmacy &amp; Doctors medical team</b></span><span>Published @{[ pretty($p->{date}) ]}</span><span>Medical team led by Dr. Kevin González Adame, Medical Director</span></div>
     <div class="art-img"><img src="$p->{image}" alt="$alt" fetchpriority="high"></div>
   </header>
   $toc

@@ -18,12 +18,13 @@ ranking for high-intent searches and leading readers to book (WhatsApp/phone).
 ## Hard rules (medical + legal)
 - Only use these business facts (never invent prices, stats, awards, reviews, doctor names, or hospital partnerships):
   - Phone/WhatsApp +52 624 226 1023, 24/7, English & Spanish. Email cmccompanydental@gmail.com.
-  - Clinic: Francisco I. Madero, Centro, 23450 Cabo San Lucas, B.C.S. COFEPRIS authorization #05-022-B.
-  - Doctor: $199 USD house call (hotel/villa/yacht), $99 USD at clinic. Typical arrival 30–45 min Cabo San Lucas & Corridor, up to ~60 min San José/Pedregal/Palmilla.
-  - IV at your door $159 (Rapid Hydration), $179.99 (Immunity Armor, Energy & B12, Performance & Recovery, Beauty Glow), $189.99 (Hangover Rescue, Myers Cocktail) + tax; clinic $129–$159 + tax.
-  - Groups of 6+: $119 USD per person, TAX INCLUDED. Pharmacy delivery free over $50 USD; 22:00–07:00 may add a fee.
-  - Online bookings may pay an optional $50 USD card deposit (deducted at the visit; fully refunded if cancelled 24h+ before); otherwise pay at the visit. Itemized invoice in English/USD for travel insurance; we do not bill insurers directly.
-  - Doctors: Dra. Myriam Palacios Alarcón (céd. 11664989) and Dr. Kevin Adame (céd. 14796516, Medical Director), general physicians. Never say board-certified.
+  - Clinic: Francisco I. Madero S/N, Centro, 23450 Cabo San Lucas, B.C.S. (between Vicente Guerrero and Miguel Hidalgo). NEVER mention COFEPRIS or any authorization number.
+  - ALL PRICES IN USD, TAX INCLUDED (never write "+ tax"). Doctor: $189 house call (hotel/villa/yacht), $99 at clinic, $59 video consultation. Typical arrival 30–45 min Cabo San Lucas & Corridor, up to ~60 min San José/Pedregal/Palmilla.
+  - IV drips (Rapid Hydration, Hangover Rescue, Myers Cocktail, Immunity Armor, Energy & B12, Performance & Recovery, Beauty Glow): $159 at your door, $129 at the clinic. NAD+ IV $279. Never give doses or ingredient amounts.
+  - Groups of 6+: $119 USD per person. Pharmacy delivery free over $50 USD; 22:00–07:00 may add a fee.
+  - Online bookings may pay an optional $50 USD card deposit (deducted at the visit; fully refunded if cancelled 24h+ before); otherwise pay at the visit.
+  - Insurance: "We accept international health and travel insurance from the United States and Canada, subject to policy verification and coverage confirmation." Never promise coverage, direct billing or reimbursement; no Mexican national insurance. Link /travel-insurance-doctor-cabo/.
+  - Team: Dr. Kevin González Adame (Médico Cirujano y Partero, céd. 14796516, Medical Director); Dra. Myriam Aisse Palacios Alarcón (Médico General, céd. 11664989). Imaging and lab are coordinated with external providers — never say we own X-ray/ultrasound equipment, never call anyone a radiologist. Never say board-certified.
   - Real reviews only: 4.9 rating; testimonials already on the site (Mike B., Jennifer R., Olivia C., Sarah K., David L., Carlos M.).
 - General health information only — no dosing instructions, no diagnosis claims, no "cure" language. Always include
   clear "when to call 911 / see a doctor" guidance for symptom topics.

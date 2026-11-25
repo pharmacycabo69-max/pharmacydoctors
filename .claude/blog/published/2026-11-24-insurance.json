@@ -1,0 +1,56 @@
+{
+  "slug": "travel-insurance-doctor-cabo",
+  "date": "2026-11-24",
+  "title": "Travel Insurance Doctor in Cabo | US & Canada Insurance",
+  "description": "International health and travel insurance from the US and Canada accepted, subject to verification. See a doctor at your hotel in Cabo: verify your policy first.",
+  "h1": "International health & travel insurance accepted — subject to verification",
+  "eyebrow": "Insurance in Los Cabos",
+  "image": "/wp-content/uploads/2026/08/doctor-pharmacy-support-travelers-cabo.jpg",
+  "image_alt": "Traveler talking with an English-speaking doctor about travel insurance in Cabo San Lucas",
+  "whatsapp": "Hi! I'd like to verify my insurance before seeing a doctor in Cabo. My insurer is: ",
+  "intro": [
+    "<strong>We accept international health and travel insurance from the United States and Canada, subject to policy verification and coverage confirmation.</strong> Contact our team to verify your eligibility and payment arrangements before receiving medical services.",
+    "This page explains how the verification works, what we can and cannot promise, and what happens if your policy does not cover the visit. In an emergency, call 911 first &mdash; paperwork never comes before your safety."
+  ],
+  "sections": [
+    {
+      "h2": "Which insurance we accept",
+      "list": [
+        "<strong>International health insurance</strong> from the United States and Canada, when the policy covers care in Mexico.",
+        "<strong>Travel medical insurance</strong> from the United States and Canada, when the policy covers the service you need.",
+        "<strong>Mexican national insurance is not accepted.</strong>"
+      ],
+      "p_after": ["Acceptance always depends on your specific policy. Many domestic US plans, including Medicare, generally do not cover care outside the United States &mdash; check with your insurer."]
+    },
+    {
+      "h2": "How verification works",
+      "list": [
+        "<strong>Contact us</strong> on WhatsApp or by phone at +52 624 226 1023 and tell us your insurer and the service you need (for example, a <a href=\"/home-doctor-cabo-san-lucas/\">doctor at your hotel</a>).",
+        "<strong>Our team tells you exactly what information is needed</strong> and how to share it privately. Please do not send policy documents through public forms.",
+        "<strong>A person reviews your case</strong> &mdash; no automatic approvals.",
+        "<strong>We tell you the result in writing:</strong> coverage confirmed, more information needed, not confirmed, or not accepted &mdash; including any deductible, limits or amount you would pay.",
+        "<strong>You decide.</strong> If coverage cannot be confirmed, you can still be seen as a private patient at our published prices."
+      ]
+    },
+    {
+      "h2": "What we can and cannot promise",
+      "p": ["We cannot guarantee coverage, authorization, reimbursement, direct payment or that there is no deductible &mdash; those decisions belong to your insurer and depend on your policy. What we do promise is a clear answer before a non-emergency visit, so there are no surprises."]
+    },
+    {
+      "h2": "Paying privately",
+      "p": ["Our prices are published in US dollars with tax included: <strong>$189</strong> for a doctor at your hotel, villa or yacht, <strong>$99</strong> at our downtown clinic, <strong>$59</strong> for a video consultation, and IV drips from <strong>$159</strong> at your door. See the <a href=\"/prices/\">full price list</a>. If you pay yourself, you receive an itemized invoice in English and US dollars."]
+    },
+    {
+      "h2": "Emergencies",
+      "p": ["Chest pain, trouble breathing, signs of a stroke, severe bleeding or a serious injury: call <strong>911</strong> right away and contact your insurer&rsquo;s assistance line when you can. Insurance questions never delay emergency care."]
+    }
+  ],
+  "faq": [
+    {"q": "Do you accept US travel insurance in Cabo?", "a": "Yes, subject to verification. We accept international health and travel insurance from the United States and Canada when the policy covers the service. Contact us before the visit to verify your policy."},
+    {"q": "Do you accept Canadian insurance?", "a": "Yes, subject to policy verification and coverage confirmation, the same as US international and travel insurance."},
+    {"q": "Do you accept Mexican insurance?", "a": "No. We accept only international health and travel insurance from the United States and Canada."},
+    {"q": "Will my insurance pay you directly?", "a": "It depends on your policy and insurer. We confirm the payment arrangement case by case before a non-emergency visit and cannot guarantee direct payment or reimbursement."},
+    {"q": "What if my insurance does not cover the visit?", "a": "You can still be seen as a private patient at our published prices in USD with tax included, and you receive an itemized invoice in English."}
+  ],
+  "related": [["/home-doctor-cabo-san-lucas/", "Doctor in Cabo San Lucas"], ["/urgent-care-cabo-san-lucas/", "Urgent care in Cabo"], ["/prices/", "Prices"], ["/sick-in-cabo-what-to-do/", "Sick in Cabo: what to do"]]
+}

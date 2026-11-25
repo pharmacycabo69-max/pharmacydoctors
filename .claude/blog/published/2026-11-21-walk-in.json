@@ -10,7 +10,7 @@
   "whatsapp": "Hi! I would like to see a doctor at your clinic in Cabo. My symptoms are: ",
   "intro": [
     "When you feel well enough to leave your room but need a doctor today, a walk-in clinic is usually the fastest and most affordable option. Our clinic is in downtown Cabo San Lucas, on Francisco I. Madero in Centro, and a consultation with an English-speaking doctor costs <strong>$99 USD</strong>.",
-    "If you would rather not go out &mdash; or you cannot &mdash; the same doctors come to your hotel, villa or yacht 24/7 for $199 USD."
+    "If you would rather not go out &mdash; or you cannot &mdash; the same doctors come to your hotel, villa or yacht 24/7 for $189 USD."
   ],
   "sections": [
     {
@@ -35,11 +35,11 @@
     },
     {
       "h2": "Walk-in clinic or a doctor at your hotel?",
-      "p": ["Both get you the same doctors. Choose the clinic ($99) if you can walk in easily and want the lowest price. Choose a <a href=\"/home-doctor-cabo-san-lucas/\">house call</a> ($199) if you have a fever, vomiting, small children, mobility problems, or simply do not want to leave your room. At night, the house call is usually the simplest option."]
+      "p": ["Both get you the same doctors. Choose the clinic ($99) if you can walk in easily and want the lowest price. Choose a <a href=\"/home-doctor-cabo-san-lucas/\">house call</a> ($189) if you have a fever, vomiting, small children, mobility problems, or simply do not want to leave your room. At night, the house call is usually the simplest option."]
     },
     {
       "h2": "IV hydration at the clinic",
-      "p": ["Dehydrated after a stomach bug, the sun or a long night? Our IV drips cost $129 to $159 + tax at the clinic, or from $159 + tax at your door. See the full <a href=\"/iv-therapy-cabo/\">IV therapy menu</a>."]
+      "p": ["Dehydrated after a stomach bug, the sun or a long night? Our IV drips cost $129 at the clinic, or from $159 at your door. See the full <a href=\"/iv-therapy-cabo/\">IV therapy menu</a>."]
     },
     {
       "h2": "When not to walk in",
@@ -48,7 +48,7 @@
   ],
   "faq": [
     {"q": "Is there a walk-in clinic in Cabo San Lucas?", "a": "Yes. Our clinic is on Francisco I. Madero in downtown Cabo San Lucas. A consultation with an English-speaking doctor is $99 USD."},
-    {"q": "How much does a walk-in doctor cost in Cabo?", "a": "With us, $99 USD at the clinic or $199 USD for a doctor at your hotel, villa or yacht. Medicines are extra."},
+    {"q": "How much does a walk-in doctor cost in Cabo?", "a": "With us, $99 USD at the clinic or $189 USD for a doctor at your hotel, villa or yacht. Medicines are extra."},
     {"q": "Do I need an appointment?", "a": "No, but a quick WhatsApp message at +52 624 226 1023 lets us tell you the current wait. You can also book a time online."},
     {"q": "Can the clinic give me a prescription?", "a": "Yes. Our doctors can prescribe after the consultation, and our pharmacy can fill it right away or deliver it to your hotel."}
   ],

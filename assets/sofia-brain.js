@@ -13,17 +13,17 @@
   var DRIPS = {
     hydration: { title: 'Rapid Hydration IV', url: '/rapid-hydration/', clinic: '$129', mobile: '$159', color: '#0ea5e9',
       en: 'Fluids and electrolytes for sun, heat, travel or a long day out.', es: 'Líquidos y electrolitos para sol, calor, viaje o un día largo.' },
-    hangover: { title: 'Hangover Rescue IV', url: '/hangover-rescue/', clinic: '$159', mobile: '$189.99', color: '#f59e0b',
+    hangover: { title: 'Hangover Rescue IV', url: '/hangover-rescue/', clinic: '$129', mobile: '$159', color: '#f59e0b',
       en: 'Rehydration, vitamins and anti-nausea support so you can enjoy the rest of your trip.', es: 'Rehidratación, vitaminas y apoyo contra náusea para disfrutar el resto del viaje.' },
-    myers: { title: 'Myers Cocktail IV', url: '/myers-cocktail/', clinic: '$159', mobile: '$189.99', color: '#22c55e',
+    myers: { title: 'Myers Cocktail IV', url: '/myers-cocktail/', clinic: '$129', mobile: '$159', color: '#22c55e',
       en: 'The classic wellness drip: hydration plus a vitamin and mineral blend.', es: 'El suero clásico de bienestar: hidratación con vitaminas y minerales.' },
-    immunity: { title: 'Immunity Armor IV', url: '/immunity-armor/', clinic: '$149', mobile: '$179.99', color: '#14b8a6',
+    immunity: { title: 'Immunity Armor IV', url: '/immunity-armor/', clinic: '$129', mobile: '$159', color: '#14b8a6',
       en: 'High-dose vitamin C, zinc and antioxidants.', es: 'Vitamina C en dosis alta, zinc y antioxidantes.' },
-    energy: { title: 'Energy & B12 IV', url: '/energy-b12/', clinic: '$149', mobile: '$179.99', color: '#a855f7',
+    energy: { title: 'Energy & B12 IV', url: '/energy-b12/', clinic: '$129', mobile: '$159', color: '#a855f7',
       en: 'A B-complex recharge for jet lag and low energy.', es: 'Complejo B para jet lag y poca energía.' },
-    performance: { title: 'Performance & Recovery IV', url: '/performance-recovery/', clinic: '$149', mobile: '$179.99', color: '#ef4444',
+    performance: { title: 'Performance & Recovery IV', url: '/performance-recovery/', clinic: '$129', mobile: '$159', color: '#ef4444',
       en: 'Rehydrate and recover after golf, fishing, training or a big day.', es: 'Recuperación después de golf, pesca, entrenamiento o un día intenso.' },
-    beauty: { title: 'Beauty Glow IV', url: '/beauty-glow/', clinic: '$149', mobile: '$179.99', color: '#ec4899',
+    beauty: { title: 'Beauty Glow IV', url: '/beauty-glow/', clinic: '$129', mobile: '$159', color: '#ec4899',
       en: 'Hydration with antioxidants for skin and glow.', es: 'Hidratación con antioxidantes para la piel.' }
   };
 
@@ -32,7 +32,7 @@
   function card(key) {
     var d = DRIPS[key];
     return { title: d.title, url: d.url, short: d[L], tier_color: d.color,
-      price_clinic: d.clinic + ' + tax', price_mobile: d.mobile + ' + tax',
+      price_clinic: d.clinic + ' tax incl.', price_mobile: d.mobile + ' tax incl.',
       wa_prefill: wa(t("Hi! I'd like to book a ", 'Hola, quiero reservar un ') + d.title + t(' in Cabo.', ' en Cabo.')) };
   }
   function info(title, url, short, color, prefill, pm, pc) {
@@ -102,8 +102,8 @@
       return r;
     }
     if (has(m, /price|cost|how much|rates?|cu[aá]nto|precio|cuesta|tarifa/)) {
-      r.reply = t('IV drips: $159–$189.99 USD + tax at your villa, hotel or yacht, or $129–$159 + tax at our clinic. Groups of 6+: $119 per person. Doctor visit: $199 at your place or $99 at the clinic.',
-                  'Sueros: $159–$189.99 USD + impuesto en tu villa, hotel o yate, o $129–$159 + impuesto en la clínica. Grupos de 6+: $119 por persona. Doctor: $199 a domicilio o $99 en la clínica.');
+      r.reply = t('All prices include tax. IV drips: $159 USD at your villa, hotel or yacht, or $129 at our clinic. NAD+ IV: $279. Groups of 6+: $119 per person. Doctor visit: $189 at your place, $99 at the clinic, or $59 by video.',
+                  'Todos los precios incluyen IVA. Sueros: $159 USD en tu villa, hotel o yate, o $129 en la clínica. NAD+: $279. Grupos de 6+: $119 por persona. Doctor: $189 a domicilio, $99 en la clínica o $59 por videoconsulta.');
       r.cards = [card('hydration'), card('hangover'), card('myers')];
       r.quick_replies = L === 'es' ? ['Ver todos los sueros', '👥 Precio para grupos', '📞 Teléfono'] : ['See all IV drips', '👥 Group rates', '📞 Phone number'];
       return r;
@@ -118,10 +118,10 @@
       r.cards = [card('hangover'), card('hydration')]; r.quick_replies = chips(); return r;
     }
     if (has(m, /doctor|fever|pain|infection|injur|\bcuts?\b|wound|stomach|diarrh|vomit|\bears?\b|throat|rash|sick|m[eé]dic|fiebre|dolor|infecci|herida|est[oó]mago|diarrea|v[oó]mito|garganta|o[ií]do|enferm[oa]/)) {
-      r.reply = t('An English-speaking doctor can come to your hotel, villa or yacht 24/7 for $199 USD per visit, or see you at our clinic for $99 USD. Send your location and a short description and we will confirm timing.',
-                  'Un doctor puede ir a tu hotel, villa o yate 24/7 por $199 USD la visita, o atenderte en la clínica por $99 USD. Envía tu ubicación y una breve descripción y te confirmamos el horario.');
+      r.reply = t('An English-speaking doctor can come to your hotel, villa or yacht 24/7 for $189 USD per visit (tax included), see you at our clinic for $99 USD, or by video for $59 USD. Send your location and a short description and we will confirm timing.',
+                  'Un doctor puede ir a tu hotel, villa o yate 24/7 por $189 USD la visita (IVA incluido), atenderte en la clínica por $99 USD o por videoconsulta por $59 USD. Envía tu ubicación y una breve descripción y te confirmamos el horario.');
       r.cards = [info(t('House-call doctor', 'Doctor a domicilio'), '/home-doctor-cabo-san-lucas/', t('24/7 at your hotel, villa, Airbnb or yacht', '24/7 en tu hotel, villa, Airbnb o yate'), '#0f766e',
-        t('Hi! I need a doctor at my location in Cabo. Symptoms: ', 'Hola, necesito un doctor en mi ubicación en Cabo. Síntomas: '), '$199 USD', '$99 USD')];
+        t('Hi! I need a doctor at my location in Cabo. Symptoms: ', 'Hola, necesito un doctor en mi ubicación en Cabo. Síntomas: '), '$189 USD', '$99 USD')];
       r.escalate = true; r.whatsapp = wa(t('Hi! I need a doctor at my location in Cabo.', 'Hola, necesito un doctor en Cabo.')); return r;
     }
     if (has(m, /pharmac|medic|prescri|deliver|pill|farmacia|medicina|receta|entrega|pastilla/)) {
@@ -132,7 +132,7 @@
       return r;
     }
     if (has(m, /senior|elder|geriatric|grandm|grandp|\bmom\b|\bdad\b|parent|abuel|adulto mayor|mam[aá]|pap[aá]/)) {
-      r.reply = t('We offer unhurried home visits for seniors living in or visiting Los Cabos: $199 USD per doctor visit at home.', 'Ofrecemos visitas a domicilio para adultos mayores en Los Cabos: $199 USD por visita del doctor.');
+      r.reply = t('We offer unhurried home visits for seniors living in or visiting Los Cabos: $189 USD per doctor visit at home, tax included.', 'Ofrecemos visitas a domicilio para adultos mayores en Los Cabos: $189 USD por visita del doctor, IVA incluido.');
       r.cards = [info(t('Senior & geriatric care', 'Atención geriátrica'), '/senior-doctor-cabo/', t('Doctor visits at home for seniors', 'Visitas médicas a domicilio'), '#0f766e',
         t('Hi! I need geriatric care for a family member in Cabo.', 'Hola, necesito atención geriátrica para un familiar en Cabo.'))];
       return r;
