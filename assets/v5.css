@@ -330,3 +330,10 @@ a{text-underline-offset:3px}
 .v5-arch.v5-mono{background:linear-gradient(170deg,#355C7C 0%,#1E3E57 60%,#16324A 100%)!important;box-shadow:inset 0 0 0 1px rgba(175,198,188,.4)}
 .v5-arch.v5-mono span{align-self:start;padding-top:22%}
 .v5-arch.v5-mono span svg{width:132px;height:132px;color:#CFE0D8}
+.v5-book-intro{padding-bottom:clamp(40px,5vw,64px)!important}
+.v5-book-intro h1{font-size:clamp(2.3rem,4.4vw,3.6rem)!important;max-width:16em}
+.v5-assure{list-style:none;display:flex;flex-wrap:wrap;gap:10px;padding:0;margin:22px 0 0}
+.v5-assure li{border:1px solid var(--line-dk);border-radius:999px;padding:8px 14px 8px 32px;position:relative;font-size:.86rem;color:rgba(247,245,239,.88)}
+.v5-assure li:before{content:"";position:absolute;left:13px;top:50%;width:9px;height:5px;border-left:1.6px solid var(--sage-lt);border-bottom:1.6px solid var(--sage-lt);transform:translateY(-70%) rotate(-45deg)}
+.v5-book{padding-top:40px!important}
+@media(max-width:760px){.v5-assure{gap:6px;margin-top:16px}.v5-assure li{font-size:.76rem;padding:6px 10px 6px 26px}.v5-assure li:before{left:10px}.v5-assure li:nth-child(n+3){display:none}.v5-book-intro .lead{font-size:.98rem!important}}
