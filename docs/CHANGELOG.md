@@ -1,6 +1,15 @@
 # Changelog
 V4 está en producción desde el 2026-11-25 (`61c7133`). V5 está en la rama `v5-premium`, pendiente de aprobación.
 
+## 2026-11-25 — V5.1 (rama `v5-premium`, no publicada)
+- **Pagos**: enlaces firmados (HMAC) con vencimiento, solo del personal (`/api/paylink`, `/concierge/`); resumen y monto desde el servidor; bloqueo de doble cobro (409) e idempotencia; webhook con estados pagado, pendiente, fallido, expirado y reembolsado, y verificación de importe y moneda; evento GA `purchase` solo con pago verificado; 42 pruebas unitarias; servidor local con Stripe simulado.
+- **Radiología**: "Mobile X-ray" con Clínica San José, DICOM con reporte, horarios y límites técnicos. **Sin ultrasonido** en ninguna parte.
+- **Páginas**: laboratorio (bajo solicitud) y concierge (noindex); recorridos por tipo de cliente en la home; hero invertido en 4 páginas.
+- **Calidad**: contenido nunca oculto por animación; mínimo de 12 px; rejilla de 2 columnas en móvil; globo de Sofía solo en escritorio; bot sin recomendar tratamientos por síntomas; 6 precios de "mercado" del blog corregidos; títulos más cortos.
+- **Integración**: merge de `hotfix-hero-tablet` (arreglo 760–900 px). Foto original del Dr. Kevin restaurada (la editada quedó como opción en `docs/`).
+- **SEO y privacidad**: `robots.txt` y `X-Robots-Tag` para `/pay`, `/concierge` y `/api`; laboratorio en el sitemap.
+- **Docs**: `CLAUDE.md`, `PAYMENTS_SETUP.md` (guía completa), `PENDING_APPROVALS.md` (P0/P1/P2), auditoría final, `PROGRESS.md`.
+
 ## 2026-11-25 — V5 (rama `v5-premium`, no publicada)
 - **Identidad premium**: escenario azul marino en todos los heroes, Cormorant Garamond y Public Sans, motivo de arco, secciones numeradas, menú de tratamientos con líneas de puntos, tarjetas planas. Nuevo `assets/v5.css` cargado en 80 páginas.
 - **Navegación**: NAD+, video y equipo médico en Doctores, radiología móvil y villas, hoteles y grupos en Más servicios.

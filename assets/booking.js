@@ -66,7 +66,7 @@
   function total() { return lines().reduce(function (s, l) { return s + l.amount; }, 0); }
   function hasAes() { return AES.some(function (a) { return state.aes[a.id]; }); }
   function hasItems() { return totalIV() > 0 || state.doctor || state.video || state.pharmacy || state.nurse || hasAes() || state.imaging; }
-  // the $50 deposit only applies to IV drips, doctor and video visits
+  // (V4+) no deposit; payable() marks services with an approved price — IV drips, doctor and video visits
   function payable() { return totalIV() > 0 || state.doctor || state.video; }
   function payUrl() {
     var iv = 0, nad = 0, p = [];

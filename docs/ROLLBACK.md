@@ -43,3 +43,13 @@ Si se revierte un commit de forma aislada, puede haber conflictos con los poster
 - V5 vive solo en la rama `v5-premium`. Si no se aprueba, no hay que hacer nada: la producción sigue en V4 (`61c7133`).
 - Si se fusiona y hay que volver: `git revert -m 1 <merge-de-v5>`, o en Vercel promover el último deployment de V4.
 - Pagos: si algo falla con Stripe, basta con **borrar `STRIPE_SECRET_KEY` en Vercel**. `/pay/` vuelve a mostrar "pay at the visit / WhatsApp", sin tocar código.
+
+## V5.1
+| Problema | Acción inmediata | Tiempo |
+|---|---|---|
+| Error en los pagos | Borrar `STRIPE_SECRET_KEY` en Vercel y hacer Redeploy. `/pay/` pasa a "pay at the visit" | 2 min |
+| Enlace de pago filtrado | Cambiar `PAY_LINK_SECRET` y hacer Redeploy: todos los enlaces quedan inválidos | 2 min |
+| Clave del personal comprometida | Cambiar `CONCIERGE_KEY` y hacer Redeploy | 2 min |
+| Error visual tras publicar V5 | Vercel → Deployments → el último de V4 → **Promote to Production** | 1 min |
+| Revertir el código | `git revert -m 1 <merge de v5-premium en main>` y push (con autorización) | 5 min |
+| Solo el arreglo de tablet | `git revert -m 1 <merge de hotfix-hero-tablet>` | 5 min |

@@ -60,3 +60,10 @@ ranking for high-intent searches and leading readers to book (WhatsApp/phone).
   "related": [ ["/path/", "Label"] ]
 }
 Inline HTML allowed in text: <strong>, <a href="/...">, &mdash; &ndash; &amp; &deg; entities.
+
+## V5.1 rules (2026-11-25)
+- Imaging: only **mobile X-ray** (portable at hotel/villa/home when feasible, or Clínica San José, DICOM + report, quote first). Never mention ultrasound, CT or MRI as our services.
+- Never quote generic "market" IV prices; our IV is $159 at your location ($129 clinic), tax included.
+- Payment wording: "nothing is charged until we confirm availability; then you pay 100% by secure link or at the visit". Never "deposit".
+- Do not use the edited photo of Dr. Kevin with the PharmacyDoctors logo.
+- Link new posts to `/medical-team/`, `/nad-plus-iv-therapy-cabo/`, `/villas-hotels-groups-cabo/` or `/laboratory-tests-cabo/` when relevant.

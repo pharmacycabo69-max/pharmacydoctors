@@ -92,8 +92,8 @@
       return r;
     }
     if (has(m, /hour|open|close|24\/7|schedule|horario|abren|cierran|abierto/)) {
-      r.reply = t('We are open 24 hours, 7 days a week — nights, weekends and holidays. WhatsApp or call ' + PHONE_TXT + '.',
-                  'Estamos abiertos las 24 horas, los 7 días — noches, fines de semana y festivos. WhatsApp o llamada al ' + PHONE_TXT + '.');
+      r.reply = t('You can message or call us 24/7 at ' + PHONE_TXT + '. We confirm availability and the time with you before you pay. Our clinic is open 9 AM–5 PM; other times by appointment. In an emergency, call 911.',
+                  'Puedes escribirnos o llamarnos 24/7 al ' + PHONE_TXT + '. Confirmamos disponibilidad y hora antes de que pagues. La clínica abre de 9:00 a 17:00; otros horarios con cita. En una emergencia, llama al 911.');
       return r;
     }
     if (has(m, /pay|card|cash|insurance|invoice|receipt|pago|pagar|tarjeta|efectivo|seguro|factura|recibo/)) {
