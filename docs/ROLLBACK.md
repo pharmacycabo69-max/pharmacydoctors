@@ -38,3 +38,8 @@ Si se revierte un commit de forma aislada, puede haber conflictos con los poster
 ## Lo que el rollback NO cubre
 - Stripe (nada se cambió), DNS, campañas, Google Business Profile y Web3Forms: fuera del repositorio.
 - La tarea diaria del blog: sigue publicando en `main` con su propio flujo.
+
+## V5
+- V5 vive solo en la rama `v5-premium`. Si no se aprueba, no hay que hacer nada: la producción sigue en V4 (`61c7133`).
+- Si se fusiona y hay que volver: `git revert -m 1 <merge-de-v5>`, o en Vercel promover el último deployment de V4.
+- Pagos: si algo falla con Stripe, basta con **borrar `STRIPE_SECRET_KEY` en Vercel**. `/pay/` vuelve a mostrar "pay at the visit / WhatsApp", sin tocar código.

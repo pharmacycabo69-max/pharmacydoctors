@@ -1,5 +1,18 @@
-# Aprobaciones pendientes — V4
-Fecha: 2026-11-25 · Nada de esto está en producción.
+# Aprobaciones pendientes
+Actualizado: 2026-11-25 (V5). La producción tiene V4. **V5 está solo en la rama `v5-premium`**.
+
+## V5 — necesario para publicar
+- [ ] **Revisar la vista previa** https://pharmacydoctors-git-v5-premium-cabo-pharmacy.vercel.app/ (requiere sesión de Vercel) y aprobar la fusión a `main`.
+- [ ] **Probar `/pay/` en la vista previa**, por ejemplo `/pay/?b=PD-261125-TEST&i=iv:1&w=door`: sin clave debe mostrar "Online card payment is being activated".
+- [ ] **Stripe**: `STRIPE_SECRET_KEY` y `STRIPE_WEBHOOK_SECRET` en Vercel, recibos automáticos y prueba con tarjeta de prueba. Detalles en `PAYMENTS_SETUP.md`.
+- [ ] **Desactivar el enlace de anticipo de $50** en Stripe.
+- [ ] **Aprobar el texto de NAD+** (`/nad-plus-iv-therapy-cabo/`): sin indicaciones clínicas, dice que la evidencia es limitada y no promete resultados.
+- [ ] **Aprobar el texto de radiología móvil**: "a domicilio cuando es técnicamente viable". Confirmar que los colaboradores tienen equipo portátil para algún estudio. Si no, cambio el enfoque a "coordinamos el estudio en un centro cercano".
+- [ ] **Página de villas, hoteles y grupos**: confirmar que se puede enviar un enlace de pago por huésped.
+- [ ] **Sesión de fotos profesional**: clínica, equipo, llegada a una villa y detalle de material. Mientras tanto se usan ilustraciones.
+- [ ] **Precios de estética**: ¿incluyen IVA? La página muestra "USD" sin decir IVA.
+
+## V4 (anteriores, siguen vigentes si no están marcadas)
 
 ## 1. Publicación (bloqueante)
 - [ ] Revisar la vista previa de la rama `v4-premium` en Vercel: https://pharmacydoctors-git-v4-premium-cabo-pharmacy.vercel.app/ (requiere sesión de Vercel)

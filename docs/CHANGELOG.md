@@ -1,6 +1,15 @@
 # Changelog — rama `v4-premium`
 Ninguno de estos cambios está en producción.
 
+## 2026-11-25 — V5 (rama `v5-premium`, no publicada)
+- **Identidad premium**: escenario azul marino en todos los heroes, Cormorant Garamond y Public Sans, motivo de arco, secciones numeradas, menú de tratamientos con líneas de puntos, tarjetas planas. Nuevo `assets/v5.css` cargado en 80 páginas.
+- **Navegación**: NAD+, video y equipo médico en Doctores, radiología móvil y villas, hoteles y grupos en Más servicios.
+- **Páginas nuevas**: `/nad-plus-iv-therapy-cabo/`, `/medical-team/`, `/villas-hotels-groups-cabo/`, `/pay/`, `/pay/success/`.
+- **Rediseñadas**: home EN/ES, catálogo de sueros EN/ES, 7 sueros, doctor a domicilio EN/ES, video, walk-in y seguros (de artículo a página de servicio), radiología móvil, estética (con la aclaración de la Dra. Rosibel), reserva EN/ES y política de cancelación.
+- **Cobro del 100 %**: `api/checkout.js` (Stripe Checkout, monto en el servidor), `api/stripe-webhook.js` (aviso "PAID" por correo) y `assets/pay.js`. La reserva genera el enlace y el mensaje para el cliente en el correo.
+- **Correcciones**: "prescribe" condicionado, promesa de "1–2 hours", política inventada "not charged" y migas de pan duplicadas.
+- **Pruebas**: `tests/payments.test.js` (30/30). JSON-LD 0 errores. Enlaces 0 rotos.
+
 ## 2026-11-25 — V4
 ### P0 · Cumplimiento y honestidad
 - **Sin anticipo**: se eliminó el anticipo de $50. "Nada se cobra ahora; confirmamos disponibilidad y pagas el precio total con enlace seguro o en la visita". Afecta la reserva (`booking.js`), las FAQ, `/prices/`, `/refund-policy/` y las páginas de sueros.

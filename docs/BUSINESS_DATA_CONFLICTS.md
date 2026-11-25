@@ -21,3 +21,14 @@ Regla aplicada: cuando el documento V4 y una instrucción anterior del chat choc
 
 ## Cómo revertir un punto
 Cada cambio está en commits separados de `v4-premium` (ver `docs/CHANGELOG.md`). Para un ajuste puntual (p. ej. volver a "Medical Director" o a 24 h en el schema), basta con un reemplazo de texto en las páginas. El procedimiento completo está en `docs/ROLLBACK.md`.
+
+## V5 (2026-11-25)
+| # | Tema | Qué hace la rama | Decisión necesaria |
+|---|---|---|---|
+| 14 | Pago por enlace | El 100 % tras confirmar, vía Stripe Checkout; el monto lo calcula el servidor | Activar claves de Stripe (`PAYMENTS_SETUP.md`) |
+| 15 | NAD+ | Página propia con lenguaje prudente ("evidencia limitada", sin promesas) | Aprobar el texto |
+| 16 | Radiología móvil | "A domicilio cuando es técnicamente viable; si no, centro cercano" | Confirmar la capacidad portátil real de los colaboradores |
+| 17 | Retrato del Dr. Kevin | La foto muestra el logo de Cabo Walk-In Clinic en el uniforme | ¿Se mantiene la foto en PharmacyDoctors? |
+| 18 | Dra. Rosibel | Aclaración: su responsabilidad sanitaria corresponde exclusivamente a Cabo Walk-In Clinic (en estética y en equipo médico) | — (instrucción del dueño) |
+| 19 | Grupos y hoteles | Sin afirmar convenios: "no reclamamos acuerdos formales con hoteles" | — |
+| 20 | Pago por huésped en grupos | La FAQ dice "un enlace para el grupo o uno por huésped" | Confirmar que el equipo puede operarlo |
