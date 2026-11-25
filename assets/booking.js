@@ -174,7 +174,7 @@
   function sameDay(a, b) { return a && b && a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate(); }
   function stepDate(main) {
     main.appendChild(el('h2', {}, t('When should we come?', '¿Cuándo vamos?')));
-    main.appendChild(el('p', { class: 'bk-sub' }, t('We work 24/7. Times are Cabo time (Mountain Time, same as Denver/Phoenix). Same-day visits usually arrive in 30–45 minutes.', 'Atendemos 24/7. Horario de Los Cabos. Las visitas del mismo día suelen llegar en 30–45 minutos.')));
+    main.appendChild(el('p', { class: 'bk-sub' }, t('You can request care 24/7. Times are Cabo time (Mountain Time, same as Denver/Phoenix). We confirm the arrival time when we confirm your booking.', 'Puedes solicitar atención 24/7. Horario de Los Cabos. Confirmamos la hora de llegada al confirmar tu reserva.')));
     var today = new Date(); today.setHours(0, 0, 0, 0);
     var max = new Date(today); max.setDate(max.getDate() + 90);
     if (!viewMonth) viewMonth = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -208,7 +208,7 @@
       var slots = el('div', { class: 'bk-slots' });
       var now = new Date(), isToday = sameDay(state.date, now);
       var opts = [];
-      if (isToday) opts.push(t('As soon as possible (30–45 min)', 'Lo antes posible (30–45 min)'));
+      if (isToday) opts.push(t('As soon as possible (we confirm the time)', 'Lo antes posible (confirmamos la hora)'));
       for (var hi = 0; hi < 24; hi++) for (var mm = 0; mm < 60; mm += 30) {
         var hh = (hi + 7) % 24;   // list starts at 7:00 AM, late-night slots at the end
         if (isToday && hh < 7) continue;
@@ -274,7 +274,7 @@
     if (!orderId) { var d = new Date(); orderId = 'PD-' + String(d.getFullYear()).slice(2) + ('0' + (d.getMonth() + 1)).slice(-2) + ('0' + d.getDate()).slice(-2) + '-' + Math.random().toString(36).slice(2, 6).toUpperCase(); }
     main.appendChild(el('h2', {}, t('Review and send', 'Revisa y envía')));
     var pre = el('div', { class: 'bk-review' }); pre.textContent = summaryText(); main.appendChild(pre);
-    main.appendChild(el('ul', { class: 'bk-assure' }, '<li>' + ((DEPOSIT_URL && payable()) ? t('After sending, secure your time with a $' + DEPOSIT + ' card deposit — it is deducted from your total. The rest is paid at the visit.', 'Al enviar, asegura tu horario con un anticipo de $' + DEPOSIT + ' con tarjeta — se descuenta de tu total. El resto lo pagas en la visita.') : t('Nothing is charged now. After we confirm availability you pay the full confirmed price — by secure card link or at the visit (card, USD or pesos). No deposit.', 'No se cobra nada ahora. Cuando confirmamos disponibilidad pagas el precio total — con enlace seguro o en la visita (tarjeta, USD o pesos). Sin anticipo.')) + '</li><li>' + t('We confirm by WhatsApp or phone, usually within minutes.', 'Te confirmamos por WhatsApp o llamada, normalmente en minutos.') + '</li><li>' + t('Licensed doctors and nurses.', 'Equipo con licencia.') + '</li><li>' + t('In a life-threatening emergency call 911.', 'En una emergencia que ponga en riesgo la vida llama al 911.') + '</li>'));
+    main.appendChild(el('ul', { class: 'bk-assure' }, '<li>' + ((DEPOSIT_URL && payable()) ? t('After sending, secure your time with a $' + DEPOSIT + ' card deposit — it is deducted from your total. The rest is paid at the visit.', 'Al enviar, asegura tu horario con un anticipo de $' + DEPOSIT + ' con tarjeta — se descuenta de tu total. El resto lo pagas en la visita.') : t('Nothing is charged now. After we confirm availability you pay the full confirmed price — by secure card link or at the visit (card, USD or pesos). No deposit.', 'No se cobra nada ahora. Cuando confirmamos disponibilidad pagas el precio total — con enlace seguro o en la visita (tarjeta, USD o pesos). Sin anticipo.')) + '</li><li>' + t('We confirm availability by WhatsApp or phone before you pay.', 'Confirmamos disponibilidad por WhatsApp o llamada antes de que pagues.') + '</li><li>' + t('Licensed doctors and nurses.', 'Equipo con licencia.') + '</li><li>' + t('In a life-threatening emergency call 911.', 'En una emergencia que ponga en riesgo la vida llama al 911.') + '</li>'));
     var hp = el('input', { type: 'text', name: '_honey', tabindex: '-1', autocomplete: 'off', style: 'position:absolute;left:-9999px', 'aria-hidden': 'true' }); main.appendChild(hp);
     var status = el('p', { class: 'bk-status', role: 'status' }); main.appendChild(status);
     var row = el('div', { class: 'bk-nav' });
