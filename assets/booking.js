@@ -5,7 +5,9 @@
   var ORDER_EMAIL_ENDPOINT = 'https://formsubmit.co/ajax/cmccompanydental@gmail.com';
   // Web3Forms lets us set the sender name. Paste the free access key here to switch providers.
   var WEB3FORMS_KEY = '61ecefdf-b8ed-4b03-b9e9-b83c05a29c0f';
-  var DEPOSIT_URL = 'https://buy.stripe.com/3cI6oAgNm2uycs1eml1sQ0k'; // Stripe Payment Link for the $50 deposit
+  // V4 (2026-11-25): no deposit. Nothing is charged online at request time; after the team confirms
+  // availability it sends a secure payment link for 100% of the confirmed price (or the guest pays at the visit).
+  var DEPOSIT_URL = '';
   var DEPOSIT = 50;
   var SENDER_NAME = 'Pharmacy & Doctors Cabo – Bookings';
   var WA = '526242261023';
@@ -94,7 +96,7 @@
     else h += '<ul class="bk-lines">' + ls.map(function (l) { return '<li><span>' + esc(l.label) + (l.note ? '<small>' + esc(l.note) + '</small>' : '') + '</span><b>' + (l.amount ? money(l.amount) : '—') + '</b></li>'; }).join('') + '</ul>';
     if (state.date) h += '<div class="bk-when">📅 ' + fmtDate(state.date) + (state.time ? ' · ' + esc(state.time) : '') + '</div>';
     var tot = total();
-    if (tot) h += '<div class="bk-total"><span>' + t('Estimated total', 'Total estimado') + '</span><b>' + money(tot) + ' USD</b></div><p class="bk-fine">' + t('All prices include tax.', 'Todos los precios incluyen IVA.') + ' ' + ((DEPOSIT_URL && payable()) ? t('$' + DEPOSIT + ' deposit secures your time; it is deducted at the visit.', 'Un anticipo de $' + DEPOSIT + ' asegura tu horario y se descuenta en la visita.') : t('No payment now — you pay at the visit.', 'No pagas ahora — pagas en la visita.')) + '</p>';
+    if (tot) h += '<div class="bk-total"><span>' + t('Estimated total', 'Total estimado') + '</span><b>' + money(tot) + ' USD</b></div><p class="bk-fine">' + t('All prices include tax.', 'Todos los precios incluyen IVA.') + ' ' + ((DEPOSIT_URL && payable()) ? t('$' + DEPOSIT + ' deposit secures your time; it is deducted at the visit.', 'Un anticipo de $' + DEPOSIT + ' asegura tu horario y se descuenta en la visita.') : t('Nothing is charged now. We confirm availability first, then you pay the full price by secure card link or at the visit.', 'No se cobra nada ahora. Primero confirmamos disponibilidad y después pagas el precio total con enlace seguro o en la visita.')) + '</p>';
     var left = GROUP_MIN - groupIV();
     if (state.where === 'door' && groupIV() > 0 && left > 0) h += '<div class="bk-nudge">👥 ' + t('Add ' + left + ' more IV' + (left > 1 ? 's' : '') + ' and everyone pays $119 (tax incl.)', 'Agrega ' + left + ' suero' + (left > 1 ? 's' : '') + ' más y todos pagan $119 (IVA incl.)') + '</div>';
     if (isGroup()) h += '<div class="bk-nudge ok">🎉 ' + t('Group rate applied: $119 per person, tax included', 'Precio de grupo aplicado: $119 por persona, IVA incluido') + '</div>';
@@ -272,7 +274,7 @@
     if (!orderId) { var d = new Date(); orderId = 'PD-' + String(d.getFullYear()).slice(2) + ('0' + (d.getMonth() + 1)).slice(-2) + ('0' + d.getDate()).slice(-2) + '-' + Math.random().toString(36).slice(2, 6).toUpperCase(); }
     main.appendChild(el('h2', {}, t('Review and send', 'Revisa y envía')));
     var pre = el('div', { class: 'bk-review' }); pre.textContent = summaryText(); main.appendChild(pre);
-    main.appendChild(el('ul', { class: 'bk-assure' }, '<li>' + ((DEPOSIT_URL && payable()) ? t('After sending, secure your time with a $' + DEPOSIT + ' card deposit — it is deducted from your total. The rest is paid at the visit.', 'Al enviar, asegura tu horario con un anticipo de $' + DEPOSIT + ' con tarjeta — se descuenta de tu total. El resto lo pagas en la visita.') : t('No payment now — you pay at the visit (card, USD or pesos).', 'No pagas ahora — pagas en la visita (tarjeta, USD o pesos).')) + '</li><li>' + t('We confirm by WhatsApp or phone, usually within minutes.', 'Te confirmamos por WhatsApp o llamada, normalmente en minutos.') + '</li><li>' + t('Licensed doctors and nurses.', 'Equipo con licencia.') + '</li><li>' + t('In a life-threatening emergency call 911.', 'En una emergencia que ponga en riesgo la vida llama al 911.') + '</li>'));
+    main.appendChild(el('ul', { class: 'bk-assure' }, '<li>' + ((DEPOSIT_URL && payable()) ? t('After sending, secure your time with a $' + DEPOSIT + ' card deposit — it is deducted from your total. The rest is paid at the visit.', 'Al enviar, asegura tu horario con un anticipo de $' + DEPOSIT + ' con tarjeta — se descuenta de tu total. El resto lo pagas en la visita.') : t('Nothing is charged now. After we confirm availability you pay the full confirmed price — by secure card link or at the visit (card, USD or pesos). No deposit.', 'No se cobra nada ahora. Cuando confirmamos disponibilidad pagas el precio total — con enlace seguro o en la visita (tarjeta, USD o pesos). Sin anticipo.')) + '</li><li>' + t('We confirm by WhatsApp or phone, usually within minutes.', 'Te confirmamos por WhatsApp o llamada, normalmente en minutos.') + '</li><li>' + t('Licensed doctors and nurses.', 'Equipo con licencia.') + '</li><li>' + t('In a life-threatening emergency call 911.', 'En una emergencia que ponga en riesgo la vida llama al 911.') + '</li>'));
     var hp = el('input', { type: 'text', name: '_honey', tabindex: '-1', autocomplete: 'off', style: 'position:absolute;left:-9999px', 'aria-hidden': 'true' }); main.appendChild(hp);
     var status = el('p', { class: 'bk-status', role: 'status' }); main.appendChild(status);
     var row = el('div', { class: 'bk-nav' });
@@ -290,7 +292,7 @@
         Date: fmtDate(state.date), Time: state.time,
         Services: lines().map(function (l) { return l.label + (l.amount ? ' ' + money(l.amount) : '') + (l.note ? ' (' + l.note + ')' : ''); }).join(' | '),
         'Pharmacy list': state.pharmacyList || '-', 'Estimated total USD': money(total()) + (isGroup() ? ' (group rate, tax incl.)' : ' (tax incl.)'),
-        Deposit: (DEPOSIT_URL && payable()) ? ('$' + DEPOSIT + ' deposit link shown — check Stripe for ' + orderId) : 'n/a', 'Referred by': window.PD_REF || '-', Notes: form.notes || '-', Language: ES ? 'Spanish' : 'English', Page: location.href
+        Payment: (DEPOSIT_URL && payable()) ? ('$' + DEPOSIT + ' deposit link shown — check Stripe for ' + orderId) : 'Full price after confirmation (send secure payment link or collect at visit)', 'Referred by': window.PD_REF || '-', Notes: form.notes || '-', Language: ES ? 'Spanish' : 'English', Page: location.href
       };
       var url = ORDER_EMAIL_ENDPOINT, body = payload;
       if (WEB3FORMS_KEY) {
@@ -310,10 +312,11 @@
     function done(ok) {
       var waUrl = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(t('Hi! I just sent a booking request on your website:', '¡Hola! Acabo de enviar una solicitud de reserva en su sitio:') + '\n' + summaryText());
       var payUrl = (DEPOSIT_URL && payable()) ? DEPOSIT_URL + '?client_reference_id=' + encodeURIComponent(orderId + (window.PD_REF ? '_ref-' + window.PD_REF : '')) + (form.email ? '&prefilled_email=' + encodeURIComponent(form.email) : '') : '';
+      var nextBox = '<div class="bk-next-steps"><b>' + t('What happens next', 'Qué sigue') + '</b><ol><li>' + t('We check availability and confirm your date and time.', 'Revisamos disponibilidad y confirmamos fecha y hora.') + '</li><li>' + t('You receive a secure payment link for the full confirmed price — or you pay at the visit.', 'Recibes un enlace seguro para pagar el precio total confirmado — o pagas en la visita.') + '</li><li>' + t('Your nurse or doctor arrives at the confirmed time.', 'Tu enfermera o doctor llega a la hora confirmada.') + '</li></ol></div>';
       var payBox = payUrl ? '<div class="bk-pay"><b>' + t('Secure your appointment', 'Asegura tu cita') + '</b><p>' + t('Pay a $' + DEPOSIT + ' USD deposit by card. It is deducted from your total at the visit.', 'Paga un anticipo de $' + DEPOSIT + ' USD con tarjeta. Se descuenta de tu total en la visita.') + '</p><a class="btn bk-paybtn" href="' + payUrl + '" target="_blank" rel="noopener">💳 ' + t('Pay $' + DEPOSIT + ' deposit', 'Pagar anticipo de $' + DEPOSIT) + '</a><small>' + t('Secure checkout by Stripe · Full refund if you cancel 24+ hours before', 'Pago seguro con Stripe · Reembolso completo si cancelas con 24 h o más') + ' (<a href="/refund-policy/" target="_blank">' + t('policy', 'política') + '</a>)</small></div>' : '';
       main.innerHTML = '<div class="bk-done"><div class="bk-ok">✓</div><h2>' + (ok ? t('Request received!', '¡Solicitud recibida!') : t('Almost done — send it on WhatsApp', 'Casi listo — envíala por WhatsApp')) + '</h2>'
         + '<p>' + (ok ? t('Your booking number is', 'Tu número de reserva es') + ' <b>' + orderId + '</b>. ' + t('We will confirm by WhatsApp or phone shortly.', 'Te confirmamos por WhatsApp o llamada en breve.') : t('We could not send it by email from your browser. Tap below to send the same booking on WhatsApp — it takes one tap.', 'No pudimos enviarla por correo desde tu navegador. Toca abajo para mandar la misma reserva por WhatsApp.')) + '</p>'
-        + (ok ? payBox + '<p class="bk-fine">' + t('For the fastest confirmation, also send it on WhatsApp:', 'Para confirmar más rápido, envíala también por WhatsApp:') + '</p>' : '')
+        + (ok ? nextBox + payBox + '<p class="bk-fine">' + t('For the fastest confirmation, also send it on WhatsApp:', 'Para confirmar más rápido, envíala también por WhatsApp:') + '</p>' : '')
         + '<a class="btn btn-wa" href="' + waUrl + '" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>' + t('Send on WhatsApp', 'Enviar por WhatsApp') + '</a>'
         + '<p class="bk-fine">' + t('Questions? Call', '¿Dudas? Llama al') + ' <a href="tel:+526242261023">+52 624 226 1023</a> (24/7).</p></div>';
     }
