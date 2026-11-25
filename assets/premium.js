@@ -61,4 +61,4 @@
 })();
 
 /* V4: IV drip filter chips */
-(function(){document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".iv-filter button");if(!b)return;var bar=b.parentNode,f=b.getAttribute("data-f");[].forEach.call(bar.querySelectorAll("button"),function(x){x.setAttribute("aria-pressed",String(x===b))});var grid=bar.nextElementSibling;if(!grid)return;[].forEach.call(grid.querySelectorAll(".iv[data-goal]"),function(c){c.hidden=!(f==="all"||c.getAttribute("data-goal")===f)})})})();
+(function(){document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".iv-filter button");if(!b)return;var bar=b.parentNode,f=b.getAttribute("data-f");[].forEach.call(bar.querySelectorAll("button"),function(x){x.setAttribute("aria-pressed",String(x===b))});var grid=bar.nextElementSibling;if(!grid)return;[].forEach.call(grid.querySelectorAll(".iv[data-goal],.v5-item[data-goal]"),function(c){c.hidden=!(f==="all"||c.getAttribute("data-goal")===f)})})})();

@@ -68,6 +68,12 @@
   function hasItems() { return totalIV() > 0 || state.doctor || state.video || state.pharmacy || state.nurse || hasAes() || state.imaging; }
   // the $50 deposit only applies to IV drips, doctor and video visits
   function payable() { return totalIV() > 0 || state.doctor || state.video; }
+  function payUrl() {
+    var iv = 0, nad = 0, p = [];
+    DRIPS.forEach(function (d) { var n = state.qty[d.id] || 0; if (d.noGroup) nad += n; else iv += n; });
+    if (iv) p.push('iv:' + iv); if (nad) p.push('nad:' + nad); if (state.doctor) p.push('doc:1'); if (state.video) p.push('video:1');
+    return 'https://www.pharmacydoctors.com/pay/?b=' + orderId + '&i=' + p.join(',') + '&w=' + state.where + (ES ? '&l=es' : '');
+  }
 
   // ---------- render ----------
   var root;
@@ -294,8 +300,12 @@
         Date: fmtDate(state.date), Time: state.time,
         Services: lines().map(function (l) { return l.label + (l.amount ? ' ' + money(l.amount) : '') + (l.note ? ' (' + l.note + ')' : ''); }).join(' | '),
         'Pharmacy list': state.pharmacyList || '-', 'Estimated total USD': money(total()) + (isGroup() ? ' (group rate, tax incl.)' : ' (tax incl.)'),
-        Payment: (DEPOSIT_URL && payable()) ? ('$' + DEPOSIT + ' deposit link shown — check Stripe for ' + orderId) : 'Full price after confirmation (send secure payment link or collect at visit)', 'Referred by': window.PD_REF || '-', Notes: form.notes || '-', Language: ES ? 'Spanish' : 'English', Page: location.href
+        Payment: payable() ? '100% after confirmation: send the pay link below, or collect at the visit' : 'Quote first (no online payment)', 'Referred by': window.PD_REF || '-', Notes: form.notes || '-', Language: ES ? 'Spanish' : 'English', Page: location.href
       };
+      // V5: ready-made link for paying 100% after the team confirms (amount is recomputed server-side)
+      var payLink = payable() ? payUrl() : '';
+      payload['Pay link (send AFTER confirming)'] = payLink || '- (quote / pay at visit)';
+      if (payLink) payload['Message for the guest after confirming'] = t('Your booking ' + orderId + ' is confirmed for ' + fmtDate(state.date) + ' ' + state.time + '. You can pay securely here: ', 'Tu reserva ' + orderId + ' está confirmada para el ' + fmtDate(state.date) + ' ' + state.time + '. Puedes pagar de forma segura aquí: ') + payLink;
       var url = ORDER_EMAIL_ENDPOINT, body = payload;
       if (WEB3FORMS_KEY) {
         url = 'https://api.web3forms.com/submit';
@@ -313,9 +323,9 @@
     };
     function done(ok) {
       var waUrl = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(t('Hi! I just sent a booking request on your website:', '¡Hola! Acabo de enviar una solicitud de reserva en su sitio:') + '\n' + summaryText());
-      var payUrl = (DEPOSIT_URL && payable()) ? DEPOSIT_URL + '?client_reference_id=' + encodeURIComponent(orderId + (window.PD_REF ? '_ref-' + window.PD_REF : '')) + (form.email ? '&prefilled_email=' + encodeURIComponent(form.email) : '') : '';
+      var depositUrl = (DEPOSIT_URL && payable()) ? DEPOSIT_URL + '?client_reference_id=' + encodeURIComponent(orderId + (window.PD_REF ? '_ref-' + window.PD_REF : '')) + (form.email ? '&prefilled_email=' + encodeURIComponent(form.email) : '') : '';
       var nextBox = '<div class="bk-next-steps"><b>' + t('What happens next', 'Qué sigue') + '</b><ol><li>' + t('We check availability and confirm your date and time.', 'Revisamos disponibilidad y confirmamos fecha y hora.') + '</li><li>' + t('You receive a secure payment link for the full confirmed price — or you pay at the visit.', 'Recibes un enlace seguro para pagar el precio total confirmado — o pagas en la visita.') + '</li><li>' + t('Your nurse or doctor arrives at the confirmed time.', 'Tu enfermera o doctor llega a la hora confirmada.') + '</li></ol></div>';
-      var payBox = payUrl ? '<div class="bk-pay"><b>' + t('Secure your appointment', 'Asegura tu cita') + '</b><p>' + t('Pay a $' + DEPOSIT + ' USD deposit by card. It is deducted from your total at the visit.', 'Paga un anticipo de $' + DEPOSIT + ' USD con tarjeta. Se descuenta de tu total en la visita.') + '</p><a class="btn bk-paybtn" href="' + payUrl + '" target="_blank" rel="noopener">💳 ' + t('Pay $' + DEPOSIT + ' deposit', 'Pagar anticipo de $' + DEPOSIT) + '</a><small>' + t('Secure checkout by Stripe · Full refund if you cancel 24+ hours before', 'Pago seguro con Stripe · Reembolso completo si cancelas con 24 h o más') + ' (<a href="/refund-policy/" target="_blank">' + t('policy', 'política') + '</a>)</small></div>' : '';
+      var payBox = depositUrl ? '<div class="bk-pay"><b>' + t('Secure your appointment', 'Asegura tu cita') + '</b><p>' + t('Pay a $' + DEPOSIT + ' USD deposit by card. It is deducted from your total at the visit.', 'Paga un anticipo de $' + DEPOSIT + ' USD con tarjeta. Se descuenta de tu total en la visita.') + '</p><a class="btn bk-paybtn" href="' + depositUrl + '" target="_blank" rel="noopener">💳 ' + t('Pay $' + DEPOSIT + ' deposit', 'Pagar anticipo de $' + DEPOSIT) + '</a><small>' + t('Secure checkout by Stripe · Full refund if you cancel 24+ hours before', 'Pago seguro con Stripe · Reembolso completo si cancelas con 24 h o más') + ' (<a href="/refund-policy/" target="_blank">' + t('policy', 'política') + '</a>)</small></div>' : '';
       main.innerHTML = '<div class="bk-done"><div class="bk-ok">✓</div><h2>' + (ok ? t('Request received!', '¡Solicitud recibida!') : t('Almost done — send it on WhatsApp', 'Casi listo — envíala por WhatsApp')) + '</h2>'
         + '<p>' + (ok ? t('Your booking number is', 'Tu número de reserva es') + ' <b>' + orderId + '</b>. ' + t('We will confirm by WhatsApp or phone shortly.', 'Te confirmamos por WhatsApp o llamada en breve.') : t('We could not send it by email from your browser. Tap below to send the same booking on WhatsApp — it takes one tap.', 'No pudimos enviarla por correo desde tu navegador. Toca abajo para mandar la misma reserva por WhatsApp.')) + '</p>'
         + (ok ? nextBox + payBox + '<p class="bk-fine">' + t('For the fastest confirmation, also send it on WhatsApp:', 'Para confirmar más rápido, envíala también por WhatsApp:') + '</p>' : '')
