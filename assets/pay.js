@@ -20,6 +20,7 @@
     box(t('Checking your payment…', 'Verificando tu pago…'), '');
     fetch('/api/checkout?session_id=' + encodeURIComponent(sid)).then(function (r) { return r.json(); }).then(function (j) {
       if (j && j.paid) {
+        if (typeof window.gtag === 'function') window.gtag('event', 'purchase', { transaction_id: j.booking, value: j.amount / 100, currency: 'USD' });
         app.innerHTML = '<div class="bk-ok" aria-hidden="true">✓</div><h2>' + t('Payment received — thank you', 'Pago recibido — gracias') + '</h2><p>' + t('Booking', 'Reserva') + ' <b>' + esc(j.booking) + '</b> · ' + money(j.amount) + '</p><p>' + t('Stripe emails your receipt. Our team has been notified and will see you at the confirmed time. To change anything, message us.', 'Stripe te envía el recibo por correo. Nuestro equipo ya fue notificado y te vemos a la hora confirmada. Para cualquier cambio, escríbenos.') + '</p>' + waBtn(t('Hi! I just paid booking ', '¡Hola! Acabo de pagar la reserva ') + j.booking);
       } else if (j && (j.status === 'unpaid' || j.status === 'no_payment_required') && j.session_status === 'complete') {
         box(t('Payment processing', 'Pago en proceso'), t('Your bank is still confirming the payment. You will receive the Stripe receipt by email once it is complete.', 'Tu banco aún está confirmando el pago. Recibirás el recibo de Stripe por correo cuando se complete.'), waBtn(t('Hi! My payment is processing for booking ', '¡Hola! Mi pago está en proceso, reserva ') + (j.booking || '')));

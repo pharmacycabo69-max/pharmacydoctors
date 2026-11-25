@@ -114,7 +114,7 @@
       return r;
     }
     if (has(m, /hangover|drunk|drink|party|tequila|resaca|cruda|cruda|cudas?/)) {
-      r.reply = t('Sorry you are feeling rough! Most guests choose Hangover Rescue. We confirm the arrival time when you book.', '¡Lo sentimos! La mayoría elige Hangover Rescue. Confirmamos la hora de llegada al reservar.');
+      r.reply = t('Sorry you are feeling rough! Many guests ask about the Hangover Rescue IV. A licensed nurse asks a few health questions first and confirms whether an IV is right for you — vomiting that will not stop, chest pain or confusion need a doctor or 911.', '¡Lo sentimos! Muchos huéspedes preguntan por el suero Hangover Rescue. Una enfermera con cédula hace unas preguntas de salud y confirma si un suero es adecuado para ti — vómito que no para, dolor de pecho o confusión requieren un doctor o el 911.');
       r.cards = [card('hangover'), card('hydration')]; r.quick_replies = chips(); return r;
     }
     if (has(m, /doctor|fever|pain|infection|injur|\bcuts?\b|wound|stomach|diarrh|vomit|\bears?\b|throat|rash|sick|m[eé]dic|fiebre|dolor|infecci|herida|est[oó]mago|diarrea|v[oó]mito|garganta|o[ií]do|enferm[oa]/)) {
@@ -153,7 +153,7 @@
       r.cards = [info('San José del Cabo', '/san-jose-del-cabo/', t('IV therapy, doctors and pharmacy delivery', 'Sueros, doctor y farmacia a domicilio'), '#0f766e', t("Hi! I'm in San José del Cabo and need: ", 'Hola, estoy en San José del Cabo y necesito: '))];
       return r;
     }
-    if (has(m, /flu|cold|immun|vitamin c|gripe|resfriado|defensas/)) { r.reply = t('Immunity Armor is our go-to for a run-down immune system. If you have a fever, a doctor visit may be better — just ask.', 'Immunity Armor es ideal para las defensas. Si tienes fiebre, quizá conviene una visita del doctor.'); r.cards = [card('immunity')]; return r; }
+    if (has(m, /flu|cold|immun|vitamin c|gripe|resfriado|defensas/)) { r.reply = t('Immunity Armor is a vitamin C and zinc drip for run-down travel days; it does not prevent or treat infections. If you have a fever or feel sick, a doctor visit is the right first step.', 'Immunity Armor es un suero con vitamina C y zinc para días de viaje pesados; no previene ni trata infecciones. Si tienes fiebre o te sientes enfermo, lo correcto es primero una visita del doctor.'); r.cards = [card('immunity')]; return r; }
     if (has(m, /energy|b12|jet ?lag|tired|fatigue|cansad|energ[ií]a/)) { r.reply = t('Energy & B12 is popular after long flights. Rapid Hydration helps too.', 'Energy & B12 es muy pedido después de vuelos largos. Rapid Hydration también ayuda.'); r.cards = [card('energy'), card('hydration')]; return r; }
     if (has(m, /skin|beauty|glow|glutathione|piel|belleza/)) { r.reply = t('Beauty Glow combines hydration with antioxidants.', 'Beauty Glow combina hidratación con antioxidantes.'); r.cards = [card('beauty')]; return r; }
     if (has(m, /golf|fish|sport|workout|train|recover|muscle|\brun\b|deporte|pesca|m[uú]sculo/)) { r.reply = t('Performance & Recovery is made for active days.', 'Performance & Recovery es para días activos.'); r.cards = [card('performance')]; return r; }

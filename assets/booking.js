@@ -317,7 +317,7 @@
         .catch(function () { done(false); });
       if (typeof window.gtag === 'function') {
         window.gtag('event', 'generate_lead', { method: 'online_booking', value: total(), currency: 'USD' });
-        window.gtag('event', 'booking_request', { value: total(), currency: 'USD', items: totalIV() });
+        window.gtag('event', 'booking_request', { value: total(), currency: 'USD' });
       }
     };
     function done(ok) {

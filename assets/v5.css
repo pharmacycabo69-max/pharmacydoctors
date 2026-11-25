@@ -337,3 +337,37 @@ a{text-underline-offset:3px}
 .v5-assure li:before{content:"";position:absolute;left:13px;top:50%;width:9px;height:5px;border-left:1.6px solid var(--sage-lt);border-bottom:1.6px solid var(--sage-lt);transform:translateY(-70%) rotate(-45deg)}
 .v5-book{padding-top:40px!important}
 @media(max-width:760px){.v5-assure{gap:6px;margin-top:16px}.v5-assure li{font-size:.76rem;padding:6px 10px 6px 26px}.v5-assure li:before{left:10px}.v5-assure li:nth-child(n+3){display:none}.v5-book-intro .lead{font-size:.98rem!important}}
+
+/* V5.1: concierge tool + payment confirmations */
+.cg-form{display:grid;gap:14px;margin-top:18px}
+.cg-form label,#cg-out label{display:grid;gap:6px;font:600 .82rem var(--sans);color:var(--navy)}
+.cg-form input,.cg-form select,#cg-out textarea{font:500 1rem var(--sans);padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--navy);width:100%}
+.cg-form input:focus,.cg-form select:focus{outline:2px solid var(--sage);border-color:var(--sage)}
+.cg-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
+.cg-form .v5-agree{display:flex;font-weight:500}
+.cg-form .v5-agree input{width:auto}
+#cg-out{margin-top:26px;border-top:1px solid var(--line);padding-top:20px}
+.v5-pay .bk-ok{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--sage-l);color:var(--sage-d);font:700 1.6rem var(--sans);margin-bottom:14px}
+.v5-pay .btn-wa{margin-top:8px}
+/* fewer floating elements on small screens: Sofia teaser bubble only on desktop */
+@media(max-width:1023px){#pdai-bubble{display:none!important}}
+/* V5.1 legibility: nothing under 12px; 2-col grids collapse on phones */
+@media(max-width:760px){.grid-cards[style*="repeat(2"]{grid-template-columns:1fr!important}}
+.iv-ing li{font-size:max(12.5px,.8rem)!important}
+.bk-steps li{font-size:max(12px,.76rem)!important}
+.bk-item-p small,.post-b small,.rv-ph-h,.opt-h{font-size:max(12px,.76rem)!important}
+.bk-check em small,em small{font-size:max(12px,.75em)!important}
+/* V5.1 journeys + composition variety */
+.v5-who-sec{padding-top:clamp(56px,6vw,88px)!important}
+.v5-whos{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.v5-who{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px 22px;display:flex;flex-direction:column;gap:8px}
+.v5-who h3{font:500 1.55rem/1.15 var(--display)!important;margin:0}
+.v5-who p{margin:0;color:var(--ink-2);font-size:.94rem}
+.v5-who ul{list-style:none;padding:12px 0 0;margin:auto 0 0;border-top:1px solid var(--line);display:grid;gap:8px}
+.v5-who a{font-weight:600;color:var(--navy);text-decoration:none}
+.v5-who a:hover{color:var(--sage-d);text-decoration:underline}
+@media(min-width:1021px){.v5-hero.rev>:first-child{order:2}.v5-hero.rev .v5-visual{justify-self:start}.v5-hero.rev .v5-card{left:auto;right:-46px}}
+@media(max-width:1020px){.v5-whos{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.v5-whos{grid-template-columns:1fr}}
+/* V5.1: content is never hidden waiting for a scroll animation (background tabs, thumbnails, crawlers) */
+.rv-in,.rv-in.is-in{opacity:1!important;transform:none!important;transition:border-color .25s var(--ease)!important}
