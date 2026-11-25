@@ -60,7 +60,7 @@
     AES.forEach(function (a) {
       if (state.aes[a.id]) out.push({ label: t('Aesthetic evaluation: ', 'Valoración estética: ') + a.name, unit: 0, amount: 0, note: t('evaluation first · listed price ', 'valoración primero · precio publicado ') + a.price + t(' (tax incl.)', ' (IVA incl.)') });
     });
-    if (state.imaging) out.push({ label: t('Imaging quote request', 'Solicitud de cotización de estudios de imagen'), unit: 0, amount: 0, note: t('X-ray / ultrasound · quoted on confirmation', 'rayos X / ultrasonido · se cotiza al confirmar') });
+    if (state.imaging) out.push({ label: t('X-ray quote request', 'Solicitud de cotización de rayos X'), unit: 0, amount: 0, note: t('X-ray · quoted on confirmation', 'rayos X · se cotiza al confirmar') });
     return out;
   }
   function total() { return lines().reduce(function (s, l) { return s + l.amount; }, 0); }
@@ -72,7 +72,7 @@
     var iv = 0, nad = 0, p = [];
     DRIPS.forEach(function (d) { var n = state.qty[d.id] || 0; if (d.noGroup) nad += n; else iv += n; });
     if (iv) p.push('iv:' + iv); if (nad) p.push('nad:' + nad); if (state.doctor) p.push('doc:1'); if (state.video) p.push('video:1');
-    return 'https://www.pharmacydoctors.com/pay/?b=' + orderId + '&i=' + p.join(',') + '&w=' + state.where + (ES ? '&l=es' : '');
+    return 'https://www.pharmacydoctors.com/concierge/?b=' + orderId + '&i=' + p.join(',') + '&w=' + state.where + (ES ? '&l=es' : '');
   }
 
   // ---------- render ----------
@@ -161,7 +161,7 @@
       ae.appendChild(lab);
     });
     var im = el('label', { class: 'bk-check' + (state.imaging ? ' sel' : '') });
-    im.innerHTML = '<input type="checkbox"' + (state.imaging ? ' checked' : '') + '><span><b>' + t('Imaging quote', 'Cotización de estudios de imagen') + '</b><small>' + t('X-ray or ultrasound, coordinated with our imaging team', 'Rayos X o ultrasonido, coordinado con nuestro equipo de imagenología') + '</small></span><em>' + t('Quote', 'Cotización') + '</em>';
+    im.innerHTML = '<input type="checkbox"' + (state.imaging ? ' checked' : '') + '><span><b>' + t('X-ray quote', 'Cotización de rayos X') + '</b><small>' + t('X-ray at your location or at Clínica San José, quoted first', 'Rayos X a domicilio o en Clínica San José, con cotización previa') + '</small></span><em>' + t('Quote', 'Cotización') + '</em>';
     im.querySelector('input').onchange = function (e) { state.imaging = e.target.checked; render(); };
     ae.appendChild(im);
     main.appendChild(ae);
@@ -300,12 +300,11 @@
         Date: fmtDate(state.date), Time: state.time,
         Services: lines().map(function (l) { return l.label + (l.amount ? ' ' + money(l.amount) : '') + (l.note ? ' (' + l.note + ')' : ''); }).join(' | '),
         'Pharmacy list': state.pharmacyList || '-', 'Estimated total USD': money(total()) + (isGroup() ? ' (group rate, tax incl.)' : ' (tax incl.)'),
-        Payment: payable() ? '100% after confirmation: send the pay link below, or collect at the visit' : 'Quote first (no online payment)', 'Referred by': window.PD_REF || '-', Notes: form.notes || '-', Language: ES ? 'Spanish' : 'English', Page: location.href
+        Payment: payable() ? '100% after confirmation: create the signed link with the concierge tool, or collect at the visit' : 'Quote first (no online payment)', 'Referred by': window.PD_REF || '-', Notes: form.notes || '-', Language: ES ? 'Spanish' : 'English', Page: location.href
       };
-      // V5: ready-made link for paying 100% after the team confirms (amount is recomputed server-side)
+      // V5.1: link for STAFF (concierge tool, needs the staff key). It is NOT a payment link: payment links are signed server-side after confirming.
       var payLink = payable() ? payUrl() : '';
-      payload['Pay link (send AFTER confirming)'] = payLink || '- (quote / pay at visit)';
-      if (payLink) payload['Message for the guest after confirming'] = t('Your booking ' + orderId + ' is confirmed for ' + fmtDate(state.date) + ' ' + state.time + '. You can pay securely here: ', 'Tu reserva ' + orderId + ' está confirmada para el ' + fmtDate(state.date) + ' ' + state.time + '. Puedes pagar de forma segura aquí: ') + payLink;
+      payload['Concierge: create payment link after confirming'] = payLink || '- (quote / pay at visit)';
       var url = ORDER_EMAIL_ENDPOINT, body = payload;
       if (WEB3FORMS_KEY) {
         url = 'https://api.web3forms.com/submit';

@@ -1,19 +1,20 @@
-// PharmacyDoctors — Stripe webhook (V5). On checkout.session.completed it emails the team automatically
-// ("Booking PD-… PAID $…") through the same Web3Forms channel the booking form uses.
-// Requires env STRIPE_WEBHOOK_SECRET (whsec_…). Optional env WEB3FORMS_KEY (defaults to the public site key).
-// Signature verification follows Stripe's scheme: HMAC-SHA256 of "<t>.<raw body>", 5-minute tolerance.
-// No health information is read or forwarded: only booking code, amount and payment status.
+// PharmacyDoctors — Stripe webhook (V5.1). Source of truth for payments = Stripe; this endpoint notifies the team.
+// Events handled: checkout.session.completed (paid / pending), checkout.session.async_payment_succeeded,
+// checkout.session.async_payment_failed, checkout.session.expired, charge.refunded.
+// Requires env STRIPE_WEBHOOK_SECRET (whsec_…). Signature: HMAC-SHA256 of "<t>.<raw body>", 5-minute tolerance.
+// Amount and currency are checked against the expected total stored in the session metadata by /api/checkout.
+// The payment record lives in Stripe even if the notification email fails (we still answer 200).
+// No health information is read or forwarded: only booking code, amount and status.
 'use strict';
 const crypto = require('crypto');
-
+const L = require('./_lib/pay.js');
 const TOLERANCE_S = 300;
-const DEFAULT_W3F = '61ecefdf-b8ed-4b03-b9e9-b83c05a29c0f';
 
 function verify(raw, header, secret, nowS) {
   if (!header || !secret) return false;
-  const parts = Object.fromEntries(header.split(',').map(p => p.split('=')).filter(p => p.length === 2).map(([k, v]) => [k.trim(), v.trim()]));
-  const sigs = header.split(',').filter(p => p.trim().startsWith('v1=')).map(p => p.trim().slice(3));
-  const t = parseInt(parts.t, 10);
+  const items = String(header).split(',').map(p => p.trim());
+  const t = parseInt((items.find(p => p.startsWith('t=')) || '').slice(2), 10);
+  const sigs = items.filter(p => p.startsWith('v1=')).map(p => p.slice(3));
   if (!t || !sigs.length) return false;
   if (Math.abs((nowS || Math.floor(Date.now() / 1000)) - t) > TOLERANCE_S) return false;
   const expected = crypto.createHmac('sha256', secret).update(`${t}.${raw}`, 'utf8').digest('hex');
@@ -28,6 +29,28 @@ async function rawBody(req) {
   return raw;
 }
 
+function classify(evt) {
+  const o = (evt.data && evt.data.object) || {};
+  const md = o.metadata || {};
+  const booking = L.BOOKING_RE.test(o.client_reference_id || md.booking || '') ? (o.client_reference_id || md.booking) : 'unknown';
+  const usd = (c) => (typeof c === 'number' ? (c / 100).toFixed(2) : '?');
+  switch (evt.type) {
+    case 'checkout.session.completed': {
+      const amountOk = String(o.amount_total) === String(md.expected_total) && o.currency === 'usd';
+      if (o.payment_status === 'paid') return { status: amountOk ? 'PAID' : 'PAID – AMOUNT MISMATCH, REVIEW', booking, amount: usd(o.amount_total) };
+      return { status: 'PENDING (delayed payment method)', booking, amount: usd(o.amount_total) };
+    }
+    case 'checkout.session.async_payment_succeeded': return { status: 'PAID (delayed method confirmed)', booking, amount: usd(o.amount_total) };
+    case 'checkout.session.async_payment_failed': return { status: 'PAYMENT FAILED', booking, amount: usd(o.amount_total) };
+    case 'checkout.session.expired': return { status: 'LINK EXPIRED / NOT PAID', booking, amount: usd(o.amount_total), quiet: true };
+    case 'charge.refunded': {
+      const m = /PD-\d{6}-[A-Z0-9]{3,6}/.exec(md.booking || o.description || '');
+      return { status: o.amount_refunded >= o.amount ? 'REFUNDED (full)' : 'REFUNDED (partial)', booking: m ? m[0] : 'see Stripe', amount: usd(o.amount_refunded) };
+    }
+    default: return null;
+  }
+}
+
 async function handler(req, res) {
   const done = (code, msg) => { res.statusCode = code; res.setHeader('Content-Type', 'application/json'); res.end(JSON.stringify(msg)); };
   if (req.method !== 'POST') return done(405, { error: 'method_not_allowed' });
@@ -36,25 +59,18 @@ async function handler(req, res) {
   const raw = await rawBody(req);
   if (!verify(raw, req.headers['stripe-signature'], secret)) return done(400, { error: 'bad_signature' });
   let evt; try { evt = JSON.parse(raw); } catch (e) { return done(400, { error: 'bad_json' }); }
-  if (evt.type !== 'checkout.session.completed' && evt.type !== 'checkout.session.async_payment_succeeded') return done(200, { received: true, ignored: evt.type });
-  const s = evt.data && evt.data.object || {};
-  const booking = /^PD-\d{6}-[A-Z0-9]{3,6}$/.test(s.client_reference_id || '') ? s.client_reference_id : 'unknown';
-  const amount = typeof s.amount_total === 'number' ? (s.amount_total / 100).toFixed(2) : '?';
-  const fetchFn = handler.fetch || fetch;
-  try {
-    await fetchFn('https://api.web3forms.com/submit', {
-      method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify({
-        access_key: process.env.WEB3FORMS_KEY || DEFAULT_W3F,
-        from_name: 'Pharmacy & Doctors Cabo – Payments',
-        subject: `PAID · Booking ${booking} · $${amount} USD`,
-        Booking: booking, 'Amount USD': amount, 'Payment status': s.payment_status || '-',
-        'Stripe session': s.id || '-', Note: 'Paid online after confirmation. Check the Stripe dashboard for the receipt.',
-      }),
+  const c = classify(evt);
+  if (!c) return done(200, { received: true, ignored: evt.type });
+  let emailed = false;
+  if (!c.quiet || process.env.NOTIFY_EXPIRED === '1') {
+    emailed = await L.notifyTeam(handler.fetch || fetch, {
+      subject: `${c.status} · Booking ${c.booking} · $${c.amount} USD`,
+      Booking: c.booking, Status: c.status, 'Amount USD': c.amount, 'Stripe event': evt.id || '-', 'Event type': evt.type,
+      Note: 'Stripe is the payment record. Check the Stripe dashboard before confirming or refunding.',
     });
-  } catch (e) { /* email failure must not make Stripe retry forever; Stripe dashboard remains the source of truth */ }
-  return done(200, { received: true });
+  }
+  return done(200, { received: true, status: c.status, emailed });
 }
 
 module.exports = handler;
-module.exports._test = { verify };
+module.exports._test = { verify, classify };
