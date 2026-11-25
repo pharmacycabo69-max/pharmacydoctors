@@ -1,79 +1,118 @@
-// Unit tests for api/checkout.js and api/stripe-webhook.js — no network, mock fetch, fake keys.
+// Unit tests — payments V5.1 (no network, fake keys). Usage: node tests/payments.test.js
+'use strict';
 const assert = require('assert');
 const crypto = require('crypto');
-const root = process.argv[2] || require("path").resolve(__dirname, "..");  // usage: node tests/payments.test.js
+const path = require('path');
+const root = process.argv[2] || path.resolve(__dirname, '..');
+const L = require(root + '/api/_lib/pay.js');
 const co = require(root + '/api/checkout.js');
+const pl = require(root + '/api/paylink.js');
 const wh = require(root + '/api/stripe-webhook.js');
-const { parseItems, quote } = co._test;
 let pass = 0; const ok = (c, m) => { assert.ok(c, m); pass++; console.log('PASS', m); };
+const SECRET = 'test-pay-link-secret-0123456789abcdef-XYZ';
+const STAFF = 'test-staff-key-123456';
+function res() { return { statusCode: 0, headers: {}, body: '', setHeader(k, v) { this.headers[k] = v; }, end(b) { this.body = b; }, get j() { return JSON.parse(this.body); } }; }
 
-// pricing
-ok(quote(parseItems('iv:1'), 'door').total === 15900, 'IV at door = $159');
-ok(quote(parseItems('iv:1'), 'clinic').total === 12900, 'IV at clinic = $129');
-ok(quote(parseItems('iv:6'), 'door').total === 6 * 11900, '6 IVs at door = group $119 each');
-ok(quote(parseItems('iv:6'), 'clinic').total === 6 * 12900, 'group rate not applied at clinic (mirrors booking.js)');
-ok(quote(parseItems('iv:5,nad:1'), 'door').total === 5 * 15900 + 27900, 'NAD+ does not count toward group');
-ok(quote(parseItems('nad:1'), 'clinic').total === 27900, 'NAD+ = $279 at clinic too');
-ok(quote(parseItems('doc:1'), 'door').total === 18900, 'Doctor at door = $189');
-ok(quote(parseItems('doc:1'), 'clinic').total === 9900, 'Doctor at clinic = $99');
-ok(quote(parseItems('video:1'), 'door').total === 5900, 'Video = $59');
-ok(quote(parseItems('iv:2,doc:1'), 'door').total === 2 * 15900 + 18900, 'mixed cart');
-// validation
-ok(parseItems('iv:0') === null, 'qty 0 rejected');
-ok(parseItems('iv:31') === null, 'qty > 30 rejected');
-ok(parseItems('botox:1') === null, 'unknown/quote-only service rejected');
-ok(parseItems('iv:1;drop') === null, 'garbage rejected');
-ok(quote(parseItems('iv:1'), 'mars') === null, 'bad location rejected');
-
-function mockRes() { return { statusCode: 0, headers: {}, body: '', setHeader(k, v) { this.headers[k] = v; }, end(b) { this.body = b; } }; }
 (async () => {
-  // not configured -> 503 with total, no Stripe call
-  delete process.env.STRIPE_SECRET_KEY;
-  let called = 0; co.fetch = async () => { called++; return { ok: true, json: async () => ({}) }; };
-  let res = mockRes();
-  await co({ method: 'POST', headers: { host: 'preview.example' }, body: { b: 'PD-261125-ABCD', i: 'iv:2', w: 'door' } }, res);
-  ok(res.statusCode === 503 && JSON.parse(res.body).total === 31800 && called === 0, 'no key -> 503 not_configured, no Stripe call');
-  // bad booking code
-  res = mockRes();
-  await co({ method: 'POST', headers: {}, body: { b: 'hack', i: 'iv:2', w: 'door' } }, res);
-  ok(res.statusCode === 400, 'bad booking code -> 400');
-  // configured -> correct Stripe request, amount from server table, generic name
-  process.env.STRIPE_SECRET_KEY = 'sk_test_FAKE';
-  let sent;
-  co.fetch = async (url, opt) => { sent = { url, opt }; return { ok: true, json: async () => ({ url: 'https://checkout.stripe.com/c/pay/cs_test_x' }) }; };
-  res = mockRes();
-  await co({ method: 'POST', headers: { host: 'pharmacydoctors-git-v5.vercel.app' }, body: { b: 'pd-261125-abcd', i: 'iv:6', w: 'door', amount: 1 } }, res);
-  const form = decodeURIComponent(sent.opt.body);
-  ok(res.statusCode === 200 && JSON.parse(res.body).url.startsWith('https://checkout.stripe.com/'), 'configured -> returns Checkout URL');
-  ok(sent.url === 'https://api.stripe.com/v1/checkout/sessions', 'calls Stripe Checkout Sessions');
-  ok(form.includes('line_items[0][price_data][unit_amount]=71400'), 'amount computed server-side (6 x $119 = $714), client amount ignored');
-  ok(form.includes('client_reference_id=PD-261125-ABCD'), 'booking code uppercased and attached');
-  ok(form.match(/product_data\]\[name\]=([^&]*)/)[1] === 'PharmacyDoctors service · Booking PD-261125-ABCD', 'generic Stripe line item name (no service/health detail)');
-  ok(form.includes('success_url=https://pharmacydoctors-git-v5.vercel.app/pay/success/'), 'success URL on same host (works on preview)');
-  // GET session status
-  co.fetch = async () => ({ ok: true, json: async () => ({ payment_status: 'paid', amount_total: 15900, currency: 'usd', client_reference_id: 'PD-261125-ABCD' }) });
-  res = mockRes();
-  await co({ method: 'GET', url: '/api/checkout?session_id=cs_test_abcdefghijkl', headers: {} }, res);
-  const g = JSON.parse(res.body);
-  ok(g.paid === true && g.amount === 15900 && g.booking === 'PD-261125-ABCD', 'GET verifies paid session');
+  // ---------- prices ----------
+  const Q = (i, w) => L.quote(L.parseItems(i), w).total;
+  ok(Q('iv:1', 'door') === 15900, 'IV at your location $159');
+  ok(Q('iv:1', 'clinic') === 12900, 'IV at clinic $129');
+  ok(Q('iv:6', 'door') === 71400, '6 standard IVs at location: group $119 each = $714 (owner-approved 2026-11-24)');
+  ok(Q('iv:5', 'door') === 79500, '5 IVs: no group rate');
+  ok(Q('iv:6', 'clinic') === 6 * 12900, 'group rate not applied at clinic');
+  ok(Q('iv:5,nad:1', 'door') === 5 * 15900 + 27900, 'NAD+ never counts toward group');
+  ok(Q('nad:6', 'door') === 6 * 27900, '6 NAD+: no discount');
+  ok(Q('doc:1', 'door') === 18900 && Q('doc:1', 'clinic') === 9900 && Q('video:1', 'door') === 5900, 'Home Doctor $189 · Walk-in $99 · Video $59');
+  ok(L.parseItems('iv:0') === null && L.parseItems('iv:31') === null && L.parseItems('botox:1') === null && L.parseItems('iv:1;x') === null, 'invalid quantities / quote-only services rejected');
 
-  // webhook signature
-  const secret = 'whsec_test_secret';
-  const payload = JSON.stringify({ type: 'checkout.session.completed', data: { object: { id: 'cs_test_1', client_reference_id: 'PD-261125-ABCD', amount_total: 18900, payment_status: 'paid' } } });
-  const t = Math.floor(Date.now() / 1000);
-  const sig = crypto.createHmac('sha256', secret).update(`${t}.${payload}`).digest('hex');
-  ok(wh._test.verify(payload, `t=${t},v1=${sig}`, secret) === true, 'valid Stripe signature accepted');
-  ok(wh._test.verify(payload, `t=${t},v1=${'0'.repeat(64)}`, secret) === false, 'forged signature rejected');
-  ok(wh._test.verify(payload, `t=${t - 1000},v1=${sig}`, secret) === false, 'old timestamp rejected (replay)');
-  process.env.STRIPE_WEBHOOK_SECRET = secret;
-  let mail; wh.fetch = async (u, o) => { mail = { u, o }; return { ok: true }; };
-  res = mockRes();
-  await wh({ method: 'POST', headers: { 'stripe-signature': `t=${t},v1=${sig}` }, body: payload }, res);
-  const m = JSON.parse(mail.o.body);
-  ok(res.statusCode === 200 && mail.u === 'https://api.web3forms.com/submit' && m.subject === 'PAID · Booking PD-261125-ABCD · $189.00 USD', 'paid event emails the team');
-  ok(!('Name' in m) && !('Notes' in m), 'webhook email carries no patient details');
-  res = mockRes();
-  await wh({ method: 'POST', headers: { 'stripe-signature': 'bad' }, body: payload }, res);
-  ok(res.statusCode === 400, 'unsigned webhook -> 400');
+  // ---------- signed tokens ----------
+  const now = 1795000000;
+  const made = L.makeToken({ b: 'pd-261125-abcd', i: 'iv:2,doc:1', w: 'door', hours: 24, l: 'en' }, SECRET, now);
+  ok(made && made.p.b === 'PD-261125-ABCD' && made.q.total === 2 * 15900 + 18900, 'staff token created with server price');
+  ok(L.verifyToken(made.token, SECRET, now + 60).ok, 'valid token verifies');
+  ok(L.verifyToken(made.token, SECRET, now + 25 * 3600).error === 'expired', 'expired token rejected');
+  ok(L.verifyToken(made.token, 'another-secret-0123456789abcdefghijkl', now).error === 'bad_token', 'token signed with another secret rejected');
+  const [body] = made.token.split('.');
+  const forged = Buffer.from(JSON.stringify(Object.assign({}, made.p, { i: 'iv:1' }))).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '') + '.' + made.token.split('.')[1];
+  ok(L.verifyToken(forged, SECRET, now).error === 'bad_token', 'tampered services (cheaper cart) rejected');
+  ok(L.verifyToken(body + '.AAAA', SECRET, now).error === 'bad_token', 'tampered signature rejected');
+  ok(L.verifyToken(made.token, '', now).error === 'not_configured', 'no PAY_LINK_SECRET -> payments disabled');
+  ok(L.makeToken({ b: 'hack', i: 'iv:1', w: 'door' }, SECRET) === null, 'bad booking code cannot get a token');
+  ok(L.makeToken({ b: 'PD-261125-ABCD', i: 'iv:1', w: 'door', hours: 999 }, SECRET, now).p.exp === now + 72 * 3600, 'link validity capped at 72 h');
+
+  // ---------- /api/paylink (staff only) ----------
+  delete process.env.CONCIERGE_KEY; delete process.env.PAY_LINK_SECRET;
+  let r = res(); await pl({ method: 'POST', headers: { 'x-concierge-key': STAFF }, body: { b: 'PD-261125-ABCD', i: 'iv:1', w: 'door' } }, r);
+  ok(r.statusCode === 503, 'paylink disabled until CONCIERGE_KEY + PAY_LINK_SECRET exist');
+  process.env.CONCIERGE_KEY = STAFF; process.env.PAY_LINK_SECRET = SECRET;
+  r = res(); await pl({ method: 'POST', headers: { 'x-concierge-key': 'guess' }, body: { b: 'PD-261125-ABCD', i: 'iv:1', w: 'door' } }, r);
+  ok(r.statusCode === 401, 'visitor without staff key cannot create a payment link');
+  r = res(); await pl({ method: 'POST', headers: { 'x-concierge-key': STAFF, host: 'preview.example' }, body: { b: 'PD-261125-ABCD', i: 'iv:6', w: 'door', hours: 6 } }, r);
+  const link = r.j; const tok = new URL(link.url).searchParams.get('t');
+  ok(r.statusCode === 200 && link.total === 71400 && /^https:\/\/preview\.example\/pay\/\?t=/.test(link.url), 'staff creates signed link on same host');
+
+  // ---------- /api/checkout ----------
+  delete process.env.STRIPE_SECRET_KEY;
+  r = res(); await co({ method: 'GET', url: '/api/checkout?t=' + tok, headers: {} }, r);
+  ok(r.statusCode === 200 && r.j.total === 71400 && r.j.booking === 'PD-261125-ABCD' && r.j.payments_enabled === false, 'pay page summary comes from server token');
+  r = res(); await co({ method: 'POST', headers: {}, body: { t: tok } }, r);
+  ok(r.statusCode === 503, 'no Stripe key -> 503, nothing charged');
+  r = res(); await co({ method: 'GET', url: '/api/checkout?t=abc.def', headers: {} }, r);
+  ok(r.statusCode === 400, 'garbage link -> 400');
+
+  process.env.STRIPE_SECRET_KEY = 'sk_test_FAKE';
+  const calls = [];
+  let paidAlready = false;
+  co.fetch = async (url, opt) => {
+    calls.push({ url, opt });
+    if (url.includes('/v1/payment_intents/search')) return { ok: true, status: 200, json: async () => ({ data: paidAlready ? [{ id: 'pi_1', status: 'succeeded' }] : [] }) };
+    if (url.endsWith('/v1/checkout/sessions')) return { ok: true, status: 200, json: async () => ({ url: 'https://checkout.stripe.com/c/pay/cs_test_x' }) };
+    return { ok: false, status: 404, json: async () => ({}) };
+  };
+  r = res(); await co({ method: 'POST', headers: { host: 'pharmacydoctors-git-v5.vercel.app' }, body: { t: tok, i: 'iv:1', total: 1 } }, r);
+  const create = calls.find(c => c.url.endsWith('/v1/checkout/sessions'));
+  const form = decodeURIComponent(create.opt.body);
+  ok(r.statusCode === 200 && r.j.url.startsWith('https://checkout.stripe.com/'), 'checkout session created');
+  ok(form.includes('line_items[0][price_data][unit_amount]=71400') && form.includes('metadata[expected_total]=71400'), 'amount from signed token, browser fields ignored');
+  ok(form.includes('line_items[0][price_data][product_data][name]=PharmacyDoctors service · Booking PD-261125-ABCD') && !/hangover|nad|iv therapy|doctor visit|symptom/i.test(form.replace(/PharmacyDoctors/g, '')), 'no medical detail sent to Stripe');
+  const ik1 = create.opt.headers['Idempotency-Key'];
+  calls.length = 0; r = res(); await co({ method: 'POST', headers: {}, body: { t: tok } }, r);
+  ok(calls.find(c => c.url.endsWith('/v1/checkout/sessions')).opt.headers['Idempotency-Key'] === ik1, 'same link -> same idempotency key (no duplicate sessions)');
+  const ex = parseInt(/expires_at=(\d+)/.exec(form)[1], 10), n = Math.floor(Date.now() / 1000);
+  ok(ex >= n + 30 * 60 && ex <= n + 24 * 3600, 'Checkout session expiry within Stripe limits and the link validity');
+  paidAlready = true; r = res(); await co({ method: 'POST', headers: {}, body: { t: tok } }, r);
+  ok(r.statusCode === 409 && r.j.error === 'already_paid', 'already-paid booking cannot be charged twice');
+  r = res(); await co({ method: 'GET', url: '/api/checkout?t=' + tok, headers: {} }, r);
+  ok(r.j.paid === true, 'pay page shows "already paid"');
+  co.fetch = async () => ({ ok: true, status: 200, json: async () => ({ payment_status: 'paid', status: 'complete', amount_total: 15900, currency: 'usd', client_reference_id: 'PD-261125-ABCD', metadata: { expected_total: '15900' } }) });
+  r = res(); await co({ method: 'GET', url: '/api/checkout?session_id=cs_test_abcdefghijkl', headers: {} }, r);
+  ok(r.j.paid === true && r.j.amount_ok === true, 'success page verifies payment with Stripe (server side)');
+  co.fetch = async () => ({ ok: true, status: 200, json: async () => ({ payment_status: 'paid', status: 'complete', amount_total: 100, currency: 'usd', client_reference_id: 'PD-261125-ABCD', metadata: { expected_total: '15900' } }) });
+  r = res(); await co({ method: 'GET', url: '/api/checkout?session_id=cs_test_abcdefghijkl', headers: {} }, r);
+  ok(r.j.paid === false && r.j.amount_ok === false, 'amount mismatch is never reported as paid');
+
+  // ---------- webhook ----------
+  const WS = 'whsec_test_secret';
+  const sign = (p, t) => `t=${t},v1=${crypto.createHmac('sha256', WS).update(`${t}.${p}`).digest('hex')}`;
+  const t0 = Math.floor(Date.now() / 1000);
+  const ev = (type, obj) => JSON.stringify({ id: 'evt_1', type, data: { object: obj } });
+  const paid = ev('checkout.session.completed', { id: 'cs_1', client_reference_id: 'PD-261125-ABCD', amount_total: 18900, currency: 'usd', payment_status: 'paid', metadata: { expected_total: '18900' } });
+  ok(wh._test.verify(paid, sign(paid, t0), WS) && !wh._test.verify(paid, `t=${t0},v1=${'0'.repeat(64)}`, WS) && !wh._test.verify(paid, sign(paid, t0 - 1000), WS), 'webhook signature: valid ok, forged and replayed rejected');
+  process.env.STRIPE_WEBHOOK_SECRET = WS;
+  let mails = []; wh.fetch = async (u, o) => { mails.push(JSON.parse(o.body)); return { ok: true }; };
+  r = res(); await wh({ method: 'POST', headers: { 'stripe-signature': sign(paid, t0) }, body: paid }, r);
+  ok(r.statusCode === 200 && mails[0].subject === 'PAID · Booking PD-261125-ABCD · $189.00 USD' && !('Name' in mails[0]) && !('Notes' in mails[0]), 'paid -> team email without patient data');
+  const bad = ev('checkout.session.completed', { client_reference_id: 'PD-261125-ABCD', amount_total: 100, currency: 'usd', payment_status: 'paid', metadata: { expected_total: '18900' } });
+  ok(wh._test.classify(JSON.parse(bad)).status.includes('MISMATCH'), 'paid with wrong amount flagged for review');
+  ok(wh._test.classify(JSON.parse(ev('checkout.session.completed', { client_reference_id: 'PD-261125-ABCD', payment_status: 'unpaid', amount_total: 100 }))).status.startsWith('PENDING'), 'delayed payment -> PENDING');
+  ok(wh._test.classify(JSON.parse(ev('checkout.session.async_payment_failed', { client_reference_id: 'PD-261125-ABCD', amount_total: 100 }))).status === 'PAYMENT FAILED', 'failed delayed payment');
+  ok(wh._test.classify(JSON.parse(ev('checkout.session.expired', { client_reference_id: 'PD-261125-ABCD' }))).quiet === true, 'expired session recorded quietly');
+  ok(wh._test.classify(JSON.parse(ev('charge.refunded', { amount: 18900, amount_refunded: 18900, description: 'PharmacyDoctors booking PD-261125-ABCD', metadata: {} }))).booking === 'PD-261125-ABCD', 'refund matched to booking');
+  wh.fetch = async () => { throw new Error('email down'); };
+  r = res(); await wh({ method: 'POST', headers: { 'stripe-signature': sign(paid, t0) }, body: paid }, r);
+  ok(r.statusCode === 200 && r.j.emailed === false, 'email failure does not lose the payment (Stripe keeps the record, 200 returned)');
+  r = res(); await wh({ method: 'POST', headers: { 'stripe-signature': 'bad' }, body: paid }, r);
+  ok(r.statusCode === 400, 'unsigned webhook -> 400');
   console.log(`\n${pass} tests passed`);
 })().catch(e => { console.error('FAIL', e.message); process.exit(1); });
