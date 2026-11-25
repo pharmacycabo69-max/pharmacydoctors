@@ -1,10 +1,10 @@
-/* PharmacyDoctors.com online booking: catalog + cart + calendar + details -> email (FormSubmit) + WhatsApp.
+/* PharmacyDoctors.com online booking: catalog + cart + calendar + details -> email (Web3Forms; FormSubmit if no key) + WhatsApp.
    Optional $50 Stripe deposit after sending. Prices mirror /prices/. Language from <html lang>. */
 (function () {
   'use strict';
   var ORDER_EMAIL_ENDPOINT = 'https://formsubmit.co/ajax/cmccompanydental@gmail.com';
   // Web3Forms lets us set the sender name. Paste the free access key here to switch providers.
-  var WEB3FORMS_KEY = '';
+  var WEB3FORMS_KEY = '61ecefdf-b8ed-4b03-b9e9-b83c05a29c0f';
   var DEPOSIT_URL = 'https://buy.stripe.com/3cI6oAgNm2uycs1eml1sQ0k'; // Stripe Payment Link for the $50 deposit
   var DEPOSIT = 50;
   var SENDER_NAME = 'Pharmacy & Doctors Cabo – Bookings';
