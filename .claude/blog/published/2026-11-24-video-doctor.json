@@ -1,0 +1,52 @@
+{
+  "slug": "video-doctor-consultation-cabo",
+  "date": "2026-11-24",
+  "title": "Online Doctor in Cabo | Video Consultation $59",
+  "description": "See an English-speaking doctor by video in Cabo for $59 USD, tax included. Advice, next steps and a doctor at your hotel or our clinic if you need one.",
+  "h1": "Online doctor in Cabo: video consultation for $59",
+  "eyebrow": "Telemedicine in Los Cabos",
+  "image": "/wp-content/uploads/2026/08/doctor-pharmacy-support-travelers-cabo.jpg",
+  "image_alt": "Traveler talking with an English-speaking doctor by video from a hotel in Cabo",
+  "whatsapp": "Hi! I'd like a video consultation with a doctor. My symptoms are: ",
+  "intro": [
+    "Not every problem needs a doctor at your door. For many questions on vacation &mdash; a rash, a cough that will not quit, a medicine you forgot at home, or simply &ldquo;should I worry about this?&rdquo; &mdash; a video consultation with an English-speaking doctor is the fastest and most affordable first step.",
+    "A video consultation costs <strong>$59 USD, tax included</strong>. If the doctor decides you need to be examined in person, we arrange a visit at your hotel ($189) or at our downtown clinic ($99)."
+  ],
+  "sections": [
+    {
+      "h2": "What a video consultation is good for",
+      "list": [
+        "Deciding whether you need to see a doctor in person, go to a hospital or simply rest",
+        "Mild cold or flu symptoms, sore throat or cough",
+        "Mild stomach upset and how to stay hydrated",
+        "Skin rashes, insect bites and sunburn",
+        "Questions about a medicine you take or forgot at home",
+        "Follow-up after a visit with our doctors"
+      ]
+    },
+    {
+      "h2": "When video is not enough",
+      "p": ["Some problems need an exam: high fever in a child, severe pain, trouble breathing or anything that is getting worse quickly. In those cases the doctor will tell you honestly and we arrange an in-person visit. For an emergency &mdash; chest pain, trouble breathing, signs of a stroke, severe bleeding &mdash; call <strong>911</strong>."]
+    },
+    {
+      "h2": "How it works",
+      "list": [
+        "Message us on WhatsApp at <strong>+52 624 226 1023</strong> or <a href=\"/book/?service=video\">book online</a>.",
+        "We confirm a time and send you the video link.",
+        "You talk with the doctor in English or Spanish from your room, villa or anywhere with a good connection.",
+        "If medicine is needed and can be given, our <a href=\"/pharmacy-delivery-cabo-san-lucas/\">pharmacy</a> can deliver it to your room."
+      ]
+    },
+    {
+      "h2": "Price and insurance",
+      "p": ["Video consultation: <strong>$59 USD, tax included</strong>. We accept international health and travel insurance from the United States and Canada, subject to policy verification &mdash; <a href=\"/travel-insurance-doctor-cabo/\">verify your insurance</a> before the call. See every price on our <a href=\"/prices/\">price list</a>."]
+    }
+  ],
+  "faq": [
+    {"q": "How much is an online doctor visit in Cabo?", "a": "A video consultation with our English-speaking doctors costs $59 USD, tax included."},
+    {"q": "Can I see a doctor by video from my hotel in Cabo?", "a": "Yes. We send you a video link at the confirmed time; you only need a phone or laptop with a good connection."},
+    {"q": "What if I need to be examined?", "a": "The doctor will tell you, and we arrange a visit at your hotel, villa or yacht ($189) or at our downtown clinic ($99)."},
+    {"q": "Is a video consultation for emergencies?", "a": "No. For chest pain, trouble breathing, signs of a stroke or severe bleeding, call 911."}
+  ],
+  "related": [["/home-doctor-cabo-san-lucas/", "Doctor at your hotel"], ["/urgent-care-cabo-san-lucas/", "Urgent care in Cabo"], ["/travel-insurance-doctor-cabo/", "Travel insurance"], ["/prices/", "Prices"]]
+}

@@ -43,7 +43,7 @@ for my $file (@ARGV) {
     $art .= '<ul>' . join('', map { "<li>$_</li>" } @{ $s->{list} }) . "</ul>\n" if $s->{list};
     for my $h3 (@{ $s->{h3} || [] }) { $art .= "<h3>$h3->{h}</h3>\n"; $art .= "<p>$_</p>\n" for @{ $h3->{p} || [] }; $art .= '<ul>' . join('', map { "<li>$_</li>" } @{ $h3->{list} }) . "</ul>\n" if $h3->{list} }
     $art .= "<p>$_</p>\n" for @{ $s->{p_after} || [] };
-    if (++$k == 2) { $art .= $cta->($p->{cta_mid}{title} // 'Need a doctor, IV or medicine in Cabo?', $p->{cta_mid}{text} // 'House calls $199 USD &middot; IV drips from $159 + tax &middot; groups of 6+ $119 per person, tax included &middot; pharmacy delivery 24/7') . "\n" }
+    if (++$k == 2) { $art .= $cta->($p->{cta_mid}{title} // 'Need a doctor, IV or medicine in Cabo?', $p->{cta_mid}{text} // 'House calls $189 USD &middot; IV drips $159 (tax included) &middot; groups of 6+ $119 per person, tax included &middot; pharmacy delivery 24/7') . "\n" }
   }
   $toc = @heads > 2 ? '<nav class="toc" aria-label="Contents"><b>In this article</b><ol>' . join('', map { qq{<li><a href="#$_->[0]">$_->[1]</a></li>} } @heads) . '</ol></nav>' : '';
   my @faq = @{ $p->{faq} || [] };
@@ -59,7 +59,7 @@ for my $file (@ARGV) {
   $toc
   <div class="art">$art
   $faqH
-  } . $cta->($p->{cta_end}{title} // 'Feeling unwell in Cabo?', $p->{cta_end}{text} // 'An English-speaking doctor ($199) or a licensed nurse with an IV (from $159 + tax) can be with you in about 30&ndash;45 minutes.') . qq{
+  } . $cta->($p->{cta_end}{title} // 'Feeling unwell in Cabo?', $p->{cta_end}{text} // 'An English-speaking doctor ($189) or a licensed nurse with an IV ($159, tax included) can be with you in about 30&ndash;45 minutes.') . qq{
   $rel
   <p style="font-size:.85rem;color:var(--muted)">This article is general information, not medical advice. In a life-threatening emergency call 911.</p>
   </div>

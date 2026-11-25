@@ -1,0 +1,49 @@
+{
+  "slug": "aesthetic-medicine-cabo",
+  "date": "2026-11-24",
+  "title": "Aesthetic Medicine in Cabo | Lip Fillers & Facial Care",
+  "description": "Aesthetic medicine in Cabo San Lucas with Dra. Rosibel Núñez Rojo: lip fillers, facial botulinum toxin, facial rejuvenation and skin brightening, after evaluation.",
+  "h1": "Aesthetic medicine in Cabo San Lucas",
+  "eyebrow": "Aesthetic medicine in Los Cabos",
+  "image": "/wp-content/uploads/real-iv/real-iv-terrace-villa.jpg",
+  "image_alt": "Aesthetic medicine consultation in Cabo San Lucas",
+  "whatsapp": "Hi! I'd like an aesthetic medicine evaluation in Cabo. I'm interested in: ",
+  "intro": [
+    "Our aesthetic medicine division is led by <strong>Dra. Rosibel Núñez Rojo</strong>, Médico Cirujano from the Universidad Autónoma de Guadalajara (Cédula Profesional 7408277). Every treatment starts with an in-person evaluation, so you get an honest recommendation &mdash; or a recommendation not to treat.",
+    "We offer four categories of treatment. Prices and the specific technique are confirmed after your evaluation."
+  ],
+  "sections": [
+    {
+      "h2": "Treatments",
+      "list": [
+        "<strong>Lip fillers</strong> &mdash; volume and definition for the lips.",
+        "<strong>Facial botulinum toxin treatments</strong> &mdash; for expression lines of the face.",
+        "<strong>Facial rejuvenation</strong> &mdash; treatments chosen for your skin after evaluation.",
+        "<strong>Skin brightening treatments</strong> &mdash; for luminosity and uneven skin tone; technique confirmed at your evaluation."
+      ]
+    },
+    {
+      "h2": "How it works",
+      "list": [
+        "<strong>Evaluation first.</strong> Dra. Rosibel reviews your goals, your health history and any medicines you take.",
+        "<strong>Clear information.</strong> You receive the plan, expected results, possible risks, recovery and the total price before deciding.",
+        "<strong>Treatment and aftercare.</strong> You get written aftercare instructions and a way to reach the team if you have questions."
+      ]
+    },
+    {
+      "h2": "Realistic expectations",
+      "p": ["Results vary from person to person and are not guaranteed. Some treatments are not recommended during pregnancy or breastfeeding, with certain medical conditions or right before sun exposure and travel &mdash; that is why the evaluation matters. We do not publish before-and-after photos without patient authorization."]
+    },
+    {
+      "h2": "Book an evaluation",
+      "p": ["Message us on WhatsApp at <strong>+52 624 226 1023</strong> with the treatment you are interested in and the dates you are in Cabo, and we will propose a time for your evaluation."]
+    }
+  ],
+  "faq": [
+    {"q": "Do you offer lip fillers in Cabo San Lucas?", "a": "Yes, after an in-person evaluation with Dra. Rosibel Núñez Rojo. The technique and price are confirmed at the evaluation."},
+    {"q": "Who performs the treatments?", "a": "Our aesthetic medicine division is led by Dra. Rosibel Núñez Rojo, Médico Cirujano (UAG), Cédula Profesional 7408277."},
+    {"q": "How much do aesthetic treatments cost?", "a": "Prices depend on the treatment and are confirmed after your evaluation, before you decide."},
+    {"q": "Can I get treated on vacation?", "a": "Often yes, but timing matters: the doctor will tell you whether sun, swimming or flights soon after the treatment are a problem."}
+  ],
+  "related": [["/home-doctor-cabo-san-lucas/", "Doctor in Cabo San Lucas"], ["/iv-therapy-cabo/", "IV therapy in Cabo"], ["/beauty-glow/", "Beauty Glow IV"], ["/prices/", "Prices"]]
+}
