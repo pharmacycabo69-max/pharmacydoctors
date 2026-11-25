@@ -3,10 +3,10 @@ Actualizado: 2026-11-24
 
 | # | Dato | Estado | Bloquea |
 |---|---|---|---|
-| 1 | ¿cabobaymedical.com es del dueño? (usa el texto viejo de Cabo Walk-In Clinic: $80/$200/$149) | pendiente | estrategia de portafolio |
+| 1 | cabobaymedical.com NO es del dueño (2026-11-24): copia el texto viejo de Cabo Walk-In Clinic — valorar aviso de retiro de contenido | decisión del dueño | — |
 | 2 | Google Business Profile de la clínica (y RMC) | pendiente | aparecer en el mapa ("Map Pack") |
-| 3 | Foto autorizada y validación del perfil de Dra. Rosibel Núñez Rojo | pendiente | foto en `/aesthetic-medicine-cabo/` |
-| 4 | Precios y técnicas de estética (4 categorías) | pendiente | precios de estética |
+| 3 | Foto real autorizada de Dra. Rosibel (no se generan retratos con IA de personas reales) | pendiente | foto en `/aesthetic-medicine-cabo/` |
+| 4 | Precios de estética tomados de medicinaesteticaencabo.com (2026-11-24); confirmar si incluyen IVA y costo de valoración | parcial | — |
 | 5 | Descripción aprobada de NAD+ (sin indicaciones clínicas) | pendiente | página propia de NAD+ |
 | 6 | Catálogo y precios de laboratorio (Santa Fe) y Travel Wellness Panel (149 vs 249 USD) | pendiente | página de laboratorio |
 | 7 | Catálogo de imagenología, sede, equipo y responsable de interpretación | pendiente | ampliar `/x-ray-imaging-cabo-san-lucas/` |
