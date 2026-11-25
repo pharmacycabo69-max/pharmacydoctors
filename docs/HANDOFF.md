@@ -1,5 +1,5 @@
 # HANDOFF — pharmacydoctors.com (Prompt Maestro V3.1)
-Fecha: 2026-11-24 · Rama de trabajo: `master-v31` (NO fusionada a `main`) · Commit base: `main` @ antes de 8d4721d
+Fecha: 2026-11-24 · Rama de trabajo: `master-v31` — **aprobada por el dueño y publicada en `main` el 2026-11-24 (commit 2003fea)** · Commit base: `main` @ antes de 8d4721d
 
 ## Decisiones del propietario aplicadas (2026-11-24)
 - Precios USD **con impuestos incluidos**: médico a domicilio $189, consulta en clínica $99, videoconsulta $59, los 7 sueros $159 a domicilio / $129 en clínica, NAD+ $279, grupos 6+ $119, anticipo en línea $50 (reembolsable con 24 h).
