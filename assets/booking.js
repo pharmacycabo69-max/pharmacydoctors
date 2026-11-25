@@ -5,7 +5,9 @@
   var ORDER_EMAIL_ENDPOINT = 'https://formsubmit.co/ajax/cmccompanydental@gmail.com';
   // Web3Forms lets us set the sender name. Paste the free access key here to switch providers.
   var WEB3FORMS_KEY = '61ecefdf-b8ed-4b03-b9e9-b83c05a29c0f';
-  var DEPOSIT_URL = 'https://buy.stripe.com/3cI6oAgNm2uycs1eml1sQ0k'; // Stripe Payment Link for the $50 deposit
+  // V4 (2026-11-25): no deposit. Nothing is charged online at request time; after the team confirms
+  // availability it sends a secure payment link for 100% of the confirmed price (or the guest pays at the visit).
+  var DEPOSIT_URL = '';
   var DEPOSIT = 50;
   var SENDER_NAME = 'Pharmacy & Doctors Cabo – Bookings';
   var WA = '526242261023';
@@ -27,7 +29,13 @@
   var VIDEO = 59;
   var AREAS = ['Cabo San Lucas (downtown / Medano / Marina)', 'Pedregal', 'Tourist Corridor (Cabo Real, Chileno, Palmilla)', 'San José del Cabo', 'Puerto Los Cabos / Costa Azul', t('Other (tell us below)', 'Otra (indícala abajo)')];
 
-  var state = { where: 'door', qty: {}, doctor: false, video: false, pharmacy: false, nurse: false, pharmacyList: '', date: null, time: '', step: 1 };
+  var AES = [
+    { id: 'lips', name: t('Lip fillers', 'Relleno de labios'), price: '$600', desc: t('Hyaluronic acid lip fillers', 'Ácido hialurónico para labios') },
+    { id: 'botox', name: t('Facial Botox', 'Botox facial'), price: '$550', desc: t('Upper face from $550 · other areas from $170', 'Tercio superior $550 · otras zonas desde $170') },
+    { id: 'rejuvenation', name: t('Facial rejuvenation', 'Rejuvenecimiento facial'), price: t('from $300', 'desde $300'), desc: t('NCTF, polynucleotides, Radiesse, Sculptra', 'NCTF, polinucleótidos, Radiesse, Sculptra') },
+    { id: 'brightening', name: t('Skin brightening', 'Aclaramiento facial'), price: '$1,500', desc: t('Cosmelan depigmenting peel', 'Peeling despigmentante Cosmelan') }
+  ];
+  var state = { where: 'door', qty: {}, aes: {}, imaging: false, doctor: false, video: false, pharmacy: false, nurse: false, pharmacyList: '', date: null, time: '', step: 1 };
   DRIPS.forEach(function (d) { state.qty[d.id] = 0; });
 
   // ---------- helpers ----------
@@ -49,10 +57,17 @@
     if (state.video) out.push({ label: t('Video consultation', 'Videoconsulta'), unit: VIDEO, amount: VIDEO, note: '' });
     if (state.pharmacy) out.push({ label: t('Pharmacy delivery', 'Farmacia a domicilio'), unit: 0, amount: 0, note: t('items priced on confirmation · free delivery over $50', 'productos se cotizan al confirmar · envío gratis desde $50') });
     if (state.nurse) out.push({ label: t('Private nurse', 'Enfermera privada'), unit: 0, amount: 0, note: t('quoted on confirmation', 'se cotiza al confirmar') });
+    AES.forEach(function (a) {
+      if (state.aes[a.id]) out.push({ label: t('Aesthetic evaluation: ', 'Valoración estética: ') + a.name, unit: 0, amount: 0, note: t('evaluation first · listed price ', 'valoración primero · precio publicado ') + a.price });
+    });
+    if (state.imaging) out.push({ label: t('Imaging quote request', 'Solicitud de cotización de estudios de imagen'), unit: 0, amount: 0, note: t('X-ray / ultrasound · quoted on confirmation', 'rayos X / ultrasonido · se cotiza al confirmar') });
     return out;
   }
   function total() { return lines().reduce(function (s, l) { return s + l.amount; }, 0); }
-  function hasItems() { return totalIV() > 0 || state.doctor || state.video || state.pharmacy || state.nurse; }
+  function hasAes() { return AES.some(function (a) { return state.aes[a.id]; }); }
+  function hasItems() { return totalIV() > 0 || state.doctor || state.video || state.pharmacy || state.nurse || hasAes() || state.imaging; }
+  // the $50 deposit only applies to IV drips, doctor and video visits
+  function payable() { return totalIV() > 0 || state.doctor || state.video; }
 
   // ---------- render ----------
   var root;
@@ -81,7 +96,7 @@
     else h += '<ul class="bk-lines">' + ls.map(function (l) { return '<li><span>' + esc(l.label) + (l.note ? '<small>' + esc(l.note) + '</small>' : '') + '</span><b>' + (l.amount ? money(l.amount) : '—') + '</b></li>'; }).join('') + '</ul>';
     if (state.date) h += '<div class="bk-when">📅 ' + fmtDate(state.date) + (state.time ? ' · ' + esc(state.time) : '') + '</div>';
     var tot = total();
-    if (tot) h += '<div class="bk-total"><span>' + t('Estimated total', 'Total estimado') + '</span><b>' + money(tot) + ' USD</b></div><p class="bk-fine">' + t('All prices include tax.', 'Todos los precios incluyen IVA.') + ' ' + (DEPOSIT_URL ? t('$' + DEPOSIT + ' deposit secures your time; it is deducted at the visit.', 'Un anticipo de $' + DEPOSIT + ' asegura tu horario y se descuenta en la visita.') : t('No payment now — you pay at the visit.', 'No pagas ahora — pagas en la visita.')) + '</p>';
+    if (tot) h += '<div class="bk-total"><span>' + t('Estimated total', 'Total estimado') + '</span><b>' + money(tot) + ' USD</b></div><p class="bk-fine">' + t('All prices include tax.', 'Todos los precios incluyen IVA.') + ' ' + ((DEPOSIT_URL && payable()) ? t('$' + DEPOSIT + ' deposit secures your time; it is deducted at the visit.', 'Un anticipo de $' + DEPOSIT + ' asegura tu horario y se descuenta en la visita.') : t('Nothing is charged now. We confirm availability first, then you pay the full price by secure card link or at the visit.', 'No se cobra nada ahora. Primero confirmamos disponibilidad y después pagas el precio total con enlace seguro o en la visita.')) + '</p>';
     var left = GROUP_MIN - groupIV();
     if (state.where === 'door' && groupIV() > 0 && left > 0) h += '<div class="bk-nudge">👥 ' + t('Add ' + left + ' more IV' + (left > 1 ? 's' : '') + ' and everyone pays $119 (tax incl.)', 'Agrega ' + left + ' suero' + (left > 1 ? 's' : '') + ' más y todos pagan $119 (IVA incl.)') + '</div>';
     if (isGroup()) h += '<div class="bk-nudge ok">🎉 ' + t('Group rate applied: $119 per person, tax included', 'Precio de grupo aplicado: $119 por persona, IVA incluido') + '</div>';
@@ -131,6 +146,20 @@
       ex.appendChild(lab);
     });
     main.appendChild(ex);
+    main.appendChild(el('h3', { class: 'bk-h' }, t('Aesthetic medicine', 'Medicina estética') + ' <small>' + t('evaluation first · Dra. Rosibel Núñez Rojo', 'valoración primero · Dra. Rosibel Núñez Rojo') + '</small>'));
+    var ae = el('div', { class: 'bk-extras' });
+    AES.forEach(function (a) {
+      var lab = el('label', { class: 'bk-check' + (state.aes[a.id] ? ' sel' : '') });
+      lab.innerHTML = '<input type="checkbox"' + (state.aes[a.id] ? ' checked' : '') + '><span><b>' + a.name + '</b><small>' + a.desc + '</small></span><em>' + a.price + '</em>';
+      lab.querySelector('input').onchange = function (e) { state.aes[a.id] = e.target.checked; render(); };
+      ae.appendChild(lab);
+    });
+    var im = el('label', { class: 'bk-check' + (state.imaging ? ' sel' : '') });
+    im.innerHTML = '<input type="checkbox"' + (state.imaging ? ' checked' : '') + '><span><b>' + t('Imaging quote', 'Cotización de estudios de imagen') + '</b><small>' + t('X-ray or ultrasound, coordinated with our imaging team', 'Rayos X o ultrasonido, coordinado con nuestro equipo de imagenología') + '</small></span><em>' + t('Quote', 'Cotización') + '</em>';
+    im.querySelector('input').onchange = function (e) { state.imaging = e.target.checked; render(); };
+    ae.appendChild(im);
+    main.appendChild(ae);
+    if (hasAes()) main.appendChild(el('p', { class: 'bk-fine' }, t('Aesthetic treatments are only done after an in-person evaluation; the evaluation fee and your final plan are confirmed by our team.', 'Los tratamientos estéticos se hacen solo después de una valoración presencial; el costo de la valoración y tu plan final los confirma nuestro equipo.')));
     if (state.pharmacy) {
       var ta = el('textarea', { class: 'bk-in', rows: '3', placeholder: t('What do you need from the pharmacy? (product names, or say you will send a prescription photo)', '¿Qué necesitas de la farmacia? (productos, o di que mandarás foto de la receta)') });
       ta.value = state.pharmacyList; ta.oninput = function () { state.pharmacyList = ta.value; }; main.appendChild(ta);
@@ -145,7 +174,7 @@
   function sameDay(a, b) { return a && b && a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate(); }
   function stepDate(main) {
     main.appendChild(el('h2', {}, t('When should we come?', '¿Cuándo vamos?')));
-    main.appendChild(el('p', { class: 'bk-sub' }, t('We work 24/7. Times are Cabo time (Mountain Time, same as Denver/Phoenix). Same-day visits usually arrive in 30–45 minutes.', 'Atendemos 24/7. Horario de Los Cabos. Las visitas del mismo día suelen llegar en 30–45 minutos.')));
+    main.appendChild(el('p', { class: 'bk-sub' }, t('You can request care 24/7. Times are Cabo time (Mountain Time, same as Denver/Phoenix). We confirm the arrival time when we confirm your booking.', 'Puedes solicitar atención 24/7. Horario de Los Cabos. Confirmamos la hora de llegada al confirmar tu reserva.')));
     var today = new Date(); today.setHours(0, 0, 0, 0);
     var max = new Date(today); max.setDate(max.getDate() + 90);
     if (!viewMonth) viewMonth = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -179,9 +208,10 @@
       var slots = el('div', { class: 'bk-slots' });
       var now = new Date(), isToday = sameDay(state.date, now);
       var opts = [];
-      if (isToday) opts.push(t('As soon as possible (30–45 min)', 'Lo antes posible (30–45 min)'));
+      if (isToday) opts.push(t('As soon as possible (we confirm the time)', 'Lo antes posible (confirmamos la hora)'));
       for (var hi = 0; hi < 24; hi++) for (var mm = 0; mm < 60; mm += 30) {
         var hh = (hi + 7) % 24;   // list starts at 7:00 AM, late-night slots at the end
+        if (state.where === "clinic" && (hh < 9 || hh >= 17)) continue;   // V4: clinic 9 AM-5 PM; other times by appointment
         if (isToday && hh < 7) continue;
         if (isToday && (hh * 60 + mm) < now.getHours() * 60 + now.getMinutes() + 60) continue;
         var dt = new Date(2000, 0, 1, hh, mm);
@@ -189,6 +219,7 @@
       }
       opts.forEach(function (o) { var b = el('button', { type: 'button', class: state.time === o ? 'on' : '' }, o); b.onclick = function () { state.time = o; render(); }; slots.appendChild(b); });
       main.appendChild(slots);
+      if (state.where === "clinic") main.appendChild(el("p", { class: "bk-sub" }, t("Clinic hours: 9 AM–5 PM. Need another time? Message us on WhatsApp and we will try to arrange an appointment.", "Horario de clínica: 9:00–17:00. ¿Necesitas otra hora? Escríbenos por WhatsApp y buscamos una cita.")));
     }
     main.appendChild(el('p', { class: 'bk-msg' }, t('Pick a date and a time.', 'Elige fecha y hora.')));
     navButtons(main, !!(state.date && state.time), t('Your details →', 'Tus datos →'), function () { state.step = 3; render(); });
@@ -245,7 +276,7 @@
     if (!orderId) { var d = new Date(); orderId = 'PD-' + String(d.getFullYear()).slice(2) + ('0' + (d.getMonth() + 1)).slice(-2) + ('0' + d.getDate()).slice(-2) + '-' + Math.random().toString(36).slice(2, 6).toUpperCase(); }
     main.appendChild(el('h2', {}, t('Review and send', 'Revisa y envía')));
     var pre = el('div', { class: 'bk-review' }); pre.textContent = summaryText(); main.appendChild(pre);
-    main.appendChild(el('ul', { class: 'bk-assure' }, '<li>' + (DEPOSIT_URL ? t('After sending, secure your time with a $' + DEPOSIT + ' card deposit — it is deducted from your total. The rest is paid at the visit.', 'Al enviar, asegura tu horario con un anticipo de $' + DEPOSIT + ' con tarjeta — se descuenta de tu total. El resto lo pagas en la visita.') : t('No payment now — you pay at the visit (card, USD or pesos).', 'No pagas ahora — pagas en la visita (tarjeta, USD o pesos).')) + '</li><li>' + t('We confirm by WhatsApp or phone, usually within minutes.', 'Te confirmamos por WhatsApp o llamada, normalmente en minutos.') + '</li><li>' + t('Licensed doctors and nurses.', 'Equipo con licencia.') + '</li><li>' + t('In a life-threatening emergency call 911.', 'En una emergencia que ponga en riesgo la vida llama al 911.') + '</li>'));
+    main.appendChild(el('ul', { class: 'bk-assure' }, '<li>' + ((DEPOSIT_URL && payable()) ? t('After sending, secure your time with a $' + DEPOSIT + ' card deposit — it is deducted from your total. The rest is paid at the visit.', 'Al enviar, asegura tu horario con un anticipo de $' + DEPOSIT + ' con tarjeta — se descuenta de tu total. El resto lo pagas en la visita.') : t('Nothing is charged now. After we confirm availability you pay the full confirmed price — by secure card link or at the visit (card, USD or pesos). No deposit.', 'No se cobra nada ahora. Cuando confirmamos disponibilidad pagas el precio total — con enlace seguro o en la visita (tarjeta, USD o pesos). Sin anticipo.')) + '</li><li>' + t('We confirm availability by WhatsApp or phone before you pay.', 'Confirmamos disponibilidad por WhatsApp o llamada antes de que pagues.') + '</li><li>' + t('Licensed doctors and nurses.', 'Equipo con licencia.') + '</li><li>' + t('In a life-threatening emergency call 911.', 'En una emergencia que ponga en riesgo la vida llama al 911.') + '</li>'));
     var hp = el('input', { type: 'text', name: '_honey', tabindex: '-1', autocomplete: 'off', style: 'position:absolute;left:-9999px', 'aria-hidden': 'true' }); main.appendChild(hp);
     var status = el('p', { class: 'bk-status', role: 'status' }); main.appendChild(status);
     var row = el('div', { class: 'bk-nav' });
@@ -263,7 +294,7 @@
         Date: fmtDate(state.date), Time: state.time,
         Services: lines().map(function (l) { return l.label + (l.amount ? ' ' + money(l.amount) : '') + (l.note ? ' (' + l.note + ')' : ''); }).join(' | '),
         'Pharmacy list': state.pharmacyList || '-', 'Estimated total USD': money(total()) + (isGroup() ? ' (group rate, tax incl.)' : ' (tax incl.)'),
-        Deposit: DEPOSIT_URL ? ('$' + DEPOSIT + ' deposit link shown — check Stripe for ' + orderId) : 'n/a', 'Referred by': window.PD_REF || '-', Notes: form.notes || '-', Language: ES ? 'Spanish' : 'English', Page: location.href
+        Payment: (DEPOSIT_URL && payable()) ? ('$' + DEPOSIT + ' deposit link shown — check Stripe for ' + orderId) : 'Full price after confirmation (send secure payment link or collect at visit)', 'Referred by': window.PD_REF || '-', Notes: form.notes || '-', Language: ES ? 'Spanish' : 'English', Page: location.href
       };
       var url = ORDER_EMAIL_ENDPOINT, body = payload;
       if (WEB3FORMS_KEY) {
@@ -282,11 +313,12 @@
     };
     function done(ok) {
       var waUrl = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(t('Hi! I just sent a booking request on your website:', '¡Hola! Acabo de enviar una solicitud de reserva en su sitio:') + '\n' + summaryText());
-      var payUrl = DEPOSIT_URL ? DEPOSIT_URL + '?client_reference_id=' + encodeURIComponent(orderId + (window.PD_REF ? '_ref-' + window.PD_REF : '')) + (form.email ? '&prefilled_email=' + encodeURIComponent(form.email) : '') : '';
+      var payUrl = (DEPOSIT_URL && payable()) ? DEPOSIT_URL + '?client_reference_id=' + encodeURIComponent(orderId + (window.PD_REF ? '_ref-' + window.PD_REF : '')) + (form.email ? '&prefilled_email=' + encodeURIComponent(form.email) : '') : '';
+      var nextBox = '<div class="bk-next-steps"><b>' + t('What happens next', 'Qué sigue') + '</b><ol><li>' + t('We check availability and confirm your date and time.', 'Revisamos disponibilidad y confirmamos fecha y hora.') + '</li><li>' + t('You receive a secure payment link for the full confirmed price — or you pay at the visit.', 'Recibes un enlace seguro para pagar el precio total confirmado — o pagas en la visita.') + '</li><li>' + t('Your nurse or doctor arrives at the confirmed time.', 'Tu enfermera o doctor llega a la hora confirmada.') + '</li></ol></div>';
       var payBox = payUrl ? '<div class="bk-pay"><b>' + t('Secure your appointment', 'Asegura tu cita') + '</b><p>' + t('Pay a $' + DEPOSIT + ' USD deposit by card. It is deducted from your total at the visit.', 'Paga un anticipo de $' + DEPOSIT + ' USD con tarjeta. Se descuenta de tu total en la visita.') + '</p><a class="btn bk-paybtn" href="' + payUrl + '" target="_blank" rel="noopener">💳 ' + t('Pay $' + DEPOSIT + ' deposit', 'Pagar anticipo de $' + DEPOSIT) + '</a><small>' + t('Secure checkout by Stripe · Full refund if you cancel 24+ hours before', 'Pago seguro con Stripe · Reembolso completo si cancelas con 24 h o más') + ' (<a href="/refund-policy/" target="_blank">' + t('policy', 'política') + '</a>)</small></div>' : '';
       main.innerHTML = '<div class="bk-done"><div class="bk-ok">✓</div><h2>' + (ok ? t('Request received!', '¡Solicitud recibida!') : t('Almost done — send it on WhatsApp', 'Casi listo — envíala por WhatsApp')) + '</h2>'
         + '<p>' + (ok ? t('Your booking number is', 'Tu número de reserva es') + ' <b>' + orderId + '</b>. ' + t('We will confirm by WhatsApp or phone shortly.', 'Te confirmamos por WhatsApp o llamada en breve.') : t('We could not send it by email from your browser. Tap below to send the same booking on WhatsApp — it takes one tap.', 'No pudimos enviarla por correo desde tu navegador. Toca abajo para mandar la misma reserva por WhatsApp.')) + '</p>'
-        + (ok ? payBox + '<p class="bk-fine">' + t('For the fastest confirmation, also send it on WhatsApp:', 'Para confirmar más rápido, envíala también por WhatsApp:') + '</p>' : '')
+        + (ok ? nextBox + payBox + '<p class="bk-fine">' + t('For the fastest confirmation, also send it on WhatsApp:', 'Para confirmar más rápido, envíala también por WhatsApp:') + '</p>' : '')
         + '<a class="btn btn-wa" href="' + waUrl + '" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>' + t('Send on WhatsApp', 'Enviar por WhatsApp') + '</a>'
         + '<p class="bk-fine">' + t('Questions? Call', '¿Dudas? Llama al') + ' <a href="tel:+526242261023">+52 624 226 1023</a> (24/7).</p></div>';
     }
@@ -300,7 +332,9 @@
     var drip = q.get('drip'), qty = parseInt(q.get('qty') || '1', 10);
     DRIPS.forEach(function (d) { if (d.id === drip) state.qty[d.id] = Math.max(1, Math.min(30, qty || 1)); });
     if (q.get('group')) { var g = DRIPS[1]; if (!drip) state.qty[g.id] = GROUP_MIN; }
-    var s = q.get('service'); if (s === 'doctor') state.doctor = true; if (s === 'video') state.video = true; if (s === 'pharmacy') state.pharmacy = true; if (s === 'nurse') state.nurse = true;
+    if (q.get('service') === 'aesthetic' || q.get('service') === 'imaging') state.where = 'clinic';
+    var tr = q.get('treatment'); AES.forEach(function (a) { if (a.id === tr) state.aes[a.id] = true; });
+    var s = q.get('service'); if (s === 'aesthetic' && !tr) state.aes.lips = true; if (s === 'imaging') state.imaging = true; if (s === 'doctor') state.doctor = true; if (s === 'video') state.video = true; if (s === 'pharmacy') state.pharmacy = true; if (s === 'nurse') state.nurse = true;
     render();
     root.scrollIntoView = root.scrollIntoView || function () {};
   }

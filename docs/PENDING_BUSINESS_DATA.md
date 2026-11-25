@@ -9,8 +9,8 @@ Actualizado: 2026-11-24
 | 4 | Precios de estética tomados de medicinaesteticaencabo.com (2026-11-24); confirmar si incluyen IVA y costo de valoración | parcial | — |
 | 5 | Descripción aprobada de NAD+ (sin indicaciones clínicas) | pendiente | página propia de NAD+ |
 | 6 | Catálogo y precios de laboratorio (Santa Fe) y Travel Wellness Panel (149 vs 249 USD) | pendiente | página de laboratorio |
-| 7 | Catálogo de imagenología, sede, equipo y responsable de interpretación | pendiente | ampliar `/x-ray-imaging-cabo-san-lucas/` |
-| 8 | Título de Luis Antonio Camacho Villegas; constancia actualizada de Myriam | pendiente | mostrar a Luis en el equipo |
+| 7 | Precios de estudios de imagen, sede y equipo (la página solo ofrece cotización, sin precios) | pendiente | precios de radiología |
+| 8 | Constancia/título de Luis (el dueño confirmó el 2026-11-24 que es radiólogo) y verificación de cédulas ante SEP; constancia de Myriam | pendiente | — |
 | 9 | Canal privado autorizado para recibir pólizas de seguro | pendiente | carga de documentos (hoy solo contacto) |
 | 10 | Datos de las 5 farmacias RMC (LOCATIONS_MASTER) | pendiente (sesión RMC) | sección "Our Locations" |
 | 11 | Servicios de enfermería confirmados (curaciones, inyecciones, monitoreo) | por confirmar | texto actual de enfermera privada |

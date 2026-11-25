@@ -86,8 +86,8 @@
       return r;
     }
     if (has(m, /address|location|where are you|clinic|directions|map|located|direcci[oó]n|ubicaci[oó]n|d[oó]nde est[aá]n|cl[ií]nica|mapa|c[oó]mo llego/)) {
-      r.reply = t('Our clinic is at ' + ADDRESS + '. Open 24/7. We also come to you anywhere in Los Cabos.',
-                  'Nuestra clínica está en ' + ADDRESS + '. Abierto 24/7. También vamos a donde estés en Los Cabos.');
+      r.reply = t('Our clinic is at ' + ADDRESS + '. Clinic hours are 9 AM–5 PM; after hours by appointment. We also come to you anywhere in Los Cabos.',
+                  'Nuestra clínica está en ' + ADDRESS + '. Horario de clínica 9:00–17:00; fuera de horario con cita. También vamos a donde estés en Los Cabos.');
       r.cards = [info(t('Directions to the clinic', 'Cómo llegar a la clínica'), MAPS, ADDRESS, '#0f766e', t("Hi! I'd like to visit your clinic.", 'Hola, quiero ir a su clínica.'))];
       return r;
     }
@@ -114,7 +114,7 @@
       return r;
     }
     if (has(m, /hangover|drunk|drink|party|tequila|resaca|cruda|cruda|cudas?/)) {
-      r.reply = t('Sorry you are feeling rough! Most guests choose Hangover Rescue. A nurse typically arrives in 30–45 minutes.', '¡Lo sentimos! La mayoría elige Hangover Rescue. La enfermera suele llegar en 30–45 minutos.');
+      r.reply = t('Sorry you are feeling rough! Most guests choose Hangover Rescue. We confirm the arrival time when you book.', '¡Lo sentimos! La mayoría elige Hangover Rescue. Confirmamos la hora de llegada al reservar.');
       r.cards = [card('hangover'), card('hydration')]; r.quick_replies = chips(); return r;
     }
     if (has(m, /doctor|fever|pain|infection|injur|\bcuts?\b|wound|stomach|diarrh|vomit|\bears?\b|throat|rash|sick|m[eé]dic|fiebre|dolor|infecci|herida|est[oó]mago|diarrea|v[oó]mito|garganta|o[ií]do|enferm[oa]/)) {
@@ -125,8 +125,8 @@
       r.escalate = true; r.whatsapp = wa(t('Hi! I need a doctor at my location in Cabo.', 'Hola, necesito un doctor en Cabo.')); return r;
     }
     if (has(m, /pharmac|medic|prescri|deliver|pill|farmacia|medicina|receta|entrega|pastilla/)) {
-      r.reply = t('We deliver medications and pharmacy essentials to your hotel, villa or yacht, usually in 30–45 minutes. Free delivery on orders over $50 USD. Send a photo of your prescription or the product name.',
-                  'Llevamos medicamentos y productos de farmacia a tu hotel, villa o yate, normalmente en 30–45 minutos. Envío gratis en pedidos de más de $50 USD. Manda foto de la receta o el nombre del producto.');
+      r.reply = t('We deliver medications and pharmacy essentials to your hotel, villa or yacht, same day when available; we confirm the delivery time with your order. Free delivery on orders over $50 USD. Send a photo of your prescription or the product name.',
+                  'Llevamos medicamentos y productos de farmacia a tu hotel, villa o yate, el mismo día según disponibilidad; confirmamos la hora de entrega con tu pedido. Envío gratis en pedidos de más de $50 USD. Manda foto de la receta o el nombre del producto.');
       r.cards = [info(t('Pharmacy delivery', 'Farmacia a domicilio'), '/pharmacy-delivery-cabo-san-lucas/', t('Free delivery over $50 · 24/7', 'Envío gratis desde $50 · 24/7'), '#16a34a',
         t('Hi! I need pharmacy delivery in Cabo. I need: ', 'Hola, necesito farmacia a domicilio en Cabo. Necesito: '))];
       return r;

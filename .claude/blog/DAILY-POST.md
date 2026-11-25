@@ -22,11 +22,12 @@ ranking for high-intent searches and leading readers to book (WhatsApp/phone).
   - ALL PRICES IN USD, TAX INCLUDED (never write "+ tax"). Doctor: $189 house call (hotel/villa/yacht), $99 at clinic, $59 video consultation. Typical arrival 30–45 min Cabo San Lucas & Corridor, up to ~60 min San José/Pedregal/Palmilla.
   - IV drips (Rapid Hydration, Hangover Rescue, Myers Cocktail, Immunity Armor, Energy & B12, Performance & Recovery, Beauty Glow): $159 at your door, $129 at the clinic. NAD+ IV $279. Never give doses or ingredient amounts.
   - Groups of 6+: $119 USD per person. Pharmacy delivery free over $50 USD; 22:00–07:00 may add a fee.
-  - Online bookings may pay an optional $50 USD card deposit (deducted at the visit; fully refunded if cancelled 24h+ before); otherwise pay at the visit.
+  - NO deposit: nothing is charged at request time; after the team confirms availability the guest pays the full confirmed price by secure card link or at the visit. Cancel 24h+ before = prepaid amount refunded; later = reviewed by authorized staff.
   - Insurance: "We accept international health and travel insurance from the United States and Canada, subject to policy verification and coverage confirmation." Never promise coverage, direct billing or reimbursement; no Mexican national insurance. Link /travel-insurance-doctor-cabo/.
-  - Team: Dr. Kevin González Adame (Médico Cirujano y Partero, céd. 14796516, Medical Director); Dra. Myriam Aisse Palacios Alarcón (Médico General, céd. 11664989). Imaging and lab are coordinated with external providers — never say we own X-ray/ultrasound equipment, never call anyone a radiologist. Never say board-certified.
+  - Team: Dr. Kevin González Adame (Médico Cirujano y Partero, céd. 14796516, Medical Director); Dra. Myriam Aisse Palacios Alarcón (Médico General, céd. 11664989). Imaging team: Dr. Luis Antonio Camacho Villegas (Radiologist, céd. 4359616) and Jenifer Alexandra Arciga Acosta (Licenciada en Radiología e Imagenología, céd. 13435891, not a physician) — link /x-ray-imaging-cabo-san-lucas/; never publish imaging prices (quote only) and never claim own equipment unless the owner confirms. Never say board-certified.
   - Real reviews only: 4.9 rating; testimonials already on the site (Mike B., Jennifer R., Olivia C., Sarah K., David L., Carlos M.).
 - General health information only — no dosing instructions, no diagnosis claims, no "cure" language. Always include
+- Never promise availability "now"; say requests are taken 24/7 and the arrival time is confirmed when booking. Never name prescription drugs (e.g. Zofran, Toradol) or give doses; never promise effects (detox, immunity boost, cures).
   clear "when to call 911 / see a doctor" guidance for symptom topics.
 - Do not name competitors. Do not use hotel brand names in titles.
 - English only, American spelling and units (°F first, then °C; miles).
