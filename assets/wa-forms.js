@@ -23,7 +23,7 @@
     });
     var url = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(lines.join('\n'));
     if (typeof window.gtag === 'function') {
-      window.gtag('event', 'whatsapp_click', { link_url: url.slice(0, 100), link_text: 'contact form', page_path: location.pathname });
+      window.gtag('event', 'whatsapp_click', { link_url: 'https://wa.me/' + WA, link_text: 'contact form', page_path: location.pathname });
       window.gtag('event', 'generate_lead', { method: 'whatsapp_form' });
     }
     if (window.pdTagWa) url = window.pdTagWa(url);

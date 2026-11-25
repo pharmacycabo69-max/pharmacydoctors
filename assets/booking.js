@@ -211,6 +211,7 @@
       if (isToday) opts.push(t('As soon as possible (we confirm the time)', 'Lo antes posible (confirmamos la hora)'));
       for (var hi = 0; hi < 24; hi++) for (var mm = 0; mm < 60; mm += 30) {
         var hh = (hi + 7) % 24;   // list starts at 7:00 AM, late-night slots at the end
+        if (state.where === "clinic" && (hh < 9 || hh >= 17)) continue;   // V4: clinic 9 AM-5 PM; other times by appointment
         if (isToday && hh < 7) continue;
         if (isToday && (hh * 60 + mm) < now.getHours() * 60 + now.getMinutes() + 60) continue;
         var dt = new Date(2000, 0, 1, hh, mm);
@@ -218,6 +219,7 @@
       }
       opts.forEach(function (o) { var b = el('button', { type: 'button', class: state.time === o ? 'on' : '' }, o); b.onclick = function () { state.time = o; render(); }; slots.appendChild(b); });
       main.appendChild(slots);
+      if (state.where === "clinic") main.appendChild(el("p", { class: "bk-sub" }, t("Clinic hours: 9 AM–5 PM. Need another time? Message us on WhatsApp and we will try to arrange an appointment.", "Horario de clínica: 9:00–17:00. ¿Necesitas otra hora? Escríbenos por WhatsApp y buscamos una cita.")));
     }
     main.appendChild(el('p', { class: 'bk-msg' }, t('Pick a date and a time.', 'Elige fecha y hora.')));
     navButtons(main, !!(state.date && state.time), t('Your details →', 'Tus datos →'), function () { state.step = 3; render(); });
