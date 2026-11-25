@@ -58,7 +58,7 @@
     if (state.pharmacy) out.push({ label: t('Pharmacy delivery', 'Farmacia a domicilio'), unit: 0, amount: 0, note: t('items priced on confirmation · free delivery over $50', 'productos se cotizan al confirmar · envío gratis desde $50') });
     if (state.nurse) out.push({ label: t('Private nurse', 'Enfermera privada'), unit: 0, amount: 0, note: t('quoted on confirmation', 'se cotiza al confirmar') });
     AES.forEach(function (a) {
-      if (state.aes[a.id]) out.push({ label: t('Aesthetic evaluation: ', 'Valoración estética: ') + a.name, unit: 0, amount: 0, note: t('evaluation first · listed price ', 'valoración primero · precio publicado ') + a.price });
+      if (state.aes[a.id]) out.push({ label: t('Aesthetic evaluation: ', 'Valoración estética: ') + a.name, unit: 0, amount: 0, note: t('evaluation first · listed price ', 'valoración primero · precio publicado ') + a.price + t(' (tax incl.)', ' (IVA incl.)') });
     });
     if (state.imaging) out.push({ label: t('Imaging quote request', 'Solicitud de cotización de estudios de imagen'), unit: 0, amount: 0, note: t('X-ray / ultrasound · quoted on confirmation', 'rayos X / ultrasonido · se cotiza al confirmar') });
     return out;
@@ -156,7 +156,7 @@
     var ae = el('div', { class: 'bk-extras' });
     AES.forEach(function (a) {
       var lab = el('label', { class: 'bk-check' + (state.aes[a.id] ? ' sel' : '') });
-      lab.innerHTML = '<input type="checkbox"' + (state.aes[a.id] ? ' checked' : '') + '><span><b>' + a.name + '</b><small>' + a.desc + '</small></span><em>' + a.price + '</em>';
+      lab.innerHTML = '<input type="checkbox"' + (state.aes[a.id] ? ' checked' : '') + '><span><b>' + a.name + '</b><small>' + a.desc + '</small></span><em>' + a.price + '<small style="display:block;font-weight:500;font-size:.72em">' + t('tax incl.', 'IVA incl.') + '</small></em>';
       lab.querySelector('input').onchange = function (e) { state.aes[a.id] = e.target.checked; render(); };
       ae.appendChild(lab);
     });
