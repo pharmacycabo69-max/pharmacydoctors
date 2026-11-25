@@ -10,7 +10,7 @@ Prefer high-intent searches (symptom + Cabo, cost, "near me", group trips, plann
 - [x] Strep throat and sore throat in Cabo — 2026-11-21 /strep-sore-throat-doctor-cabo/
 - [x] Flu, colds and COVID-like symptoms on vacation in Los Cabos — 2026-11-23 /flu-cold-covid-symptoms-cabo/
 - [x] Heat exhaustion and dehydration in Cabo: warning signs — 2026-11-24 /heat-exhaustion-dehydration-cabo/
-- [ ] Allergic reactions and hives on vacation in Cabo
+- [x] Allergic reactions and hives on vacation in Cabo — 2026-11-25 /allergic-reaction-hives-cabo/
 - [ ] Jellyfish and stingray stings at Cabo beaches: what to do
 - [ ] Sinus infection while traveling in Los Cabos
 - [ ] Motion sickness on Cabo boat tours and fishing charters
@@ -75,7 +75,7 @@ Prefer high-intent searches (symptom + Cabo, cost, "near me", group trips, plann
 
 ## Added 2026-11-21 from competitor research (symptom pages rank well for "X in Cabo San Lucas")
 - [ ] Flu symptoms in Cabo: when to see a doctor
-- [ ] Allergic reaction or hives in Cabo: what to do
+- [x] Allergic reaction or hives in Cabo: what to do — skipped, same intent as 2026-11-25 /allergic-reaction-hives-cabo/
 - [ ] Traveler's diarrhea in Cabo (Montezuma's revenge): relief and when to worry
 - [ ] Scorpion sting in Baja California Sur: what to do
 - [ ] Seasickness on a Cabo fishing or whale-watching trip
