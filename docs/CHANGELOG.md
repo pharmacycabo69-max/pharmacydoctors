@@ -1,5 +1,5 @@
-# Changelog — rama `v4-premium`
-Ninguno de estos cambios está en producción.
+# Changelog
+V4 está en producción desde el 2026-11-25 (`61c7133`). V5 está en la rama `v5-premium`, pendiente de aprobación.
 
 ## 2026-11-25 — V5 (rama `v5-premium`, no publicada)
 - **Identidad premium**: escenario azul marino en todos los heroes, Cormorant Garamond y Public Sans, motivo de arco, secciones numeradas, menú de tratamientos con líneas de puntos, tarjetas planas. Nuevo `assets/v5.css` cargado en 80 páginas.
