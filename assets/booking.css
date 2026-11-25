@@ -82,3 +82,4 @@
 .bk-next-steps{margin:16px auto;max-width:440px;text-align:left;background:#fff;border:1px solid #e6e2d6;border-radius:16px;padding:16px 18px}
 .bk-next-steps b{display:block;margin-bottom:6px}
 .bk-next-steps ol{margin:0;padding-left:20px;display:grid;gap:6px;font-size:.93rem}
+@media(max-width:980px){.bk-grid .bk-side{order:2}.bk-grid .bk-main{order:1}}
