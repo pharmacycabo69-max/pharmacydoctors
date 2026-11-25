@@ -341,3 +341,16 @@ h1 em,h2 em,h3 em{background:none!important;-webkit-text-fill-color:currentColor
   .hero .hero-media{order:2;margin-top:28px}
   .hero h1{font-size:2.35rem!important}
 }
+
+/* V4 IV filters + safety */
+.iv-filter{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 26px}
+.iv-filter button{appearance:none;border:1px solid var(--line);background:#fff;color:var(--navy);font:600 .9rem var(--sans);padding:9px 16px;border-radius:999px;cursor:pointer;transition:background .15s,border-color .15s,color .15s}
+.iv-filter button:hover{border-color:var(--sage)}
+.iv-filter button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.iv[hidden]{display:none!important}
+.iv-safety{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start}
+.iv-safety h2{margin:12px 0 10px}
+.iv-safety ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.iv-safety li{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 16px 13px 44px;position:relative}
+.iv-safety li:before{content:"!";position:absolute;left:14px;top:12px;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:var(--sage-l);color:var(--navy);font:800 .75rem var(--sans)}
+@media(max-width:860px){.iv-safety{grid-template-columns:1fr}.iv-filter{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px;margin-left:-16px;margin-right:-16px;padding-left:16px;padding-right:16px}.iv-filter button{flex:none}}
