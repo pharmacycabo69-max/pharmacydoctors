@@ -2,6 +2,9 @@ User-agent: *
 Allow: /
 Disallow: /wp-admin/
 Disallow: /partners/
+Disallow: /pay/
+Disallow: /concierge/
+Disallow: /api/
 Allow: /wp-admin/admin-ajax.php
 
 Sitemap: https://www.pharmacydoctors.com/sitemap.xml
