@@ -13,6 +13,7 @@
     + '<label>Staff key<input id="cg-key" type="password" required autocomplete="off"></label>'
     + '<label>Booking code<input id="cg-b" required pattern="PD-\\d{6}-[A-Za-z0-9]{3,6}" placeholder="PD-261125-AB12" value="' + (q.get('b') || '').replace(/[^A-Za-z0-9-]/g, '') + '"></label>'
     + '<div class="cg-row"><label>Standard IVs<input id="cg-iv" type="number" min="0" max="30" value="' + (items.iv || 0) + '"></label><label>NAD+<input id="cg-nad" type="number" min="0" max="30" value="' + (items.nad || 0) + '"></label><label>Doctor visits<input id="cg-doc" type="number" min="0" max="30" value="' + (items.doc || 0) + '"></label><label>Video<input id="cg-video" type="number" min="0" max="30" value="' + (items.video || 0) + '"></label></div>'
+    + '<div class="cg-row"><label>Quoted service (optional)<select id="cg-qx"><option value="">None</option><option value="xray">X-ray (accepted quote)</option><option value="lab">Laboratory (accepted quote)</option><option value="aes">Aesthetics (after evaluation)</option><option value="nurse">Private nurse (accepted quote)</option></select></label><label>Quoted amount USD (tax incl.)<input id="cg-qa" type="number" min="10" max="5000" step="1" placeholder="e.g. 125"></label></div>'
     + '<div class="cg-row"><label>Location<select id="cg-w"><option value="door">Guest location (hotel / villa / yacht)</option><option value="clinic">Downtown clinic</option></select></label><label>Link valid for<select id="cg-h"><option value="6">6 hours</option><option value="24" selected>24 hours</option><option value="48">48 hours</option><option value="72">72 hours</option></select></label><label>Guest language<select id="cg-l"><option value="en">English</option><option value="es">Español</option></select></label></div>'
     + '<label>Confirmed date &amp; time (for the message)<input id="cg-when" placeholder="Sat, Nov 28 · 10:00 AM"></label>'
     + '<label class="v5-agree"><input type="checkbox" id="cg-ok" required> <span>I confirmed availability, the price and the health questions with the guest.</span></label>'
@@ -21,14 +22,17 @@
   if (q.get('w') === 'clinic') $('cg-w').value = 'clinic';
   if (q.get('l') === 'es') $('cg-l').value = 'es';
   try { $('cg-key').value = sessionStorage.getItem('pd_cg_key') || ''; } catch (e) {}
-  var NAMES = { iv: 'IV therapy', nad: 'NAD+', doc: 'Doctor visit', video: 'Video consultation' };
+  var NAMES = { iv: 'IV therapy', nad: 'NAD+', doc: 'Doctor visit', video: 'Video consultation', q_xray: 'X-ray (quoted)', q_lab: 'Laboratory (quoted)', q_aes: 'Aesthetic treatment (quoted)', q_nurse: 'Private nurse (quoted)' };
   $('cg-form').onsubmit = function (e) {
     e.preventDefault();
     var parts = []; ['iv', 'nad', 'doc', 'video'].forEach(function (k) { var n = parseInt($('cg-' + k).value, 10) || 0; if (n > 0) parts.push(k + ':' + n); });
     var msg = $('cg-msg'); msg.className = 'v5-msg'; msg.textContent = '';
-    if (!parts.length) { msg.textContent = 'Add at least one service with a published price. Quotes (aesthetics, X-ray, pharmacy) are not paid here.'; return; }
+    var qx = $('cg-qx').value, qa = Math.round(parseFloat($('cg-qa').value || '0') * 100);
+    if (!parts.length && !qx) { msg.textContent = 'Add at least one priced service, or a quoted service with the accepted amount. Pharmacy orders are not paid here.'; return; }
+    if (qx && !(qa >= 1000 && qa <= 500000)) { msg.textContent = 'Enter the accepted quote amount ($10–$5,000).'; return; }
     try { sessionStorage.setItem('pd_cg_key', $('cg-key').value); } catch (e2) {}
     var body = { b: $('cg-b').value.trim().toUpperCase(), i: parts.join(','), w: $('cg-w').value, hours: $('cg-h').value, l: $('cg-l').value };
+    if (qx) { body.qx = qx; body.qa = qa; }
     fetch('/api/paylink', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-concierge-key': $('cg-key').value }, body: JSON.stringify(body) })
       .then(function (r) { return r.json().then(function (j) { return { s: r.status, j: j }; }); })
       .then(function (x) {

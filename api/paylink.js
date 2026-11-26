@@ -12,7 +12,7 @@ async function handler(req, res) {
   if (staffKey.length < 16 || secret.length < 32) return L.send(res, 503, { error: 'not_configured' });
   if (!L.safeEqual(req.headers['x-concierge-key'], staffKey)) return L.send(res, 401, { error: 'unauthorized' });
   const body = await L.readJson(req);
-  const made = L.makeToken({ b: body.b, i: body.i, w: body.w, hours: body.hours, l: body.l }, secret);
+  const made = L.makeToken({ b: body.b, i: body.i, w: body.w, hours: body.hours, l: body.l, qx: body.qx || undefined, qa: body.qa }, secret);
   if (!made) return L.send(res, 400, { error: 'bad_request' });
   const url = `${L.originOf(req)}/pay/?t=${made.token}`;
   return L.send(res, 200, { url, booking: made.p.b, total: made.q.total, lines: made.q.lines, expires: made.p.exp });

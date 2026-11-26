@@ -34,13 +34,21 @@ function parseItems(i) {
   return Object.keys(out).length ? out : null;
 }
 
-function quote(items, where) {
-  if (!items || (where !== 'door' && where !== 'clinic')) return null;
+// Quoted services (X-ray, lab, aesthetics, private nurse): the amount is set by staff in the signed link after the
+// written quote is accepted. Bounds protect against typos ($10 – $5,000).
+const QUOTE_TYPES = ['xray', 'lab', 'aes', 'nurse'];
+const QUOTE_MIN = 1000, QUOTE_MAX = 500000;
+function validQuote(qx, qa) { return QUOTE_TYPES.includes(qx) && Number.isInteger(qa) && qa >= QUOTE_MIN && qa <= QUOTE_MAX; }
+
+function quote(items, where, qx, qa) {
+  if (where !== 'door' && where !== 'clinic') return null;
+  items = items || {};
   const lines = [];
   if (items.iv) lines.push({ key: 'iv', qty: items.iv, unit: (where === 'door' && items.iv >= GROUP_MIN) ? PRICES.ivGroup : PRICES.iv[where] });
   if (items.nad) lines.push({ key: 'nad', qty: items.nad, unit: PRICES.nad[where] });
   if (items.doc) lines.push({ key: 'doc', qty: items.doc, unit: PRICES.doc[where] });
   if (items.video) lines.push({ key: 'video', qty: items.video, unit: PRICES.video[where] });
+  if (qx !== undefined && qx !== null) { if (!validQuote(qx, qa)) return null; lines.push({ key: 'q_' + qx, qty: 1, unit: qa }); }
   const total = lines.reduce((s, l) => s + l.qty * l.unit, 0);
   return total > 0 ? { lines, total } : null;
 }
@@ -65,20 +73,25 @@ function verifyToken(token, secret, nowS) {
   if (p.v !== 1 || !BOOKING_RE.test(p.b || '')) return { ok: false, error: 'bad_token' };
   const now = nowS || Math.floor(Date.now() / 1000);
   if (!p.exp || now > p.exp) return { ok: false, error: 'expired', booking: p.b };
-  const q = quote(parseItems(p.i), p.w);
+  if (p.i && !parseItems(p.i)) return { ok: false, error: 'bad_token' };
+  const q = quote(p.i ? parseItems(p.i) : {}, p.w, p.qx, p.qa);
   if (!q) return { ok: false, error: 'bad_token' };
   return { ok: true, p, q };
 }
 
-function makeToken({ b, i, w, hours, l }, secret, nowS) {
+function makeToken({ b, i, w, hours, l, qx, qa }, secret, nowS) {
   const booking = String(b || '').toUpperCase();
-  const items = parseItems(i);
+  const items = i ? parseItems(i) : {};
+  const hasQuote = qx !== undefined && qx !== null && qx !== '';
+  if (hasQuote) qa = Math.round(Number(qa));
   if (!BOOKING_RE.test(booking) || !items || (w !== 'door' && w !== 'clinic')) return null;
-  const q = quote(items, w);
+  if (hasQuote && !validQuote(qx, qa)) return null;
+  const q = quote(items, w, hasQuote ? qx : undefined, hasQuote ? qa : undefined);
   if (!q) return null;
   const h = Math.max(1, Math.min(MAX_HOURS, parseInt(hours, 10) || 24));
   const now = nowS || Math.floor(Date.now() / 1000);
-  const p = { v: 1, b: booking, i: String(i), w, iat: now, exp: now + h * 3600, n: b64u(crypto.randomBytes(6)), l: l === 'es' ? 'es' : 'en' };
+  const p = { v: 1, b: booking, i: i ? String(i) : '', w, iat: now, exp: now + h * 3600, n: b64u(crypto.randomBytes(6)), l: l === 'es' ? 'es' : 'en' };
+  if (hasQuote) { p.qx = qx; p.qa = qa; }
   return { token: sign(p, secret), p, q };
 }
 
@@ -146,4 +159,4 @@ async function notifyTeam(fetchFn, fields) {
   } catch (e) { return false; }
 }
 
-module.exports = { PRICES, GROUP_MIN, BOOKING_RE, MAX_HOURS, parseItems, quote, sign, verifyToken, makeToken, tokenId, safeEqual, form, stripe, stripeKey, findPaid, send, readJson, originOf, notifyTeam };
+module.exports = { QUOTE_TYPES, PRICES, GROUP_MIN, BOOKING_RE, MAX_HOURS, parseItems, quote, sign, verifyToken, makeToken, tokenId, safeEqual, form, stripe, stripeKey, findPaid, send, readJson, originOf, notifyTeam };

@@ -7,7 +7,7 @@
   var ES = q.get('l') === 'es' || (document.documentElement.lang || '').indexOf('es') === 0;
   function t(en, es) { return ES ? es : en; }
   var WA = '526242261023';
-  var NAMES = function () { return { iv: t('IV therapy', 'Sueroterapia'), nad: t('NAD+ therapy', 'Terapia NAD+'), doc: t('Doctor visit', 'Consulta médica'), video: t('Video consultation', 'Videoconsulta') }; };
+  var NAMES = function () { return { iv: t('IV therapy', 'Sueroterapia'), nad: t('NAD+ therapy', 'Terapia NAD+'), doc: t('Doctor visit', 'Consulta médica'), video: t('Video consultation', 'Videoconsulta'), q_xray: t('X-ray (accepted quote)', 'Rayos X (cotización aceptada)'), q_lab: t('Laboratory tests (accepted quote)', 'Laboratorio (cotización aceptada)'), q_aes: t('Aesthetic treatment (after evaluation)', 'Tratamiento estético (tras valoración)'), q_nurse: t('Private nurse (accepted quote)', 'Enfermera privada (cotización aceptada)') }; };
   function money(c) { return '$' + (c / 100).toLocaleString('en-US', { minimumFractionDigits: c % 100 ? 2 : 0 }) + ' USD'; }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function wa(msg) { return 'https://wa.me/' + WA + '?text=' + encodeURIComponent(msg); }

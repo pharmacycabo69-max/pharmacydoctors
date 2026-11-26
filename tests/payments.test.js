@@ -40,6 +40,16 @@ function res() { return { statusCode: 0, headers: {}, body: '', setHeader(k, v) 
   ok(L.verifyToken(made.token, '', now).error === 'not_configured', 'no PAY_LINK_SECRET -> payments disabled');
   ok(L.makeToken({ b: 'hack', i: 'iv:1', w: 'door' }, SECRET) === null, 'bad booking code cannot get a token');
   ok(L.makeToken({ b: 'PD-261125-ABCD', i: 'iv:1', w: 'door', hours: 999 }, SECRET, now).p.exp === now + 72 * 3600, 'link validity capped at 72 h');
+  // quoted services (X-ray, lab, aesthetics, nurse): amount set by staff inside the signed link
+  const xr = L.makeToken({ b: 'PD-261125-XRAY', w: 'door', qx: 'xray', qa: 12500 }, SECRET, now);
+  ok(xr && xr.q.total === 12500 && L.verifyToken(xr.token, SECRET, now).q.lines[0].key === 'q_xray', 'staff-quoted X-ray link: $125 from the signed quote');
+  ok(L.makeToken({ b: 'PD-261125-XRAY', w: 'door', qx: 'xray', qa: 500 }, SECRET, now) === null && L.makeToken({ b: 'PD-261125-XRAY', w: 'door', qx: 'xray', qa: 900000 }, SECRET, now) === null, 'quoted amount bounded ($10–$5,000)');
+  ok(L.makeToken({ b: 'PD-261125-XRAY', w: 'door', qx: 'ultrasound', qa: 12500 }, SECRET, now) === null, 'unknown quoted service type rejected');
+  const mix = L.makeToken({ b: 'PD-261125-MIX1', i: 'iv:1', w: 'door', qx: 'nurse', qa: 20000 }, SECRET, now);
+  ok(mix && mix.q.total === 15900 + 20000, 'priced + quoted items in one link');
+  const xb = xr.token.split('.'); const fp = JSON.parse(Buffer.from(xb[0].replace(/-/g, '+').replace(/_/g, '/'), 'base64').toString()); fp.qa = 100;
+  const forgedQ = Buffer.from(JSON.stringify(fp)).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '') + '.' + xb[1];
+  ok(L.verifyToken(forgedQ, SECRET, now).error === 'bad_token', 'tampered quoted amount rejected');
 
   // ---------- /api/paylink (staff only) ----------
   delete process.env.CONCIERGE_KEY; delete process.env.PAY_LINK_SECRET;

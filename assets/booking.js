@@ -35,7 +35,7 @@
     { id: 'rejuvenation', name: t('Facial rejuvenation', 'Rejuvenecimiento facial'), price: t('from $300', 'desde $300'), desc: t('NCTF, polynucleotides, Radiesse, Sculptra', 'NCTF, polinucleótidos, Radiesse, Sculptra') },
     { id: 'brightening', name: t('Skin brightening', 'Aclaramiento facial'), price: '$1,500', desc: t('Cosmelan depigmenting peel', 'Peeling despigmentante Cosmelan') }
   ];
-  var state = { where: 'door', qty: {}, aes: {}, imaging: false, doctor: false, video: false, pharmacy: false, nurse: false, pharmacyList: '', date: null, time: '', step: 1 };
+  var state = { where: 'door', qty: {}, aes: {}, imaging: false, lab: false, doctor: false, video: false, pharmacy: false, nurse: false, pharmacyList: '', date: null, time: '', step: 1 };
   DRIPS.forEach(function (d) { state.qty[d.id] = 0; });
 
   // ---------- helpers ----------
@@ -60,12 +60,13 @@
     AES.forEach(function (a) {
       if (state.aes[a.id]) out.push({ label: t('Aesthetic evaluation: ', 'Valoración estética: ') + a.name, unit: 0, amount: 0, note: t('evaluation first · listed price ', 'valoración primero · precio publicado ') + a.price + t(' (tax incl.)', ' (IVA incl.)') });
     });
+    if (state.lab) out.push({ label: t('Laboratory tests request', 'Solicitud de análisis de laboratorio'), unit: 0, amount: 0, note: t('lab · quoted on confirmation', 'laboratorio · se cotiza al confirmar') });
     if (state.imaging) out.push({ label: t('X-ray quote request', 'Solicitud de cotización de rayos X'), unit: 0, amount: 0, note: t('X-ray · quoted on confirmation', 'rayos X · se cotiza al confirmar') });
     return out;
   }
   function total() { return lines().reduce(function (s, l) { return s + l.amount; }, 0); }
   function hasAes() { return AES.some(function (a) { return state.aes[a.id]; }); }
-  function hasItems() { return totalIV() > 0 || state.doctor || state.video || state.pharmacy || state.nurse || hasAes() || state.imaging; }
+  function hasItems() { return totalIV() > 0 || state.doctor || state.video || state.pharmacy || state.nurse || hasAes() || state.imaging || state.lab; }
   // (V4+) no deposit; payable() marks services with an approved price — IV drips, doctor and video visits
   function payable() { return totalIV() > 0 || state.doctor || state.video; }
   function payUrl() {
@@ -164,6 +165,10 @@
     im.innerHTML = '<input type="checkbox"' + (state.imaging ? ' checked' : '') + '><span><b>' + t('X-ray quote', 'Cotización de rayos X') + '</b><small>' + t('X-ray at your location or at Clínica San José, quoted first', 'Rayos X a domicilio o en Clínica San José, con cotización previa') + '</small></span><em>' + t('Quote', 'Cotización') + '</em>';
     im.querySelector('input').onchange = function (e) { state.imaging = e.target.checked; render(); };
     ae.appendChild(im);
+    var lb = el('label', { class: 'bk-check' + (state.lab ? ' sel' : '') });
+    lb.innerHTML = '<input type="checkbox"' + (state.lab ? ' checked' : '') + '><span><b>' + t('Laboratory tests', 'Análisis de laboratorio') + '</b><small>' + t('Ordered by our doctors, processed by an external lab, quoted first', 'Indicados por nuestros médicos, procesados por un laboratorio externo, con cotización previa') + '</small></span><em>' + t('Quote', 'Cotización') + '</em>';
+    lb.querySelector('input').onchange = function (e) { state.lab = e.target.checked; render(); };
+    ae.appendChild(lb);
     main.appendChild(ae);
     if (hasAes()) main.appendChild(el('p', { class: 'bk-fine' }, t('Aesthetic treatments are only done after an in-person evaluation; the evaluation fee and your final plan are confirmed by our team.', 'Los tratamientos estéticos se hacen solo después de una valoración presencial; el costo de la valoración y tu plan final los confirma nuestro equipo.')));
     if (state.pharmacy) {
@@ -341,9 +346,9 @@
     var drip = q.get('drip'), qty = parseInt(q.get('qty') || '1', 10);
     DRIPS.forEach(function (d) { if (d.id === drip) state.qty[d.id] = Math.max(1, Math.min(30, qty || 1)); });
     if (q.get('group')) { var g = DRIPS[1]; if (!drip) state.qty[g.id] = GROUP_MIN; }
-    if (q.get('service') === 'aesthetic' || q.get('service') === 'imaging') state.where = 'clinic';
+    if (q.get('service') === 'aesthetic') state.where = 'clinic';
     var tr = q.get('treatment'); AES.forEach(function (a) { if (a.id === tr) state.aes[a.id] = true; });
-    var s = q.get('service'); if (s === 'aesthetic' && !tr) state.aes.lips = true; if (s === 'imaging') state.imaging = true; if (s === 'doctor') state.doctor = true; if (s === 'video') state.video = true; if (s === 'pharmacy') state.pharmacy = true; if (s === 'nurse') state.nurse = true;
+    var s = q.get('service'); if (s === 'aesthetic' && !tr) state.aes.lips = true; if (s === 'imaging') state.imaging = true; if (s === 'lab') state.lab = true; if (s === 'doctor') state.doctor = true; if (s === 'video') state.video = true; if (s === 'pharmacy') state.pharmacy = true; if (s === 'nurse') state.nurse = true;
     render();
     root.scrollIntoView = root.scrollIntoView || function () {};
   }
