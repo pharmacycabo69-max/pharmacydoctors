@@ -167,3 +167,8 @@ vercel env add STRIPE_SECRET_KEY --environment preview --git-branch v5-premium -
 vercel env add STRIPE_WEBHOOK_SECRET --environment preview --git-branch v5-premium --sensitive
 ```
 Cada comando pide el valor: pégalo y pulsa Enter.
+
+### Actualización (2026-11-26)
+- `STRIPE_SECRET_KEY` agregada por el dueño como *Secret*, **solo Preview** (todas las ramas de preview).
+- Production quedó **sin variables**. Se eliminaron una variable creada por error (con la clave de prueba como nombre) y una `STRIPE_SECRET_KEY` con clave **live** que se había guardado en Production. **Recomendación:** rotar ambas claves en Stripe (Roll key).
+- Pendiente: `STRIPE_WEBHOOK_SECRET` (requiere Protection Bypass for Automation en Vercel y el endpoint en Stripe).
