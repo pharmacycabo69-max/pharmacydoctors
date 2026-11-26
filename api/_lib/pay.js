@@ -160,8 +160,13 @@ async function notifyTeam(fetchFn, fields) {
       method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify(Object.assign({ access_key: process.env.WEB3FORMS_KEY || '61ecefdf-b8ed-4b03-b9e9-b83c05a29c0f', from_name: 'Pharmacy & Doctors Cabo – Payments' }, fields)),
     });
+    if (!r.ok) {
+      // Diagnostic only: status + start of the provider reply (no customer data is logged).
+      let t = ''; try { t = (await r.text()).slice(0, 160).replace(/s+/g, ' '); } catch (e) {}
+      console.error('notifyTeam failed', r.status, t);
+    }
     return r.ok;
-  } catch (e) { return false; }
+  } catch (e) { console.error('notifyTeam error', e && e.message); return false; }
 }
 
 module.exports = { QUOTE_TYPES, PRICES, GROUP_MIN, BOOKING_RE, MAX_HOURS, parseItems, quote, sign, verifyToken, makeToken, tokenId, safeEqual, form, stripe, stripeKey, findPaid, send, readJson, originOf, notifyTeam };
