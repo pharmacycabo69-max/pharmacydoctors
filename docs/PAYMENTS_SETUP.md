@@ -126,3 +126,26 @@ node tests/payments.test.js                       # 42 pruebas unitarias
 node tools/dev-server.js 8081 --mock              # sitio + /api + Stripe SIMULADO (marcado en pantalla)
 ```
 Clave de personal local (solo para la simulación): `local-dev-staff-key`. **La simulación no prueba Stripe real.**
+
+## 11. Cobrar servicios cotizados (rayos X, laboratorio, estética, enfermería) — V5.3
+1. El cliente pide cotización: en `/book/`, rayos X o laboratorio aparecen como **"Quote"**; en estética, primero la valoración.
+2. El equipo confirma la viabilidad (rayos X: la confirma el profesional de imagen), el lugar, la hora y el monto, y el cliente **acepta** la cotización.
+3. En `/concierge/`:
+   - "Quoted service" → tipo (X-ray / Laboratory / Aesthetics / Private nurse);
+   - "Quoted amount USD" → el monto aceptado, entre $10 y $5,000, con IVA incluido.
+   - Se pueden combinar con servicios de precio fijo (por ejemplo, 1 suero + enfermera).
+4. El enlace firmado lleva ese monto. El cliente no puede cambiarlo; Stripe cobra exactamente eso.
+5. Farmacia y medicamentos: **sin cobro en línea**. Se cotizan y se cobran como se acuerde al confirmar el pedido.
+
+## 12. Compra completa probada (simulación local, 2026-11-26)
+**Myers × 2 en villa ($318):**
+1. Catálogo (villa, 2 personas).
+2. Book now: reserva preseleccionada, correo con enlace de concierge.
+3. Concierge: enlace firmado.
+4. `/pay/`, Stripe simulado, `/pay/success/` verificado.
+5. Correo "PAID · Booking PD-261126-DDGH · $318.00 USD".
+6. Segundo intento de cobro: 409 (bloqueado).
+
+**Rayos X cotizado ($125):** concierge con monto cotizado → `/pay/` "X-ray (accepted quote) $125" → pago simulado → "PAID · Booking PD-261126-XRAY · $125.00 USD".
+
+**Con Stripe real (modo test) falta probarlo:** requiere las variables de §2.

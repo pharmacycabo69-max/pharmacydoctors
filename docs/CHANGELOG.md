@@ -1,6 +1,14 @@
 # Changelog
 V4 está en producción desde el 2026-11-25 (`61c7133`). V5 está en la rama `v5-premium`, pendiente de aprobación.
 
+## 2026-11-26 — V5.3 (rama `v5-premium`, no publicada)
+- Fuente única `assets/pd-data.json` (precios, tratamientos, duraciones, horarios, políticas); el servidor la usa; `tests/consistency.test.js` (16 pruebas) impide contradicciones.
+- Catálogo interactivo de IV (modalidad, buscador, filtros, personas, precio y total en vivo, Book now preseleccionado), carrusel en la home, selector en las 8 páginas de tratamiento con tratamientos relacionados, calculadora de grupos (3 páginas) y selector de doctor (4 páginas).
+- Reserva: conserva lugar (hotel, villa o yate), cantidad y modalidad; laboratorio como cotización; rayos X ya no forzado a clínica.
+- Enlaces firmados con monto cotizado (rayos X, laboratorio, estética, enfermería); 47 pruebas de pagos.
+- Consistencia: 81 correcciones (sin pago en visita para servicios médicos, sin anticipo ni código muerto de 0, sin promesas de llegada o respuesta, sin 24 h físico, una duración de suero, plazo de reembolso).
+- Tarjetas compactas en móvil; páginas de pago y concierge sin barra flotante ni bot.
+
 ## 2026-11-25 — V5.1 (rama `v5-premium`, no publicada)
 - **Pagos**: enlaces firmados (HMAC) con vencimiento, solo del personal (`/api/paylink`, `/concierge/`); resumen y monto desde el servidor; bloqueo de doble cobro (409) e idempotencia; webhook con estados pagado, pendiente, fallido, expirado y reembolsado, y verificación de importe y moneda; evento GA `purchase` solo con pago verificado; 42 pruebas unitarias; servidor local con Stripe simulado.
 - **Radiología**: "Mobile X-ray" con Clínica San José, DICOM con reporte, horarios y límites técnicos. **Sin ultrasonido** en ninguna parte.

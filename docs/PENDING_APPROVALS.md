@@ -13,7 +13,7 @@ Actualizado: 2026-11-25. **Producción = V4** (`main` en `61c7133`). V5.1 está 
 ## P1 — mejoras importantes (no bloquean)
 | # | Pendiente | Detalle |
 |---|---|---|
-| P1-1 | **Fotos profesionales** | Ver la lista de tomas abajo. Hoy video, walk-in, seguros y laboratorio usan ilustración de línea. |
+| P1-1 | **Fotos profesionales** | Ver la lista de tomas abajo. Hoy video, walk-in, seguros y laboratorio usan ilustración de línea. **V5.3:** las tarjetas del catálogo de Rapid Hydration, Hangover Rescue, Myers (escena de yoga), Immunity y Energy usan imágenes heredadas `pdh-*` de origen no confirmado; reemplazarlas por fotos propias (una por tratamiento, 4:3). |
 | P1-2 | Foto del Dr. Kevin con logo PharmacyDoctors | Guardada como opción en `docs/design-v5/options/`. No se usa públicamente. Confirmar autorización y que representa bien su relación con la marca. |
 | P1-3 | Catálogo maestro de radiología (Cabo Walk-In Clinic) | Cuando llegue: lista de estudios y precios públicos autorizados. La página ya tiene el lugar para integrarlo. Mientras tanto, todo es por cotización. |
 | P1-4 | Precios de estética | Fuente: tu instrucción del 2026-11-24 de usar los precios de medicinaesteticaencabo.com, más la confirmación de IVA incluido del 2026-11-25. Además de las 4 categorías, la página muestra **técnicas y precios de detalle** del mismo catálogo: ceja $180, sonrisa gingival $170, mandíbula $170, masetero $350, NCTF $300, PN $350, Radiesse $1,000, Sculptra $1,200. Confirmar que se ofrecen; si no, los paso a "en valoración". |
@@ -25,6 +25,9 @@ Actualizado: 2026-11-25. **Producción = V4** (`main` en `61c7133`). V5.1 está 
 | P1-10 | Search Console y GA4 | Sin acceso. Las oportunidades de palabras clave no están validadas con datos reales. |
 | P1-11 | Canal seguro para pólizas | La página de seguros pide no enviar pólizas por formularios públicos. Falta definir el canal (correo cifrado o portal). |
 | P1-12 | Respuesta automática al cliente al reservar | Web3Forms gratuito no la incluye. Con Web3Forms Pro, o con el CRM, se puede enviar automáticamente "recibimos tu solicitud". |
+
+| P1-13 | Catálogo de estudios de rayos X y laboratorio | Para activar la **búsqueda de estudios** hace falta el catálogo maestro (Cabo Walk-In Clinic) con precios públicos autorizados. Hoy es solicitud con cotización. |
+| P1-14 | Duración validada | El catálogo muestra 45–60 min por suero (dato publicado desde V4) y "sesión más larga" para NAD+. Pendiente de validación por el equipo médico. |
 
 ## P2 — optimizaciones futuras
 - WebP para las fotos grandes (la mayor pesa ~150 KB).

@@ -436,3 +436,20 @@ a{text-underline-offset:3px}
 @media(max-width:1180px){.tx-grid{grid-template-columns:repeat(3,1fr)}.tx-track{grid-auto-columns:calc((100% - 36px)/3)}}
 @media(max-width:860px){.tx-grid,.tx-grid-3{grid-template-columns:1fr 1fr}.tx-track{grid-auto-columns:46%}.cat-bar{justify-content:flex-start}}
 @media(max-width:560px){.tx-grid,.tx-grid-3{grid-template-columns:1fr}.tx-track{grid-auto-columns:82%}.tx{flex-direction:row;flex-wrap:wrap}.tx-img{aspect-ratio:16/9;width:100%}.tx-name{font-size:1.3rem!important}.cat-seg{width:100%}.cat-seg button{flex:1;padding:10px 6px}.tx-arrow{display:none}.tx-nav .btn{margin-left:0;width:100%;justify-content:center}}
+/* V5.3 compact cards on phones (grid only; carousel keeps vertical cards) */
+@media(max-width:560px){
+  .tx-grid .tx{display:grid;grid-template-columns:104px 1fr;align-items:stretch}
+  .tx-grid .tx-img{aspect-ratio:auto;width:104px;height:100%;min-height:150px}
+  .tx-grid .tx-body{padding:12px 12px 14px;gap:4px}
+  .tx-grid .tx-name{font-size:1.25rem!important}
+  .tx-grid .tx-desc{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:.88rem}
+  .tx-grid .tx-meta li{font-size:.75rem;padding:3px 8px}
+  .tx-grid .tx-price b{font-size:1.6rem}
+  .tx-grid .tx-actions{gap:6px}
+  .tx-grid .tx-actions .btn{padding:10px 6px!important;font-size:.84rem!important}
+  .tx-track .tx{flex-direction:column;flex-wrap:nowrap}
+  .cat-bar{padding:10px;gap:10px}
+}
+/* payment and staff pages: no promotional floating elements */
+body:has(#pay-app) .pd-cta,body:has(#pay-app) #pdai-btn,body:has(#pay-app) #pdai-bubble,body:has(#cg-app) .pd-cta,body:has(#cg-app) #pdai-btn,body:has(#cg-app) #pdai-bubble{display:none!important}
+body:has(#pay-app),body:has(#cg-app){padding-bottom:0!important}

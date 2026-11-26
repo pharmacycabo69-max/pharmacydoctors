@@ -57,3 +57,10 @@ node tools/dev-server.js 8081 --mock        # local site + /api + clearly-labell
 - No horizontal scroll at 375/390/768/880/1024/1440.
 - Nothing under 12px.
 - Hero images never 0px wide (the 760–900px bug).
+
+## V5.3 additions
+- **Single source of truth:** `assets/pd-data.json` (prices, treatments, durations, hours, policies). `api/_lib/pay.js` requires it; catalog cards are generated from it; `tests/consistency.test.js` fails if `booking.js`, catalog cards, schema prices or visible copy contradict it.
+- **UI:** `assets/catalog.js` (progressive enhancement: catalog filters/search/modality/guests, treatment picker, group calculator, doctor service picker, carousel). Cards are server-rendered HTML.
+- **Booking URL params:** `drip`, `where=door|clinic`, `qty`, `place=hotel|villa|yacht`, `service=doctor|video|imaging|lab|aesthetic|pharmacy|nurse`, `group=1`. Never put medical details in URLs.
+- **Quoted services** (xray/lab/aes/nurse) are charged only through a staff-signed link carrying the accepted amount (`qx`, `qa`).
+- Run `node tests/payments.test.js` (47) and `node tests/consistency.test.js` (16) before every push.
