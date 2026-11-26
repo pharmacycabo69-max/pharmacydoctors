@@ -4,10 +4,10 @@ Actualizado: 2026-11-25. **Producción = V4** (`main` en `61c7133`). V5.1 está 
 ## P0 — bloqueos para publicar de forma segura
 | # | Pendiente | Quién | Qué hacer exactamente |
 |---|---|---|---|
-| P0-1 | Autorizar la publicación | Dueño | Revisar la vista previa de `v5-premium` y escribir en el chat "publica V5". |
+| P0-1 | Autorizar la publicación y activar cobros reales | Dueño | Revisar la vista previa de `v5-premium` y escribir en el chat "publica V5". Los pasos para cobrar en producción están en `PAYMENTS_SETUP.md` §17 (rotar la clave live, variables de Production, webhook live). |
 | P0-2 | **Registro persistente de solicitudes** | Dueño decide | Hoy cada solicitud de reserva solo queda en el **correo** (Web3Forms gratuito no guarda historial). Los **pagos** sí quedan en Stripe. Opciones: (a) el CRM o agenda que ya usen (dime cuál y si tiene API); (b) Google Sheets del negocio; (c) Vercel KV/Postgres. No creé ninguna infraestructura nueva sin tu autorización. |
 | P0-3 | Variables de pago (modo prueba) | Dueño | ✅ En Preview: `STRIPE_SECRET_KEY` (sk_test), `PAY_LINK_SECRET`, `CONCIERGE_KEY`. Production sin variables. `STRIPE_WEBHOOK_SECRET` ✅ y webhook de prueba activo (§15). Recomendado: rotar en Stripe las claves live y test que se expusieron al configurarlas. |
-| P0-4 | Prueba real del cobro | Dueño + Claude | ✅ **Pago real en modo test verificado el 2026-11-26** (PD-261126-TEST1, $159, tarjeta 4242): Checkout cs_test, página de éxito verificada y doble pago bloqueado (`PAYMENTS_SETUP.md` §14). Webhook probado: 200 PAID. Falta: reembolso de prueba y **correo de aviso al equipo** (ver P0-6). |
+| P0-4 | Prueba real del cobro | Dueño + Claude | ✅ **Pago real en modo test verificado el 2026-11-26** (PD-261126-TEST1, $159, tarjeta 4242): Checkout cs_test, página de éxito verificada y doble pago bloqueado (`PAYMENTS_SETUP.md` §14). Webhook probado: 200 PAID y reembolso 200 REFUNDED (full). **Ciclo completo probado en modo test.** |
 | P0-6 | Aviso de pago por correo al equipo | ✅ Dueño | **Decidido el 2026-11-26: aviso de Stripe** ("Successful payment receipt" por correo, activado). Confirmar con el primer pago real que llega. Web3Forms gratuito no puede enviarlo desde el servidor (§15). |
 | P0-5 | ~~Publicar el arreglo de tablet~~ | ✅ | **Publicado en producción el 2026-11-25** (merge df66c19), verificado en vivo a 880 px. |
 

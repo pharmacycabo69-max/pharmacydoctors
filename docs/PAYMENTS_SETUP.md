@@ -204,3 +204,28 @@ Cada comando pide el valor: pégalo y pulsa Enter.
 - Llega al correo del usuario de Stripe con sesión iniciada. Cada miembro del equipo que quiera el aviso debe ser usuario de la cuenta de Stripe y activar la misma casilla.
 - El correo muestra el monto y la descripción "PharmacyDoctors booking PD-…". Es posible que en modo prueba Stripe no lo envíe; se confirmará con el primer pago real.
 - El webhook se mantiene: verifica pagos y montos y deja registro en los logs de Vercel. Si más adelante se quiere un aviso propio con formato, ver la opción 2 de §15 (Resend).
+
+## 16. Reembolso de prueba (vista previa, 2026-11-26) ✅
+- Reembolso total de PD-261126-TEST1 (USD 159.00, motivo "Solicitado por el cliente") desde el Dashboard de Stripe, **en modo prueba**.
+- El webhook recibió `charge.refunded` y respondió `200 {"status":"REFUNDED (full)"}`.
+- **Ciclo completo probado en Stripe test:** enlace firmado → Checkout → pago → página de éxito verificada → bloqueo de doble pago → webhook PAID → reembolso → webhook REFUNDED.
+
+## 17. Lista para empezar a vender (producción) — requiere autorización expresa del dueño
+Cada paso toca producción o claves reales. No se hace ninguno sin un "sí" explícito del dueño en el chat.
+
+1. **Rotar la clave live en Stripe** (modo real → Desarrolladores → Claves de API → *Roll key* en la clave secreta), porque la anterior quedó expuesta. Rotar también la clave de prueba. **Lo hace el dueño.**
+2. **Variables en Vercel, solo Production:**
+   - `STRIPE_SECRET_KEY` = la nueva `sk_live_…` (**la pega el dueño**);
+   - `PAY_LINK_SECRET` y `CONCIERGE_KEY`: valores **nuevos**, distintos de los de Preview (los genera Claude con el CLI);
+   - `STRIPE_WEBHOOK_SECRET`: ver el paso 3.
+3. **Webhook en Stripe, modo real:**
+   - URL `https://www.pharmacydoctors.com/api/stripe-webhook/` (con `/` final y **sin** bypass, porque producción es pública);
+   - los mismos 5 eventos, carga "Resumen";
+   - el dueño copia su `whsec_…` a Vercel → Production.
+4. **Publicar V5:** fusionar `v5-premium` → `main` después de que el dueño revise la vista previa y escriba "publica V5".
+5. **Verificación sin cobrar:**
+   - `/pay/` con un enlace de concierge debe mostrar "Pay $… USD" activo;
+   - una firma falsa al webhook debe dar 400.
+   - **No se hace un cobro real de prueba** (regla del dueño); el primer pago real confirma el aviso por correo de Stripe.
+6. **Antiguo enlace de $50:** sigue activo. Se desactiva solo cuando el dueño lo indique.
+7. **Clave de concierge de producción:** entregarla solo al personal autorizado.
