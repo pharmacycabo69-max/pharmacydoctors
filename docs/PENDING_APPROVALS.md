@@ -8,7 +8,7 @@ Actualizado: 2026-11-25. **Producción = V4** (`main` en `61c7133`). V5.1 está 
 | P0-2 | **Registro persistente de solicitudes** | Dueño decide | Hoy cada solicitud de reserva solo queda en el **correo** (Web3Forms gratuito no guarda historial). Los **pagos** sí quedan en Stripe. Opciones: (a) el CRM o agenda que ya usen (dime cuál y si tiene API); (b) Google Sheets del negocio; (c) Vercel KV/Postgres. No creé ninguna infraestructura nueva sin tu autorización. |
 | P0-3 | Variables de pago (modo prueba) | Dueño | En Vercel, **solo Preview**: `STRIPE_SECRET_KEY=sk_test_…`, `PAY_LINK_SECRET`, `CONCIERGE_KEY`, `STRIPE_WEBHOOK_SECRET`. Luego la prueba con la tarjeta 4242 (`PAYMENTS_SETUP.md` §2–4). Sin esto el cobro en línea queda apagado (no se rompe nada: "pay at the visit"). |
 | P0-4 | Prueba real del cobro | Dueño + Claude | Después de P0-3 hago la prueba en modo test sobre la vista previa: reserva, enlace, pago, webhook, recibo y reembolso. **La integración real con Stripe NO está probada todavía**: solo con pruebas unitarias y simulación local. |
-| P0-5 | Publicar el arreglo de tablet (760–900 px) | Dueño | Producción tiene ese error hoy. La rama `hotfix-hero-tablet` lo corrige (más IVA en estética). Se puede publicar sola si lo autorizas, antes de V5. |
+| P0-5 | ~~Publicar el arreglo de tablet~~ | ✅ | **Publicado en producción el 2026-11-25** (merge df66c19), verificado en vivo a 880 px. |
 
 ## P1 — mejoras importantes (no bloquean)
 | # | Pendiente | Detalle |
