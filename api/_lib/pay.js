@@ -107,7 +107,12 @@ function form(obj) {
 }
 
 function stripeBase() { return process.env.STRIPE_API_BASE || 'https://api.stripe.com'; }
-function stripeKey() { const k = process.env.STRIPE_SECRET_KEY || ''; return /^sk_(test|live)_/.test(k) ? k : ''; }
+// Live keys only work in Production; Preview/Development refuse them so no real charge can happen outside production.
+function stripeKey() {
+  const k = process.env.STRIPE_SECRET_KEY || '';
+  if (/^sk_live_/.test(k) && process.env.VERCEL_ENV !== 'production') return '';
+  return /^sk_(test|live)_/.test(k) ? k : '';
+}
 
 async function stripe(fetchFn, method, path, params, extraHeaders) {
   const key = stripeKey();

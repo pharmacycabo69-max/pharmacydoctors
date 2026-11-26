@@ -102,6 +102,11 @@ function res() { return { statusCode: 0, headers: {}, body: '', setHeader(k, v) 
   r = res(); await co({ method: 'GET', url: '/api/checkout?session_id=cs_test_abcdefghijkl', headers: {} }, r);
   ok(r.j.paid === false && r.j.amount_ok === false, 'amount mismatch is never reported as paid');
 
+  // live key outside production is refused
+  process.env.STRIPE_SECRET_KEY = 'sk_live_SHOULDNOTWORK'; delete process.env.VERCEL_ENV;
+  ok(L.stripeKey() === '', 'live Stripe key refused outside Production (Preview stays test-only)');
+  process.env.VERCEL_ENV = 'production'; ok(L.stripeKey() === 'sk_live_SHOULDNOTWORK', 'live key accepted only when VERCEL_ENV=production'); delete process.env.VERCEL_ENV; process.env.STRIPE_SECRET_KEY = 'sk_test_FAKE';
+
   // ---------- webhook ----------
   const WS = 'whsec_test_secret';
   const sign = (p, t) => `t=${t},v1=${crypto.createHmac('sha256', WS).update(`${t}.${p}`).digest('hex')}`;

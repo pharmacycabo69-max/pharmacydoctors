@@ -1,3 +1,7 @@
 .claude/*
 !.claude/blog/
 !.claude/tools/
+.vercel
+
+.vercel
+.env*

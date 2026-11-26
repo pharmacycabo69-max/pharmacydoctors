@@ -149,3 +149,21 @@ Clave de personal local (solo para la simulación): `local-dev-staff-key`. **La 
 **Rayos X cotizado ($125):** concierge con monto cotizado → `/pay/` "X-ray (accepted quote) $125" → pago simulado → "PAID · Booking PD-261126-XRAY · $125.00 USD".
 
 **Con Stripe real (modo test) falta probarlo:** requiere las variables de §2.
+
+## 13. Estado real de la configuración (2026-11-26)
+- **Vercel CLI 67.0.0** instalado; sesión `pharmacycabo69-5399`, equipo **cabo-pharmacy**.
+- Vinculado **solo** el proyecto `pharmacydoctors` (en la carpeta `Pharmacy Doctors v5`). `.vercel/` y `.env.local` están en `.gitignore`.
+- **Antes había 0 variables de entorno.**
+- **Configurado por Claude**, ambas como *Secret* (ocultas), solo en **Preview** y solo para la rama `v5-premium`:
+  - `PAY_LINK_SECRET`: aleatoria de 48 caracteres; nadie necesita conocerla.
+  - `CONCIERGE_KEY`: aleatoria; guardada en `C:\Users\ZenBook\Documents\PharmacyDoctors-PREVIEW-concierge-key.txt`. Producción tendrá otra.
+- **Protección en el servidor:** una clave `sk_live_` se **rechaza** fuera de Production (Preview no puede cobrar dinero real).
+- **Faltan, y solo tú puedes ponerlos:** `STRIPE_SECRET_KEY` (`sk_test_…`) y `STRIPE_WEBHOOK_SECRET` (`whsec_…`), con los comandos de abajo. El valor se escribe en tu terminal y no pasa por el chat.
+
+### Comandos exactos (PowerShell)
+```
+cd "C:\Users\ZenBook\Proyectos Software Sergio\Pharmacy Doctors v5"
+vercel env add STRIPE_SECRET_KEY --environment preview --git-branch v5-premium --sensitive
+vercel env add STRIPE_WEBHOOK_SECRET --environment preview --git-branch v5-premium --sensitive
+```
+Cada comando pide el valor: pégalo y pulsa Enter.
