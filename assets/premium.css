@@ -339,6 +339,8 @@ h1 em,h2 em,h3 em{background:none!important;-webkit-text-fill-color:currentColor
 @media(max-width:900px){
   .hero .wrap{display:flex!important;flex-direction:column}
   .hero .hero-media{order:2;margin-top:28px}
+  .hero .hero-media{width:100%;max-width:560px;align-self:center}
+  .hero .hm-badge{white-space:normal;min-width:220px}
   .hero h1{font-size:2.35rem!important}
 }
 
