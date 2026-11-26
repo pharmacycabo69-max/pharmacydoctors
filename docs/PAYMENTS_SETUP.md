@@ -198,3 +198,9 @@ Cada comando pide el valor: pégalo y pulsa Enter.
     1. Activar en Stripe → Configuración → Notificaciones el aviso por correo de "pagos correctos". No requiere código.
     2. Un proveedor de correo transaccional con API para servidor (p. ej. Resend, con capa gratuita; requiere cuenta, clave y, para usar el dominio propio, registros DNS).
     3. Web3Forms Pro, si permite envíos desde servidor (confirmar con ellos).
+
+### Decisión del dueño (2026-11-26): aviso de pago por Stripe
+- Activado en Stripe → Configuración → Preferencias de comunicación → *Transactions and Balances* → **"Successful payment receipt" por correo**. Se comprobó al recargar la página.
+- Llega al correo del usuario de Stripe con sesión iniciada. Cada miembro del equipo que quiera el aviso debe ser usuario de la cuenta de Stripe y activar la misma casilla.
+- El correo muestra el monto y la descripción "PharmacyDoctors booking PD-…". Es posible que en modo prueba Stripe no lo envíe; se confirmará con el primer pago real.
+- El webhook se mantiene: verifica pagos y montos y deja registro en los logs de Vercel. Si más adelante se quiere un aviso propio con formato, ver la opción 2 de §15 (Resend).
