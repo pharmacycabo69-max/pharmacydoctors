@@ -172,3 +172,15 @@ Cada comando pide el valor: pégalo y pulsa Enter.
 - `STRIPE_SECRET_KEY` agregada por el dueño como *Secret*, **solo Preview** (todas las ramas de preview).
 - Production quedó **sin variables**. Se eliminaron una variable creada por error (con la clave de prueba como nombre) y una `STRIPE_SECRET_KEY` con clave **live** que se había guardado en Production. **Recomendación:** rotar ambas claves en Stripe (Roll key).
 - Pendiente: `STRIPE_WEBHOOK_SECRET` (requiere Protection Bypass for Automation en Vercel y el endpoint en Stripe).
+
+## 14. Prueba real con Stripe en modo test (vista previa, 2026-11-26) ✅
+- El concierge creó el enlace firmado de **PD-261126-TEST1** (IV Therapy a domicilio, $159 USD) en la vista previa de `v5-premium`.
+- `/pay/` mostró "Pay $159 USD" activo, así que el servidor aceptó la clave `sk_test_`.
+- Se abrió un Stripe Checkout **real en modo test** (`cs_test_…`) con la línea genérica "PharmacyDoctors service · Booking PD-261126-TEST1". No se envió a Stripe ningún dato médico.
+- El dueño pagó con la tarjeta de prueba 4242. No hubo cobro real.
+- `/pay/success/` verificó el pago con Stripe y mostró "Payment received — thank you · Booking PD-261126-TEST1 · $159 USD".
+- Al volver a abrir el enlace aparece "This booking is already paid". El doble cobro queda bloqueado.
+- **Por qué no llegó ningún correo:**
+  1. El aviso al equipo ("PAID · Booking …") lo envía el **webhook**, y todavía falta `STRIPE_WEBHOOK_SECRET` (§4).
+  2. En modo test, Stripe **no envía recibos automáticos** al cliente. Se pueden ver en Dashboard → Payments (modo test) → el pago → "Send receipt".
+- **Pendiente de probar:** webhook, correo de pago y reembolso de prueba.

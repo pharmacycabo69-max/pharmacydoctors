@@ -6,8 +6,8 @@ Actualizado: 2026-11-25. **Producción = V4** (`main` en `61c7133`). V5.1 está 
 |---|---|---|---|
 | P0-1 | Autorizar la publicación | Dueño | Revisar la vista previa de `v5-premium` y escribir en el chat "publica V5". |
 | P0-2 | **Registro persistente de solicitudes** | Dueño decide | Hoy cada solicitud de reserva solo queda en el **correo** (Web3Forms gratuito no guarda historial). Los **pagos** sí quedan en Stripe. Opciones: (a) el CRM o agenda que ya usen (dime cuál y si tiene API); (b) Google Sheets del negocio; (c) Vercel KV/Postgres. No creé ninguna infraestructura nueva sin tu autorización. |
-| P0-3 | Variables de pago (modo prueba) | Dueño | En Vercel, **solo Preview**: `STRIPE_SECRET_KEY=sk_test_…`, `PAY_LINK_SECRET`, `CONCIERGE_KEY`, `STRIPE_WEBHOOK_SECRET`. Luego la prueba con la tarjeta 4242 (`PAYMENTS_SETUP.md` §2–4). Sin esto el cobro en línea queda apagado (no se rompe nada: "pay at the visit"). |
-| P0-4 | Prueba real del cobro | Dueño + Claude | Después de P0-3 hago la prueba en modo test sobre la vista previa: reserva, enlace, pago, webhook, recibo y reembolso. **La integración real con Stripe NO está probada todavía**: solo con pruebas unitarias y simulación local. |
+| P0-3 | Variables de pago (modo prueba) | Dueño | ✅ En Preview: `STRIPE_SECRET_KEY` (sk_test), `PAY_LINK_SECRET`, `CONCIERGE_KEY`. Production sin variables. **Falta `STRIPE_WEBHOOK_SECRET`** (requiere activar Protection Bypass for Automation en Vercel y crear el endpoint en Stripe, §4). Recomendado: rotar en Stripe las claves live y test que se expusieron al configurarlas. |
+| P0-4 | Prueba real del cobro | Dueño + Claude | ✅ **Pago real en modo test verificado el 2026-11-26** (PD-261126-TEST1, $159, tarjeta 4242): Checkout cs_test, página de éxito verificada y doble pago bloqueado (`PAYMENTS_SETUP.md` §14). Falta probar: webhook, correo de pago y reembolso. |
 | P0-5 | ~~Publicar el arreglo de tablet~~ | ✅ | **Publicado en producción el 2026-11-25** (merge df66c19), verificado en vivo a 880 px. |
 
 ## P1 — mejoras importantes (no bloquean)
