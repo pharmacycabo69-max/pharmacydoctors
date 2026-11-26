@@ -6,14 +6,17 @@
 'use strict';
 const crypto = require('crypto');
 
+// Single source of truth: assets/pd-data.json (also used by the catalog and the consistency tests).
+const D = require('../../assets/pd-data.json');
+const P = D.prices;
 const PRICES = {               // approved master prices (cents, USD, tax included)
-  iv:    { door: 15900, clinic: 12900 },   // $159 at your location · $129 at the clinic (owner 2026-11-24)
-  ivGroup: 11900,              // $119 per IV, 6+ standard IVs at the guest's location (owner 2026-11-24)
-  nad:   { door: 27900, clinic: 27900 },   // $279, never part of the group rate
-  doc:   { door: 18900, clinic: 9900 },    // Home Doctor $189 · Walk-in $99
-  video: { door: 5900,  clinic: 5900 },    // Video $59
+  iv:    { door: P.iv.door, clinic: P.iv.clinic },       // $159 at your location · $129 at the clinic
+  ivGroup: P.ivGroup.unit,                               // $119 per IV, 6+ standard IVs at the guest's location
+  nad:   { door: P.nad.door, clinic: P.nad.clinic },     // $279, never part of the group rate
+  doc:   { door: P.doc.door, clinic: P.doc.clinic },     // Home Doctor $189 · Walk-in $99
+  video: { door: P.video.door, clinic: P.video.clinic }, // Video $59
 };
-const GROUP_MIN = 6;
+const GROUP_MIN = P.ivGroup.min;
 const MAX_QTY = 30;
 const BOOKING_RE = /^PD-\d{6}-[A-Z0-9]{3,6}$/;
 const MAX_HOURS = 72;

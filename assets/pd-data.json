@@ -1,0 +1,33 @@
+{
+  "_about": "PharmacyDoctors single source of truth for prices, durations, hours and policies (V5.3, 2026-11-26). Server (api/_lib/pay.js), catalog (assets/catalog.js) and tests read this file. Change prices ONLY here and only with owner approval.",
+  "currency": "USD",
+  "taxIncluded": true,
+  "prices": {
+    "iv":    { "door": 15900, "clinic": 12900, "source": "owner 2026-11-24" },
+    "ivGroup": { "unit": 11900, "min": 6, "where": "door", "excludes": ["nad"], "source": "owner 2026-11-24" },
+    "nad":   { "door": 27900, "clinic": 27900, "source": "V5 master price" },
+    "doc":   { "door": 18900, "clinic": 9900, "source": "V5 master price" },
+    "video": { "door": 5900, "clinic": 5900, "source": "V5 master price" }
+  },
+  "treatments": [
+    { "id": "rapid-hydration", "name": "Rapid Hydration", "kind": "iv", "goal": "hydration", "cat_en": "Hydration", "cat_es": "Hidratación", "duration": "45–60 min", "img": "/wp-content/uploads/2026/07/pdh-rh-hero-v2.jpg", "en": "Fluids and electrolytes for sun, heat and long travel days.", "es": "Líquidos y electrolitos para el sol, el calor y los días de viaje." },
+    { "id": "hangover-rescue", "name": "Hangover Rescue", "kind": "iv", "goal": "night", "cat_en": "After a night out", "cat_es": "Después de una fiesta", "duration": "45–60 min", "img": "/wp-content/uploads/2026/07/pdh-iv-hangover-preview-lite.jpg", "en": "Rehydration and vitamins after a late night. Any medicine only if a doctor approves it.", "es": "Rehidratación y vitaminas después de una fiesta. Cualquier medicamento, solo si un médico lo aprueba." },
+    { "id": "myers-cocktail", "name": "Myers Cocktail", "kind": "iv", "goal": "wellness", "cat_en": "Wellness", "cat_es": "Bienestar", "duration": "45–60 min", "img": "/wp-content/uploads/2026/07/pdh-iv-myers-preview-lite.jpg", "en": "The classic blend of vitamins and minerals, given as an IV.", "es": "La mezcla clásica de vitaminas y minerales, aplicada por vía intravenosa." },
+    { "id": "immunity-armor", "name": "Immunity Armor", "kind": "iv", "goal": "travel", "cat_en": "Run-down days", "cat_es": "Días de cansancio", "duration": "45–60 min", "img": "/wp-content/uploads/2026/07/pdh-iv-immunity-preview-lite.jpg", "en": "Fluids with vitamin C and zinc for run-down travel days. It does not prevent or treat infections.", "es": "Líquidos con vitamina C y zinc para días de viaje pesados. No previene ni trata infecciones." },
+    { "id": "energy-b12", "name": "Energy & B12", "kind": "iv", "goal": "travel", "cat_en": "Travel days", "cat_es": "Días de viaje", "duration": "45–60 min", "img": "/wp-content/uploads/2026/07/pdh-iv-energy-preview-lite.jpg", "en": "B vitamins and fluids for tiring travel days.", "es": "Vitaminas del complejo B y líquidos para días de viaje agotadores." },
+    { "id": "performance-recovery", "name": "Performance & Recovery", "kind": "iv", "goal": "sport", "cat_en": "Sport & activity", "cat_es": "Deporte y actividad", "duration": "45–60 min", "img": "/wp-content/uploads/real-iv/real-iv-poolside.jpg", "en": "Fluids, electrolytes and vitamins after golf, fishing, sport or a long hike.", "es": "Líquidos, electrolitos y vitaminas después de golf, pesca, deporte o caminatas." },
+    { "id": "beauty-glow", "name": "Beauty Glow", "kind": "iv", "goal": "skin", "cat_en": "Skin & events", "cat_es": "Piel y eventos", "duration": "45–60 min", "img": "/wp-content/uploads/real-iv/real-iv-terrace-villa.jpg", "en": "Hydration and vitamins before a wedding, shoot or event.", "es": "Hidratación y vitaminas antes de una boda, sesión de fotos o evento." },
+    { "id": "nad-plus", "name": "NAD+", "kind": "nad", "goal": "wellness", "cat_en": "Wellness · health review", "cat_es": "Bienestar · valoración", "duration": "Longer session", "duration_es": "Sesión más larga", "page": "/nad-plus-iv-therapy-cabo/", "img": "/wp-content/uploads/real-iv/real-iv-sterile-set.jpg", "en": "A slower infusion, only after a health review. Research on its benefits is still limited.", "es": "Una infusión más lenta, solo después de una valoración. La evidencia sobre sus beneficios aún es limitada." }
+  ],
+  "hours": {
+    "clinic": "9 AM–5 PM daily; other times by appointment",
+    "requests": "24/7 by WhatsApp, phone or online — availability and arrival time confirmed before payment",
+    "xrayProvider": "Clínica San José, Paseo Marino S/N, col. Chamizal, San José del Cabo · Mon–Fri 8:30 AM–7:30 PM · Sat 8:30 AM–2:00 PM"
+  },
+  "policies": {
+    "payment": "Nothing is charged until availability is confirmed; then 100% of the confirmed price by secure card link (Stripe). No deposits.",
+    "cancellation": "Full refund if you cancel 24 hours or more before, or if we cancel. Less than 24 hours or no-show: reviewed by authorized staff in writing. Delivered services are not refundable.",
+    "refundTiming": "Refunds return to the original card in 5–10 business days, depending on the bank.",
+    "freeDeliveryOver": 50
+  }
+}
