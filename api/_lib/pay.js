@@ -162,7 +162,7 @@ async function notifyTeam(fetchFn, fields) {
     });
     if (!r.ok) {
       // Diagnostic only: status + start of the provider reply (no customer data is logged).
-      let t = ''; try { t = (await r.text()).slice(0, 160).replace(/s+/g, ' '); } catch (e) {}
+      let t = ''; try { t = (await r.text()).slice(0, 160).replace(/\s+/g, ' '); } catch (e) {}
       console.error('notifyTeam failed', r.status, t);
     }
     return r.ok;
