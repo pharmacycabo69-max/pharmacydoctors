@@ -105,7 +105,11 @@ function res() { return { statusCode: 0, headers: {}, body: '', setHeader(k, v) 
   // live key outside production is refused
   process.env.STRIPE_SECRET_KEY = 'sk_live_SHOULDNOTWORK'; delete process.env.VERCEL_ENV;
   ok(L.stripeKey() === '', 'live Stripe key refused outside Production (Preview stays test-only)');
-  process.env.VERCEL_ENV = 'production'; ok(L.stripeKey() === 'sk_live_SHOULDNOTWORK', 'live key accepted only when VERCEL_ENV=production'); delete process.env.VERCEL_ENV; process.env.STRIPE_SECRET_KEY = 'sk_test_FAKE';
+  process.env.VERCEL_ENV = 'production'; ok(L.stripeKey() === 'sk_live_SHOULDNOTWORK', 'live key accepted only when VERCEL_ENV=production'); delete process.env.VERCEL_ENV;
+  process.env.STRIPE_SECRET_KEY = 'rk_live_RESTRICTED'; ok(L.stripeKey() === '', 'restricted live key refused outside production');
+  process.env.VERCEL_ENV = 'production'; ok(L.stripeKey() === 'rk_live_RESTRICTED', 'restricted live key accepted in production'); delete process.env.VERCEL_ENV;
+  process.env.STRIPE_SECRET_KEY = 'rk_test_R'; ok(L.stripeKey() === 'rk_test_R', 'restricted test key accepted');
+  process.env.STRIPE_SECRET_KEY = 'sk_test_FAKE';
 
   // ---------- webhook ----------
   const WS = 'whsec_test_secret';

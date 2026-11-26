@@ -110,8 +110,9 @@ function stripeBase() { return process.env.STRIPE_API_BASE || 'https://api.strip
 // Live keys only work in Production; Preview/Development refuse them so no real charge can happen outside production.
 function stripeKey() {
   const k = process.env.STRIPE_SECRET_KEY || '';
-  if (/^sk_live_/.test(k) && process.env.VERCEL_ENV !== 'production') return '';
-  return /^sk_(test|live)_/.test(k) ? k : '';
+  if (/^[sr]k_live_/.test(k) && process.env.VERCEL_ENV !== 'production') return '';
+  // Restricted keys (rk_) are preferred: Checkout Sessions write + PaymentIntents read is all this site needs.
+  return /^[sr]k_(test|live)_/.test(k) ? k : '';
 }
 
 async function stripe(fetchFn, method, path, params, extraHeaders) {
