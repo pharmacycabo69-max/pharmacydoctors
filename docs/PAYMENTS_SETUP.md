@@ -184,3 +184,17 @@ Cada comando pide el valor: pégalo y pulsa Enter.
   1. El aviso al equipo ("PAID · Booking …") lo envía el **webhook**, y todavía falta `STRIPE_WEBHOOK_SECRET` (§4).
   2. En modo test, Stripe **no envía recibos automáticos** al cliente. Se pueden ver en Dashboard → Payments (modo test) → el pago → "Send receipt".
 - **Pendiente de probar:** webhook, correo de pago y reembolso de prueba.
+
+## 15. Webhook configurado y probado (vista previa, 2026-11-26) ✅ con una limitación
+- **Vercel:** el dueño creó "Protection Bypass for Automation" (secreto de 32 caracteres, guardado en `Documents\PharmacyDoctors-PREVIEW-bypass-secret.txt`). La protección de la vista previa sigue activa para todo lo demás.
+- **Stripe (modo prueba):** destino `pharmacydoctors-preview-test` (`we_1Ug76t5W1RAXluyqAMKJksxp`), carga "Resumen" (snapshot), API 2026-08-26.dahlia. Escucha 5 eventos: `checkout.session.completed`, `async_payment_succeeded`, `async_payment_failed`, `expired` y `charge.refunded`.
+  - URL: `…/api/stripe-webhook/?x-vercel-protection-bypass=…`. **Debe terminar en `/`**: el sitio usa `trailingSlash: true`, la versión sin barra responde 308 y Stripe no sigue redirecciones.
+- **Vercel:** `STRIPE_WEBHOOK_SECRET` agregada por el dueño como *Secret*, **solo Preview**. Production sigue **sin variables**.
+- **Comprobado:**
+  - una firma falsa da `400 bad_signature`;
+  - el evento real de PD-261126-TEST1, reenviado, da `200 {"status":"PAID"}`.
+- **Limitación:** el correo al equipo **no sale desde el servidor**. Web3Forms (plan gratuito) responde **403 con un reto de Cloudflare** ("Just a moment…") a las peticiones desde Vercel; está registrado con `console.error` en los logs. Las reservas no se ven afectadas, porque se envían desde el navegador del cliente. El pago sí queda registrado en Stripe y la página de éxito lo verifica.
+  - **Opciones (decide el dueño):**
+    1. Activar en Stripe → Configuración → Notificaciones el aviso por correo de "pagos correctos". No requiere código.
+    2. Un proveedor de correo transaccional con API para servidor (p. ej. Resend, con capa gratuita; requiere cuenta, clave y, para usar el dominio propio, registros DNS).
+    3. Web3Forms Pro, si permite envíos desde servidor (confirmar con ellos).
