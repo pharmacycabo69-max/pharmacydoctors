@@ -11,7 +11,7 @@ Prefer high-intent searches (symptom + Cabo, cost, "near me", group trips, plann
 - [x] Flu, colds and COVID-like symptoms on vacation in Los Cabos — 2026-11-23 /flu-cold-covid-symptoms-cabo/
 - [x] Heat exhaustion and dehydration in Cabo: warning signs — 2026-11-24 /heat-exhaustion-dehydration-cabo/
 - [x] Allergic reactions and hives on vacation in Cabo — 2026-11-25 /allergic-reaction-hives-cabo/
-- [ ] Jellyfish and stingray stings at Cabo beaches: what to do
+- [x] Jellyfish and stingray stings at Cabo beaches: what to do — 2026-11-26 /jellyfish-stingray-sting-cabo/
 - [ ] Sinus infection while traveling in Los Cabos
 - [ ] Motion sickness on Cabo boat tours and fishing charters
 - [ ] Child with a fever in Cabo: finding a pediatric-friendly doctor
